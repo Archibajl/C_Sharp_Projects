@@ -70,9 +70,9 @@ namespace InitialSet_IntroAsmnt1
             //Testvalue initialized as length of input string.
             int i = (testVal.Length - 1);
             //Loops and adds the string in reverse to another string.
-            while (i != -1 && testVal.Substring(i) != " ")
+            while (i != -1 && testVal.Substring(i,1) != " ")
             {
-                retVal += testVal.Substring(i);
+                retVal += testVal.Substring(i,1);
                 i--;
             }
 
