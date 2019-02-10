@@ -14,7 +14,7 @@ namespace HW2_Archibald
         {
             return $"Movement range = {moveSpeed}. Attack range = {attackRange}. Attack damage = {damagePerAttack}";
         }
-        override public string Special(Character1 target)
+        override public string Special(char target)
         {
             return $"";
         }

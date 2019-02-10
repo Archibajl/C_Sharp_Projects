@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace HW2_Archibald
 {
-    class Warrior : Character1
+    class Archer2 : Character2
     {
-        private static int moveSpeed = 1, damagePerAttack = 20, health = 75, priority = 3, attackRange = 1;
+        private static int moveSpeed = 1, damagePerAttack = 20, health = 50, priority = 2, attackRange = 6;
 
         override public string GetSpecialDescription()
         {

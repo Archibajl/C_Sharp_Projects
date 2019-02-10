@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HW2_Archibald
 {
-    class Warrior : Character1
+    class Warrior2 : Character2
     {
         private static int moveSpeed = 1, damagePerAttack = 20, health = 75, priority = 3, attackRange = 1;
 

@@ -13,22 +13,28 @@ namespace HW2_Archibald
 {
     class Game
     {
-        struct Position{int[] Ch1, Ch2; };
+        Character1 w1 = new Warrior();
+        Character1 m1 = new Mage();
+        Character1 a1 = new Archer();
+        struct Position{int Ch1, Ch2; char class1, class2 };
 
         static void Main(string[] args)
         {
-            Character1 w1 = new Warrior();
-            Character1 m1 = new Mage();
-            Character1 a1 = new Archer();
+            
+            
             Game gm = new Game();
-            char inClass;
+            char inClass1, inClass2;
             string input;
 
-            WriteLine("Chose a class " +
+            WriteLine("Chose player 1 class " +
             "M = mage /n W = Warrior /n  A = Archer /n");
             input = ReadLine();
-            char.TryParse(input, out inClass);
-
+            char.TryParse(input, out inClass1);
+            WriteLine("Chose player 2 class " +
+           "M = mage /n W = Warrior /n  A = Archer /n");
+            input = ReadLine();
+            char.TryParse(input, out inClass2);
+            //while ()
             
 
         }
