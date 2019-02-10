@@ -8,125 +8,66 @@ namespace InitialSet_IntroAsmnt1
     {
         static void Main(string[] args)
         {
+            Calls Cal = new Calls();
+            Program Pro = new Program();
+
             string InLine = "";
-                string OutLine;
+            
             double Transfer;
             bool exit = false;
-            while (exit == false) {
+            WriteLine("Enter a number (integer) from 1 to 5 to run each program \n" +
+                "Enter 1 to Convert from Fahrenheit to Celsius. \n"+
+                "Enter 2 to Calculate the volume of a circle from a radius. \n" +
+                "Enter 3 to see what numbers between a number and 0 are multiples of 3 or 5. \n"+
+                "Enter 4 to determine if an input is a Palindrome. \n" +
+                "Enter 5 to exit the program \n");
+            while (exit == false)
+            {
                 int KeyInput = 0;
-                Program Prog;
                 WriteLine("Enter a umber between 1 and 5.");
-
                 InLine = ReadLine();
-                Transfer = Prog.TestVal(InLine);
+                //Calls the required functions to return a number and run each method.
+                Transfer = Cal.TestVal(InLine);
                 KeyInput = Convert.ToInt32(Transfer);
-                
-                OutLine = Prog.Output(KeyInput, exit);
-                WriteLine(Prog.Output(KeyInput, exit));
+
+                //OutLine = Pro.Output(KeyInput, exit);
+                WriteLine(Pro.Output(KeyInput, ref exit) + "\n \n");
             }
         }
-        string Output(int KeyIn, bool Exit)
+
+
+        private string Output(int KeyIn, ref bool Exit)
         {
-            string Ret1 = "0";
-
+            Calls Cal = new Calls();
+            string Ret1 = "0";           
+            
+            //Checks the input and runs the appropriate function.
             switch (KeyIn)
-            {               
+            {
 
-                case '1':
-                    Ret1 = TempConverter();
+                case 1:
+                    Ret1 = Cal.TempConverter();
                     break;
-                case '2':
-                    Ret1 = SphereVolume();
+                case 2:
+                    Ret1 = Cal.SphereVolume();
                     break;
-                case '3':
-                    Ret1 = Multiple();
+                case 3:
+                    Ret1 = Cal.Multiple();
                     break;
-                case '4':
-                    Ret1 = IsPallindrome();
+                case 4:
+                    Ret1 = Cal.IsPallindrome();
+                    break;
+                case 5:
+                    Ret1 = "Exiting";
+                    Exit = true;
                     break;
                 default:
-                    WriteLine("The number must be between 1 and 5.");
+                    WriteLine("The number must be an integer between 1 and 5.");
                     break;
-                }
+            }
             return Ret1;
-        }
-
-        //Converts from Farenheight to Celcius
-        String TempConverter()
-        {
-            string inVal, outVal;            
-            double CVal, FVal;
-            WriteLine("Enter a temperature in Fahrenheit to convert to Celsius.");
-            inVal = ReadLine();
-            //Converts from string to Decimal
-            FVal = TestVal(inVal);
-            //Returns the temperature converted to Celsius.
-            CVal = (FVal - 32) / 1.8;
-            outVal = Convert.ToString(CVal) + " degrese Celsius";
-            return outVal; 
-        }
-
-        String SphereVolume()
-        {
-            string inVal = "0"; string outVal = "0";
-            double Vol = 0;
-            Vol = TestVal(inVal);
-            Vol = Math.Pow(2, Vol) * Math.PI;
-            return outVal;
-        }
-
-        string Multiple()
-        {
-            string inVal;
-            string outVal = "0";
-
-
-            return outVal;
-        }
-
-        //Checks if a word entered is the same forwards and backwards.
-        //Checks for Pallindrome.
-        string IsPallindrome()
-        {
-            string retVal = ""; string testVal;            
-            WriteLine("Enter a word to test whether it is a Pallindrome or not.");
-            testVal = ReadLine() ;
-            //Testvalue initialized as length of input string.
-            int i = (testVal.Length - 1);
-            //Loops and adds the string in reverse to another string.
-            while ( i != -1 && testVal.Substring(i) != " ")
-            {
-                retVal += testVal.Substring(i);
-                i--;
-            }
-
-            //Tests the reverse string for pallindrome against orrigional.
-            if (retVal == testVal)
-            {
-                retVal = retVal + " is a Pallindrome.";
-            }
-            else
-            {
-                retVal = retVal + " Is not Pallindrome.";
-            }
-            return retVal;
-        }
-
-        //Tests and returns an input as a number output.
-        double TestVal(string Input)
-        {
-            double RetNum = 0;
-            //Catches failures or errors in the conversion of the input to a decimal number.
-                try { RetNum = Convert.ToDouble(Input); }
-            catch (InvalidCastException e)
-            {
-                WriteLine("Invalid entry, You must enter a number.");
-            }
-            catch (ArgumentNullException e)
-            {
-                WriteLine("Invalid entry, You must enter a number.");
-            }
-            return RetNum;
         }
     }
 }
+
+

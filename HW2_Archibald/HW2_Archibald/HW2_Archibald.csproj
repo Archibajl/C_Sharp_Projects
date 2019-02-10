@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5E929303-D00D-482B-B7C9-83727F68D8F5}</ProjectGuid>
+    <ProjectGuid>{ADA42C42-A496-4D41-9D4C-42F497C84A8B}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>InitialSet_IntroAsmnt1</RootNamespace>
-    <AssemblyName>InitialSet_IntroAsmnt1</AssemblyName>
+    <RootNamespace>HW2_Archibald</RootNamespace>
+    <AssemblyName>HW2_Archibald</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,9 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Calls.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Archer.cs" />
+    <Compile Include="Character1.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="Mage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Warrior.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
