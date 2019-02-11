@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace Recursion
 {
-    class Program
+    class BinarySearchTree<Node>
     {
-        static void Main(string[] args)
-        {
-
-        }
-
-        
     }
 }
