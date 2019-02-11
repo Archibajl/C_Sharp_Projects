@@ -6,33 +6,37 @@ using System.Threading.Tasks;
 
 namespace HW2_Archibald
 {
-    abstract class Character2
-    {
-        Character1 w1 = new Warrior();
-        Character1 m1 = new Mage();
-        Character1 a1 = new Archer();        
+    public abstract class Character2
+    {        
+        
+        
+             
+        private int position = 28;
 
-        private static int position = 28;
-
-        void TakeDamage(int amount)
+        public void TakeDamage(int amount)
         {
             Health -= amount;
         }
 
+        public abstract string GetMovementAttackDescription();
+
         public abstract string GetSpecialDescription();
         
-        string Attack(char target)
+        public string Attack(char target)
         {            
             switch (target)
             {
                 case 'w':
-                    w1.Health -=  DamagePerAttack;
+                    Character1 w1 = new Warrior();
+                    w1.TakeDamage(DamagePerAttack);
                     break;
-                case 'a' :
-                    a1.Health -= DamagePerAttack;
+                case 'a' :                    
+                    Character1 a1 = new Archer();
+                    a1.TakeDamage(DamagePerAttack);
                     break;
                 case 'm' :
-                    m1.Health -= DamagePerAttack;
+                    Character1 m1 = new Mage();
+                    m1.TakeDamage(DamagePerAttack);
                     break;
             }
 
@@ -47,7 +51,7 @@ namespace HW2_Archibald
 
         public abstract int Health { set; get; }
 
-        private int Position
+        public int Position
         {
             set { position = value; }
             get { return position; }

@@ -3,41 +3,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Console;
 
 namespace HW2_Archibald
 {
     public abstract class Character1
-    {
-        Character2 w2 = new Warrior2();
-        Character2 m2 = new Mage2();
-        Character2 a2 = new Archer2();
-        private static int position = 23;
+    {       
+        
+        private int position = 23;
 
-        void TakeDamage(int amount)
+        public void TakeDamage(int amount)
         {
             Health -= amount;
         }
 
+        public abstract string GetMovementAttackDescription();
+
         public abstract string GetSpecialDescription();
 
-        string Attack(char target)
+        public string Attack(char target)
         {
-            Character2 w2 = new Warrior2();
-            Character2 m2 = new Mage2();
-            Character2 a2 = new Archer2();
-
+            
             switch (target)
             {
                 case 'w':
-                    w2.Health -= DamagePerAttack;
-                break;
-                case 'a' :
-                    a2.Health -= DamagePerAttack;
-                break;
-                case 'm' :
-                    m2.Health -= DamagePerAttack;
-                break;
+                    Character2 w2 = new Warrior2();
+                    if ((AttackRange >= (w2.Position - Position)) && (AttackRange >= (Position - w2.Position)))
+                    {                        
+                        w2.TakeDamage(DamagePerAttack);
+                    }
+                    break;
+                case 'a':
+                    Character2 a2 = new Archer2();
+                    if ((AttackRange >= (a2.Position - Position)) && (AttackRange >= (Position - a2.Position)))
+                    {
+                        a2.TakeDamage(DamagePerAttack);
+                        return $"You dealt {DamagePerAttack} damage.";
+                    }
+                    break;
+                case 'm':
+                    Character2 m2 = new Mage2();
+                    if ((AttackRange >= (m2.Position-Position))&&(AttackRange >= (Position-m2.Position)))
+                    {
+                        m2.TakeDamage(DamagePerAttack);
+                    }
+                    break;
             }
 
             return $"You dealt {DamagePerAttack} damage.";
@@ -51,7 +60,7 @@ namespace HW2_Archibald
 
         public abstract int Health { set; get; }     
 
-        private int Position
+        public int Position
         {
             set { position = value; }
             get { return position ; }

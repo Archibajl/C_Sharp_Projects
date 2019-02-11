@@ -6,13 +6,22 @@ using System.Threading.Tasks;
 
 namespace HW2_Archibald
 {
-    class Warrior2 : Character2
+    public class Warrior2 : Character2
     {
-        private static int moveSpeed = 1, damagePerAttack = 20, health = 75, priority = 3, attackRange = 1;
+        /*Character1 w1 = new Warrior();
+        Character1 m1 = new Mage();
+        Character1 a1 = new Archer();*/
+
+        private int moveSpeed = 1, damagePerAttack = 20, health = 75, priority = 3, attackRange = 1;
+
+        override public string GetMovementAttackDescription()
+        {
+            return $"Movement range = {moveSpeed}. Attack range = {attackRange}. Attack damage = {damagePerAttack}";
+        }
 
         override public string GetSpecialDescription()
         {
-            return $"Movement range = {moveSpeed}. Attack range = {attackRange}. Attack damage = {damagePerAttack}";
+            return $"leap up to 8 units to the spot in front of the opponent if possible, if opponent is greater than 5 units away deal 30 damage";
         }
         override public string Special(char target)
         {
