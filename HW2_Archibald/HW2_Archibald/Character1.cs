@@ -7,8 +7,13 @@ using System.Threading.Tasks;
 namespace HW2_Archibald
 {
     public abstract class Character1
-    {       
-        
+    {
+        Character2[] character2 = {
+            new Warrior2(),
+            new Archer2(),
+            new Mage2()
+            };
+
         private int position = 23;
 
         public void TakeDamage(int amount)
@@ -20,36 +25,18 @@ namespace HW2_Archibald
 
         public abstract string GetSpecialDescription();
 
-        public string Attack(char target)
+        public string Attack(int target)
         {
-            
-            switch (target)
-            {
-                case 'w':
-                    Character2 w2 = new Warrior2();
-                    if ((AttackRange >= (w2.Position - Position)) && (AttackRange >= (Position - w2.Position)))
-                    {                        
-                        w2.TakeDamage(DamagePerAttack);
-                    }
-                    break;
-                case 'a':
-                    Character2 a2 = new Archer2();
-                    if ((AttackRange >= (a2.Position - Position)) && (AttackRange >= (Position - a2.Position)))
-                    {
-                        a2.TakeDamage(DamagePerAttack);
-                        return $"You dealt {DamagePerAttack} damage.";
-                    }
-                    break;
-                case 'm':
-                    Character2 m2 = new Mage2();
-                    if ((AttackRange >= (m2.Position-Position))&&(AttackRange >= (Position-m2.Position)))
-                    {
-                        m2.TakeDamage(DamagePerAttack);
-                    }
-                    break;
-            }
+            string retstr;
 
-            return $"You dealt {DamagePerAttack} damage.";
+            if ((AttackRange >= (character2[target].Position - Position)) && (AttackRange >= (Position - character2[target].Position)))
+            {
+                character2[target].TakeDamage(DamagePerAttack);
+                retstr = $"You dealt {DamagePerAttack} damage.";
+            }
+            else { retstr = "Your target is out of range try again"; }
+
+            return retstr;
         }
 
         public abstract string Special(char target);

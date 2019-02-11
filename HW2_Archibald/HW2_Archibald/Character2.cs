@@ -7,10 +7,14 @@ using System.Threading.Tasks;
 namespace HW2_Archibald
 {
     public abstract class Character2
-    {        
-        
-        
-             
+    {
+        Character1[] character1 =
+        {
+            new Warrior(),
+            new Archer(),
+            new Mage()
+        };
+
         private int position = 28;
 
         public void TakeDamage(int amount)
@@ -22,25 +26,18 @@ namespace HW2_Archibald
 
         public abstract string GetSpecialDescription();
         
-        public string Attack(char target)
-        {            
-            switch (target)
-            {
-                case 'w':
-                    Character1 w1 = new Warrior();
-                    w1.TakeDamage(DamagePerAttack);
-                    break;
-                case 'a' :                    
-                    Character1 a1 = new Archer();
-                    a1.TakeDamage(DamagePerAttack);
-                    break;
-                case 'm' :
-                    Character1 m1 = new Mage();
-                    m1.TakeDamage(DamagePerAttack);
-                    break;
-            }
+        public string Attack(int target)
+        {
+            string retstr;
 
-            return $"You dealt {DamagePerAttack} damage.";
+            if ((AttackRange >= (character1[target].Position - Position)) && (AttackRange >= (Position - character1[target].Position)))
+            {
+                character1[target].TakeDamage(DamagePerAttack);
+                retstr = $"You dealt {DamagePerAttack} damage.";
+            }
+            else { retstr = "Your target is out of range try again"; }
+
+            return retstr;
         }
 
         public abstract string Special(char target);
