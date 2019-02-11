@@ -26,16 +26,7 @@ namespace HW2_Archibald
             new Archer(),
             new Mage()
         };
-
-        /*Character2 wa2 = new Warrior2();
-        Character2 ma2 = new Mage2();
-        Character2 ar2 = new Archer2();*/
-
-
-
-
-        /*private struct Position{ public int pos1, pos2; }
-        Position p = new Position();*/
+                               
 
         static void Main(string[] args)
         {                       
@@ -58,57 +49,64 @@ namespace HW2_Archibald
            "M = mage \n W = Warrior \n  A = Archer \n");
             input = ReadLine();
             inClass2 = gm.ChoseCharacter(input);
+            int player = gm.Priority(inClass1, inClass2);
             while (end == false)
             {
-                int player = 1;
-                //provides a description or characters and abilities for current player.
-                end = gm.Discription(inClass1, inClass2, player, ref pos1);
-                input = ReadLine();
-                int.TryParse(input, out command);
-                if (command == 1)
+                if (player == 1)
                 {
-                    test = false;
-                    while (test == false)
-                    {//checks and requests movement input
-                        gm.Movement(inClass1, player, ref test, ref pos1);                        
+                    player = 1;
+                    //provides a description or characters and abilities for current player.
+                    end = gm.Discription(inClass1, inClass2, player, ref pos1);
+                    input = ReadLine();
+                    int.TryParse(input, out command);
+                    if (command == 1)
+                    {
+                        test = false;
+                        while (test == false)
+                        {//checks and requests movement input
+                            gm.Movement(inClass1, player, ref test, ref pos1);
+                        }
+                        test = false;
+                        while (test == false)
+                        {//calls attack after movement.
+                            WriteLine("Woult you like to attack Y/N ?");
+                            input = ReadLine();
+                            test = char.TryParse(input, out cmd);
+                        }
+                        gm.CallAttack(cmd, inClass1, inClass2, player);
                     }
-                    test = false;
-                    while(test == false)
-                    {//calls attack after movement.
-                        WriteLine("Woult you like to attack Y/N ?");
-                        input = ReadLine();
-                        test = char.TryParse(input, out cmd);
+                    if (command == 2)
+                    {//calls special attack.
+                        WriteLine(gm.CallSpecial(inClass1, inClass2, player));
                     }
-                    gm.CallAttack(cmd, inClass1, inClass2, player);
+                    //changes the player number to make it possible to use the same functions.
+                    player = 2;
                 }
-                if(command == 2)
-                {//calls special attack.
-                    WriteLine(gm.CallSpecial(inClass1, inClass2, player));
-                }
-                //changes the player number to make it possible to use the same functions.
-                player = 2;
-                end = gm.Discription(inClass2, inClass1, player, ref pos2);
-                input = ReadLine();
-                int.TryParse(input, out command);
-                if(command == 1)
-                {
-                    test = false;
-                    while (test == false)
-                    {//movement
-                        gm.Movement(inClass1, player, ref test, ref pos1);
+                if (player == 2) {
+                    end = gm.Discription(inClass2, inClass1, player, ref pos2);
+                    input = ReadLine();
+                    int.TryParse(input, out command);
+                    if (command == 1)
+                    {
+                        test = false;
+                        while (test == false)
+                        {//movement
+                            gm.Movement(inClass1, player, ref test, ref pos1);
+                        }
+                        test = false;
+                        while (test == false)
+                        {//attack calls
+                            WriteLine("Woult you like to attack Y/N ?");
+                            input = ReadLine();
+                            test = char.TryParse(input, out cmd);
+                        }
+                        gm.CallAttack(cmd, inClass2, inClass1, player);
                     }
-                    test = false;
-                    while (test == false)
-                    {//attack calls
-                        WriteLine("Woult you like to attack Y/N ?");
-                        input = ReadLine();
-                        test = char.TryParse(input, out cmd);
+                    if (command == 2)
+                    {//speical call
+                        WriteLine(gm.CallSpecial(inClass2, inClass1, player));
                     }
-                    gm.CallAttack(cmd, inClass2, inClass1, player);
-                }
-                if (command == 2)
-                {//speical call
-                    WriteLine( gm.CallSpecial(inClass2, inClass1, player));
+                    player = 1;
                 }
             }
         }
@@ -188,6 +186,13 @@ namespace HW2_Archibald
                 }
                 return output;
             }
+        }
+
+        int Priority(int cl1, int cl2)
+        {
+           if( character1[cl1].Priority > character2[cl2].Priority){ return 2; }
+            if (character2[cl2].Priority >= character1[cl1].Priority) { return 1; }
+            else { return 1; }
         }
 
         //returns character and health discriptions

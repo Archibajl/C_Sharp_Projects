@@ -8,12 +8,7 @@ namespace HW2_Archibald
 {
     public abstract class Character2
     {
-        Character1[] character1 =
-        {
-            new Warrior(),
-            new Archer(),
-            new Mage()
-        };
+        
 
         private int position = 28;
 

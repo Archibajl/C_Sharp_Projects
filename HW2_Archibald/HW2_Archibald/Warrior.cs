@@ -8,9 +8,7 @@ namespace HW2_Archibald
 {
     public class Warrior : Character1
     {
-        /*Character2 w2 = new Warrior2();
-        Character2 m2 = new Mage2();
-        Character2 a2 = new Archer2();*/
+        
 
         private int moveSpeed = 2, damagePerAttack = 20, health = 75, priority = 3, attackRange = 1;
 

@@ -7,10 +7,7 @@ using System.Threading.Tasks;
 namespace HW2_Archibald
 {
     public class Mage : Character1
-    {
-        /*Character2 w2 = new Warrior2();
-        Character2 m2 = new Mage2();
-        Character2 a2 = new Archer2();*/
+    {       
 
         private int moveSpeed = 1, damagePerAttack = 20, health = 50, priority = 2, attackRange = 6;
 

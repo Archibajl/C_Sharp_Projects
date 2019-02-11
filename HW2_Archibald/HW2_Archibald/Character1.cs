@@ -7,12 +7,7 @@ using System.Threading.Tasks;
 namespace HW2_Archibald
 {
     public abstract class Character1
-    {
-       /* Character2[] character2 = {
-            new Warrior2(),
-            new Archer2(),
-            new Mage2()
-            };*/
+    {       
 
         private int position = 23;
 
