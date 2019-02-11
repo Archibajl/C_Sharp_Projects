@@ -21,11 +21,27 @@ namespace HW2_Archibald
 
         override public string GetSpecialDescription()
         {
-            return $"leap up to 8 units to the spot in front of the opponent if possible, if opponent is greater than 5 units away deal 30 damage";
+            return $"leap up to 8 units to the spot in front of the opponent if possible, if opponent is greater than 5 units away and less than 9 deal 30 damage";
         }
-        override public string Special(char target)
+        override public string Special(Character1 target)
         {
-            return $"";
+            string effect;
+            if (((target.Position - Position) <= 8) || (Position - target.Position) <= 8)
+            {
+                if (((target.Position - Position) > 5) || ((Position - target.Position) > 5))
+                {
+                    target.TakeDamage(30);
+                    effect = "You dealt 30 Dammage to Player 2";
+                }
+                else
+                {
+                    Position = (target.Position - 1);
+                    effect = $"You lept to { Position}";
+
+                }
+            }
+            else { effect = "Target out of range, attack failed."; }
+            return effect;
         }
 
         override public int MoveSpeed

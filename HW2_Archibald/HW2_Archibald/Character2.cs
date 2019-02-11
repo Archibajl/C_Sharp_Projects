@@ -26,13 +26,13 @@ namespace HW2_Archibald
 
         public abstract string GetSpecialDescription();
         
-        public string Attack(int target)
+        public string Attack(Character1 target)
         {
             string retstr;
 
-            if ((AttackRange >= (character1[target].Position - Position)) && (AttackRange >= (Position - character1[target].Position)))
+            if ((AttackRange >= (target.Position - Position)) && (AttackRange >= (Position - target.Position)))
             {
-                character1[target].TakeDamage(DamagePerAttack);
+                target.TakeDamage(DamagePerAttack);
                 retstr = $"You dealt {DamagePerAttack} damage.";
             }
             else { retstr = "Your target is out of range try again"; }
@@ -40,7 +40,7 @@ namespace HW2_Archibald
             return retstr;
         }
 
-        public abstract string Special(char target);
+        public abstract string Special(Character1 target);
 
         public abstract int MoveSpeed { set; get; }
 

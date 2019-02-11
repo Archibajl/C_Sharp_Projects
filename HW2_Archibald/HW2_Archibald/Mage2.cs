@@ -23,24 +23,27 @@ namespace HW2_Archibald
         {
             return $"knock back the opponent 4 units, range = 3, deals 3 damage";
         }
-        public override string Special(char target)
+        public override string Special(Character1 target)
         {
-            switch (target)
+            string effect;
+            if (((target.Position - Position) <= 3) || (Position - target.Position) <= 3)
             {
-                case 'w':
-                    Character1 w1 = new Warrior();
-                    w1.TakeDamage(DamagePerAttack);
-                    break;
-                case 'a':
-                    Character1 a1 = new Archer();                    
-                    a1.TakeDamage(DamagePerAttack);
-                    break;
-                case 'm':
-                    Character1 m1 = new Mage();
-                    m1.TakeDamage(DamagePerAttack);
-                    break;
+                target.TakeDamage(3);
+                if(((target.Position -3) <= 0) || ((target.Position + 3) <= 50))
+                {
+                    if ((Position - target.Position) < 0)
+                    {
+                        target.Position += 3;
+                    }
+                    if ((target.Position-Position) <= 0)
+                    {
+                        target.Position -= 3;
+                    }
+                }
+                effect = "You dealt 3 Dammage and pushed back Player 1 (4) units.";
             }
-            return $"";
+            else { effect = "Target out of range, attack failed."; }
+            return effect;
         }
 
         override public int MoveSpeed

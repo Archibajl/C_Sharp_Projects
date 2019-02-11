@@ -48,11 +48,12 @@ namespace HW2_Archibald
             char cmd = 'n';
             bool end = false;
             bool test = false;
+
             WriteLine("Chose player 1 class \n" +
             "M = mage \n W = Warrior \n  A = Archer \n");
             input = ReadLine();
             inClass1 = gm.ChoseCharacter(input);
-
+            //requests input for character choice.
             WriteLine("Chose player 2 class \n" +
            "M = mage \n W = Warrior \n  A = Archer \n");
             input = ReadLine();
@@ -60,36 +61,59 @@ namespace HW2_Archibald
             while (end == false)
             {
                 int player = 1;
-                gm.Discription(inClass1, inClass2, player, ref pos1);
+                //provides a description or characters and abilities for current player.
+                end = gm.Discription(inClass1, inClass2, player, ref pos1);
                 input = ReadLine();
                 int.TryParse(input, out command);
                 if (command == 1)
                 {
+                    test = false;
                     while (test == false)
-                    {
-                        gm.Movement(inClass1, player, ref test, ref pos1);
+                    {//checks and requests movement input
+                        gm.Movement(inClass1, player, ref test, ref pos1);                        
+                    }
+                    test = false;
+                    while(test == false)
+                    {//calls attack after movement.
+                        WriteLine("Woult you like to attack Y/N ?");
                         input = ReadLine();
                         test = char.TryParse(input, out cmd);
-
                     }
-                    WriteLine("Woult you like to attack Y/N ?");
-                    
+                    gm.CallAttack(cmd, inClass1, inClass2, player);
                 }
-
+                if(command == 2)
+                {//calls special attack.
+                    WriteLine(gm.CallSpecial(inClass1, inClass2, player));
+                }
+                //changes the player number to make it possible to use the same functions.
                 player = 2;
-                gm.Discription(inClass2, inClass1, player, ref pos2);
+                end = gm.Discription(inClass2, inClass1, player, ref pos2);
                 input = ReadLine();
                 int.TryParse(input, out command);
-                if (command == 1)
+                if(command == 1)
                 {
+                    test = false;
                     while (test == false)
-                    {
-                        //gm.Movement(inClass1, player, ref test, ref pos1);
+                    {//movement
+                        gm.Movement(inClass1, player, ref test, ref pos1);
                     }
+                    test = false;
+                    while (test == false)
+                    {//attack calls
+                        WriteLine("Woult you like to attack Y/N ?");
+                        input = ReadLine();
+                        test = char.TryParse(input, out cmd);
+                    }
+                    gm.CallAttack(cmd, inClass2, inClass1, player);
+                }
+                if (command == 2)
+                {//speical call
+                    WriteLine( gm.CallSpecial(inClass2, inClass1, player));
                 }
             }
         }
 
+        //sets the index for which character the the user chose.
         int ChoseCharacter(string input)
         {
             string Test;
@@ -97,7 +121,7 @@ namespace HW2_Archibald
             int output = 0;
             bool test;
             test = char.TryParse(input, out transvar);
-
+            //runs if input is incorrect.
             if ((input == "") || (test == false))
             {
                 while (test == false)
@@ -166,21 +190,33 @@ namespace HW2_Archibald
             }
         }
 
-        void Discription(int charIndex, int charIndex2, int player, ref int position) {
+        //returns character and health discriptions
+        bool Discription(int charIndex, int charIndex2, int player, ref int position) {
             string output = null;
+            bool end = false;
             string[] character = { "Warrior", "Archer", "Mage" };
             if (player == 1)
-            {
+            {//checks health of both players.
+                if(character1[charIndex].Health <= 0)
+                {
+                    end = true;
+                }
+                //return for player 1.
                 output = $"Player 1 Class = {character[charIndex]}, Health = {character1[charIndex].Health}"+
-                    $" Player2 Class = {character[charIndex]}, Health = {character1[charIndex].Health} \n \n";
+                    $" Player2 Class = {character[charIndex2]}, Health = {character2[charIndex2].Health} \n \n";
                 output += $"1. Move and Attack ({character1[charIndex].GetMovementAttackDescription()})\n";
                 output += $"wa1. Special ({character1[charIndex].GetSpecialDescription()})";
                 position = character1[charIndex].Position;
             }
             if (player == 2)
             {
-                output = $"Player 2 Class = {character[charIndex]}, Health = {character1[charIndex].Health}" +
-                    $" Player1 Class = {character[charIndex]}, Health = {character1[charIndex].Health} \n \n";
+                if (character2[charIndex].Health <= 0)
+                {
+                    end = true;
+                }
+                //return for player 2
+                output = $"Player 2 Class = {character[charIndex]}, Health = {character2[charIndex].Health}" +
+                    $" Player1 Class = {character[charIndex2]}, Health = {character1[charIndex2].Health} \n \n";
                 output += $"1. Move and Attack ({character2[charIndex].GetMovementAttackDescription()})\n";
                 output += $"wa1. Special ({character2[charIndex].GetSpecialDescription()})";
                 position = character2[charIndex].Position;
@@ -188,7 +224,9 @@ namespace HW2_Archibald
             if (output != null)
             {
                 WriteLine($"{output} \n");
+                
             }
+            return end;
         }
                      
         //Call to move a players character
@@ -257,71 +295,36 @@ namespace HW2_Archibald
 
             }
         }
-
-        void CallAttack(char command, int Ch1, int Ch2, int character ) {
+        //calls attack from respective class
+        void CallAttack(char command, int ch1, int ch2, int character ) {
             if ((command == 'y') || (command == 'Y'))
-            {
+            {//seperates each call by class.
                 if (character == 1)
                 {
-                    WriteLine(character1[Ch1].Attack(Ch2));
+                    WriteLine(character1[ch1].Attack(character2[ch2]));
                 }
                 if (character == 2)
                 {
-                    WriteLine(character2[Ch1].Attack(Ch2));
+                    WriteLine(character2[ch1].Attack(character1[ch2]));
                 }
             }
         }
 
-        /*void Discription(char Character, int player, ref int position)
+        string CallSpecial(int ch1, int ch2, int player)
         {
-
-            string output = null;
             if (player == 1)
             {
-                switch (Character)
-                {
-                    case 'w':
-                        output = $"1. Move and Attack ({character1[1].GetMovementAttackDescription()})\n";
-                        output += $"wa1. Special ({character1[1].GetSpecialDescription()})";
-                        position = character1[1].Position;
-                        break;
-                    case 'a':
-                        output = $"1. Move and Attack ({character1[2].GetMovementAttackDescription()})\n";
-                        output += $"2. Special ({character1[2].GetSpecialDescription()})";
-                        position = character1[1].Position;
-                        break;
-                    case 'm':
-                        output = $"1. Move and Attack ({character1[3].GetMovementAttackDescription()})\n";
-                        output += $"2. Special ({character1[3].GetSpecialDescription()})";
-                        position = character1[1].Position;
-                        break;
-                }
+                string output;
+                output = character1[ch1].Special(character2[ch2]);
+                return output;
             }
             if (player == 2)
             {
-                switch (Character)
-                {
-                    case 'w':
-                        output = $"1. Move and Attack ({character2[1].GetMovementAttackDescription()})\n";
-                        output += $"2. Special ({character2[1].GetSpecialDescription()})";
-                        position = character2[2].Position;
-                        break;
-                    case 'a':
-                        output = $"1. Move and Attack ({character2[2].GetMovementAttackDescription()})\n";
-                        output += $"2. Special ({character2[2].GetSpecialDescription()})";
-                        position = character2[2].Position;
-                        break;
-                    case 'm':
-                        output = $"1. Move and Attack ({character2[3].GetMovementAttackDescription()})\n";
-                        output += $"2. Special ({character2[3].GetSpecialDescription()})";
-                        position = character2[3].Position;
-                        break;
-                }
+                string output;
+                output = character2[ch1].Special(character1[ch2]);
+                return output;
             }
-            if (output != null)
-            {
-                WriteLine($"{output} \n");
-            }
-        }*/
+            else { return "Error william robinson."; }
+        }       
     }
 }

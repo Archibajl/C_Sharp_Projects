@@ -23,10 +23,16 @@ namespace HW2_Archibald
         {
             return $"12 range attack, deals 10 damage";
         }
-        override public string Special(char target)
+        override public string Special(Character2 target)
         {
-
-            return $"";
+            string effect;
+            if (((target.Position - Position) <= 12) || (Position - target.Position) <= 12)
+            {
+                target.TakeDamage(10);
+                effect = "You dealt 10 Dammage";
+            }
+            else { effect = "Target out of range, attack failed."; }
+            return effect;
         }
 
         override public int MoveSpeed
