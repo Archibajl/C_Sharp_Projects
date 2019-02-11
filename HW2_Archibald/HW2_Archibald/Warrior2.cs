@@ -12,7 +12,7 @@ namespace HW2_Archibald
         Character1 m1 = new Mage();
         Character1 a1 = new Archer();*/
 
-        private int moveSpeed = 1, damagePerAttack = 20, health = 75, priority = 3, attackRange = 1;
+        private int moveSpeed = 2, damagePerAttack = 20, health = 75, priority = 3, attackRange = 1;
 
         override public string GetMovementAttackDescription()
         {
