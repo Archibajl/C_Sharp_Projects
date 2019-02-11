@@ -205,7 +205,7 @@ namespace HW2_Archibald
                 output = $"Player 1 Class = {character[charIndex]}, Health = {character1[charIndex].Health}"+
                     $" Player2 Class = {character[charIndex2]}, Health = {character2[charIndex2].Health} \n \n";
                 output += $"1. Move and Attack ({character1[charIndex].GetMovementAttackDescription()})\n";
-                output += $"wa1. Special ({character1[charIndex].GetSpecialDescription()})";
+                output += $"2. Special ({character1[charIndex].GetSpecialDescription()})";
                 position = character1[charIndex].Position;
             }
             if (player == 2)
@@ -218,7 +218,7 @@ namespace HW2_Archibald
                 output = $"Player 2 Class = {character[charIndex]}, Health = {character2[charIndex].Health}" +
                     $" Player1 Class = {character[charIndex2]}, Health = {character1[charIndex2].Health} \n \n";
                 output += $"1. Move and Attack ({character2[charIndex].GetMovementAttackDescription()})\n";
-                output += $"wa1. Special ({character2[charIndex].GetSpecialDescription()})";
+                output += $"2. Special ({character2[charIndex].GetSpecialDescription()})";
                 position = character2[charIndex].Position;
             }
             if (output != null)
