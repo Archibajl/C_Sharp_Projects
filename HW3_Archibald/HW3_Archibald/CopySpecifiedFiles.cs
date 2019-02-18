@@ -18,21 +18,32 @@ namespace HW3_Archibald
             //if (!Directory.Exists(desiredFilePath))
             
                System.IO.Directory.CreateDirectory(desiredFilePath);
-                   // System.IO.Directory.CreateDirectory(filePath) = "CopiedFiles";
-            
+            // System.IO.Directory.CreateDirectory(filePath) = "CopiedFiles";
+
 
             for (int i = 0; i < directoryLocation.Length; i++)
             {
-                try
+                if (directoryLocation[i] != "No files found")
                 {
-                    File.Copy( directoryLocation[i], desiredFilePath + @"\\" + ReturnFileName(directoryLocation[i]), true);
-                }
-                catch(FieldAccessException e)
-                {
-                    Console.WriteLine("Unable to copy {0}", directoryLocation[i]);
+                    try
+                    {
+                        File.Copy(directoryLocation[i], desiredFilePath + @"\\" + ReturnFileName(directoryLocation[i]), true);
+                    }
+                    catch (FieldAccessException e)
+                    {
+                        Console.WriteLine("Unable to copy {0}", directoryLocation[i]);
+                    }
                 }
             }
-            output = desiredFilePath;
+            if (directoryLocation[0] == "No files found")
+            {
+                output = "No files found to copy";
+            }
+            else
+            {
+                output = desiredFilePath;
+            }
+            
             return output;
         }
 
