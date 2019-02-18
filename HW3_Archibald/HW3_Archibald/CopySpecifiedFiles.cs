@@ -14,19 +14,18 @@ namespace HW3_Archibald
         {
             string output = null;
             string filePath = @CurrentFilePath() ;
-            string desiredFilePath = filePath + @"\CopiedFiles\";
-            //if (!Directory.Exists(desiredFilePath))
+            string desiredFilePath = filePath + @"\CopiedFiles\";            
             
+            //Creates a file if none exists.
                System.IO.Directory.CreateDirectory(desiredFilePath);
-            // System.IO.Directory.CreateDirectory(filePath) = "CopiedFiles";
-
-
+            
+            //Coppies every file that has been found matching the type of file requested under the folder input.
             for (int i = 0; i < directoryLocation.Length; i++)
             {
                 if (directoryLocation[i] != "No files found")
                 {
                     try
-                    {
+                    {//Copies the files to the specified directory.
                         File.Copy(directoryLocation[i], desiredFilePath + @"\\" + ReturnFileName(directoryLocation[i]), true);
                     }
                     catch (FieldAccessException e)
@@ -47,12 +46,15 @@ namespace HW3_Archibald
             return output;
         }
 
+        //Returns the current filepath of the program.
         private string CurrentFilePath()
         {
             string output;
             output = @Environment.CurrentDirectory;
             return output;
         }
+        //I didn't return the names of the files just the location.
+        //This takes the last part of the location which is the file name and copies it, so that it can be used to copy the file.
         private string ReturnFileName(string cutFileName)
         {
             string[] splitName = null;

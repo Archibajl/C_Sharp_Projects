@@ -1,4 +1,7 @@
-﻿using System;
+﻿//Justin Archibald
+//CSC 3020 C#
+//HW 3
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +14,7 @@ namespace HW3_Archibald
 {
     class FindFiles : CopyFile
     {
+        //REturns an array of file locations.
         public string[] ReturnFilePath(string st, string fType)
         {
             string[] output = null;
@@ -28,6 +32,7 @@ namespace HW3_Archibald
             return output;
         }
 
+        //Returns the locations of files in a string.
         string RetFiles(string start, string fileType)
         {
             string retStr = null;
@@ -43,24 +48,23 @@ namespace HW3_Archibald
                        retStr += firstFiles[b] + ",";
                        
                     }
-                }
-                //string[] directory = Directory.GetDirectories(start); 
+                } //calls recursion for each file found.                
                 for (int i = 0; i < directory.Length; i++)
                 {
                     retStr += RetFiles(directory[i], fileType);
                 }                
-            }
+            } //lets the user know that this file can not be accessed.
             catch (FieldAccessException e)
             {
                 Console.WriteLine( "Can not access file, {0}", start);
-            }
+            }//supposed to let the user know that there is no file here.
             catch (FileNotFoundException e)
             {
                 Console.WriteLine( "File path does not exist, {0}", start);
             }
             return retStr;
         }
-
+        //Returns the string in an array of strings, which are locations of each file.
         string[] BreakUpString(string cutter)
         {
             string[] retStr = null;
