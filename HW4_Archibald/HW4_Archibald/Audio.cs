@@ -11,8 +11,8 @@ namespace HW4_Archibald
     {
         Data<Audio> da = new Data<Audio>();
 
-        string[]  fileName, fileExtention, dateLastAccessed;
-        int[] index;
+        string[] fileName = null, fileExtention = null, dateLastAccessed = null;
+        int[] index = null;
 
         public int Length;
         public int[] Index { set { index = value; } get { return index; } }
@@ -20,63 +20,108 @@ namespace HW4_Archibald
         public string[] FileExtention { set { fileExtention = value; } get { return fileExtention; } }
         public string[] DateLastAccessed { set { dateLastAccessed = value; } get { return dateLastAccessed; } }
 
-        public void Search()
+        public void Search(string directory)
         {
-
-            string[] fileTypes = { "MP3", "MP4", "WAV" };
+            string[] fileTypes = { ".mp3", ".mp4", ".wav" };
             string[] retstr = null;
 
-            for (int b = 0; b < fileTypes.Length; b++) {
+            for (int b = 0; b < fileTypes.Length; b++)
+            {
                 string[] temp;
-                int tempLen;
-                temp = ReturnFilePath(fileTypes[b], fileTypes[b]);
-
-                tempLen = retstr.Length;
-                Array.Resize<string>(ref retstr, retstr.Length + temp.Length);
-
-                for (int c = 0; c < temp.Length; c++)
+                int tempLen = 0;
+                retstr = ReturnFilePath(directory, fileTypes[b]);
+                temp = retstr;
+                if (retstr != null)
                 {
-                    if (tempLen != 0)
+                    tempLen = retstr.Length;
+                    Array.Resize<string>(ref retstr, retstr.Length + temp.Length);
+
+                    for (int c = 0; c < temp.Length; c++)
                     {
-                        retstr[c + tempLen] = temp[c];
+                        if (tempLen != 0)
+                        {
+                            retstr[c + tempLen] = temp[c];
+                        }
+                        else
+                        {
+                            retstr[c] = temp[c];
+                        }
+                    }
+
+                    RetFileType(temp);
+                    RetFileExtention(temp);
+
+                    tempLen = 0;
+                    if (index != null)
+                    {
+                        tempLen = fileExtention.Length;
+                        Array.Resize<int>(ref index, index.Length + temp.Length);
                     }
                     else
                     {
-                        retstr[c] = temp[c];
+                        Array.Resize<int>(ref index, temp.Length);
+                    }
+                    for (int i = 0; i < retstr.Length; i++)
+                    {
+                        Index[i] = i;
+                        da.Insert(Index[i], FileName[i]);
+                        da.FileExtention.Insert(Index[i], FileExtention[i]);
+                        da.DateAccessed.Insert(Index[i], DateLastAccessed[i]);
+                        da.FileDirectory.Insert(Index[i], retstr[i]);
+                        da = new Data<Audio>();
+                        Length = i;
                     }
                 }
             }
-
-            for (int i = 0; i < retstr.Length; i++)
-            {
-                Index[i] = i;
-                da.FileName.Insert(Index[i], FileName[i]);
-                da.FileExtention.Insert(Index[i], FileExtention[i]);
-                da.DateAccessed.Insert(Index[i], DateLastAccessed[i]);
-                da.FileDirectory.Insert( Index[i],retstr[i]);
-                da = new Data<Audio>();
-                Length = i;
-            }
         }
+
         public void PrintValues()
         {
             Console.WriteLine($"File Name: {da.FileName}\n File Extention {da.FileExtention} \n Date Last accessed {da.DateAccessed}");
             for (int i = 0; i < Length; i++)
-            {                                
+            {
                 Console.WriteLine($" Index: {i} \n File name: {FileName} \n File Extention: {FileExtention}\n Date Last Accessed {DateLastAccessed}");
-            }            
+            }
         }
         public void RetFileType(string[] location)
         {
-            for(int i =0; i < location.Length; i++)
+            int tempLen = 0;
+            if (fileName != null) {
+                tempLen = fileName.Length;
+                Array.Resize<string>(ref fileName, fileName.Length + location.Length);
+                Array.Resize<string>(ref dateLastAccessed, dateLastAccessed.Length + location.Length);
+            }else
+            {
+                Array.Resize<string>(ref fileName, location.Length);
+                Array.Resize<string>(ref dateLastAccessed, location.Length);
+            }
+
+            for (int i =0; i < location.Length; i++)
+            {
+                DateLastAccessed[i] = Convert.ToString(Directory.GetLastAccessTime(location[i]));                
+                string[] temp;
+                temp = location[i].Split('\\').ToArray<string>();
+                FileName[i] = temp[temp.Length - 1];
+                                
+            }
+        }
+        public void RetFileExtention(string[] location)
+        {
+            int tempLen = 0;
+            if (fileExtention != null)
+            {
+                tempLen = fileExtention.Length;
+                Array.Resize<string>(ref fileExtention, fileExtention.Length + location.Length);
+            }
+            else
+            {
+                Array.Resize<string>(ref fileExtention,  location.Length);
+            }
+            for (int i = 0; i < location.Length; i++)
             {
                 string[] temp;
-                temp = location[i].Split('/').ToArray<string>();
-                FileName[i] = temp[temp.Length - 1];
                 temp = location[i].Split('.').ToArray<string>();
-                FileExtention[i] = temp[temp.Length - 1];
-                DateLastAccessed[i] = Convert.ToString( Directory.GetLastAccessTime(location[i]));
-
+                FileExtention[i + tempLen] = temp[temp.Length - 1];
             }
         }
     }

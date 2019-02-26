@@ -22,7 +22,7 @@ namespace HW4_Archibald
             }
             else
             {
-                output[0] = "No files found,";
+                //output[0] = "No files found,";
             }
             return output;
         }
@@ -49,13 +49,17 @@ namespace HW4_Archibald
                     retStr += RetFiles(directory[i], fileType);
                 }
             } //lets the user know that this file can not be accessed.
-            catch (FieldAccessException )
+            catch (FieldAccessException e)
             {
                 Console.WriteLine("Can not access file, {0}", start);
             }//supposed to let the user know that there is no file here.
-            catch (FileNotFoundException)
+            catch (FileNotFoundException e)
             {
                 Console.WriteLine("File path does not exist, {0}", start);
+            }
+            catch (Exception e)
+            {
+
             }
             return retStr;
         }

@@ -12,8 +12,9 @@ namespace HW4_Archibald
         string[] FileName { set; get; }
         string[] FileExtention { set; get; }
         string[] DateLastAccessed { set; get; }
-        void Search();
+        void Search(string directory);
         void PrintValues();
         void RetFileType(string[] location);
+        void RetFileExtention(string[] location);
         }
 }

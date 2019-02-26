@@ -1,4 +1,8 @@
-﻿using System;
+﻿//Justin Archibald
+//CSC3020
+//HW 4
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,11 +13,16 @@ namespace HW4_Archibald
 {
     class Program
     {
-        IMedia<M> m = new {
-            Audio A = new Audio();
-            Video V = new Video();
-            Image I = new Image();
-        }
+        //Character1[] character1 =
+        //{
+        //    new Warrior(),
+        //    new Archer(),
+        //    new Mage()
+        //};
+        IMedia<Video> Vid = new Video();
+        IMedia<Image> Img = new Image();
+        IMedia<Audio> Aud = new Audio();
+
         static void Main(string[] args)
         {
             Program pr = new Program();
@@ -33,23 +42,40 @@ namespace HW4_Archibald
 
         bool SearchSelect(int Select)
         {
+            string input;
             bool exitVal = false;
             switch (Select)
             {
                 case 1:
-
+                    WriteLine("Enter the directory to search.");
+                    input = @ReadLine();
+                    Vid.Search(input);
                     break;
                 case 2:
+                    WriteLine("Enter the directory to search.");
+                    input = @ReadLine();
+                    Aud.Search(input);
                     break;
                 case 3:
+                    WriteLine("Enter the directory to search.");
+                    input = @ReadLine();
+                    Img.Search(input);
                     break;
                 case 4:
+                    WriteLine("Enter the directory to search.");
+                    input = @ReadLine();
+                    Vid.Search(input);
+                    Aud.Search(input);
+                    Img.Search(input);
                     break;
                 case 5:
+                    Vid.PrintValues();
                     break;
                 case 6:
+                    Aud.PrintValues();
                     break;
                 case 7:
+                    Img.PrintValues();
                     break;
                 case 8:
                     exitVal = true;
