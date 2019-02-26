@@ -49,11 +49,11 @@ namespace HW4_Archibald
                     retStr += RetFiles(directory[i], fileType);
                 }
             } //lets the user know that this file can not be accessed.
-            catch (FieldAccessException e)
+            catch (FieldAccessException )
             {
                 Console.WriteLine("Can not access file, {0}", start);
             }//supposed to let the user know that there is no file here.
-            catch (FileNotFoundException e)
+            catch (FileNotFoundException)
             {
                 Console.WriteLine("File path does not exist, {0}", start);
             }

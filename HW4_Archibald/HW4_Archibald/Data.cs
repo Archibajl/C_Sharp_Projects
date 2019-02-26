@@ -8,65 +8,50 @@ using System.Threading.Tasks;
 
 namespace HW4_Archibald
 {
-    public class Data<T>
+    public class Data<T> 
     {
-        private Data<T> Node = new Data<T>();
-
-        Data<T> FwdNode { get; set; }
-        Data<T> RevNode { get; set; }
-        Data<string> Index { get; set; }
-        Data<string> FileName { get; set; }
-        Data<string> FileExtention { get; set; }
-        Data<string> DateAccessed { get; set; }
+        //Data<int> FwdNode = null;
+        //Data<int> PrevNode = null;
+        //ICollection<int> Index = new ICollection<int>();
+        //private string Index;
+        //private Data<T>[] Files;
+        //Data<>[] Calls(){
+        public string FileDirectory { get; set; }
+        public string FileName { get; set; }
+        public string FileExtention { get; set; }
+        public string DateAccessed { get; set; }
         
+    //    Data<T>(struct)
+    //    {
+    //        FwdNode = null;
+    //        PrevNode = null;
+    //        List<int> Index = new List<int>();
+    //}
 
+    //void Insert(string[] fileName, string[] fileExtention, string[] dateAccessed)
+    //    {             
+    //            for (int i = 0; i < fileName.Length; i++) {
+    //            FileName = fileName[i];
+    //            FileExtention = fileExtention[i];
+    //            DateAccessed = dateAccessed[i];
+    //            Files[i] = new Data<T>();
+    //        }
+    //        }
+            //FileExtention = fileExtention;
+            //DateAccessed = dateAccessed;
+        //}
+        
+        //public void DeleteNode(int index)
+        //{
+        //    Files[index] 
+        //}
 
-        public Data()
-        {
-            
-            this.Node = new Data<T>();
-            FwdNode = null;
-            RevNode = null;
-        }
-
-        public void AddNode(T newLocation)
-        {
-            if(this.FwdNode == null)
-            {
-                
-            }
-            
-        }
-
-        void Add(string index, string fName, string fExt, string dateAcc)
-        {
-            
-        }
-
-        public void DeleteNode(T e)
-        {
-            if (FwdNode != null)
-            {
-                this.Node = RevNode;
-                FwdNode = null;
-            }else
-            {
-                Object temp;
-                temp = FwdNode;
-                this.Node = null;
-
-                Node = this.RevNode;
-                this.FwdNode = temp;
-            }
-
-        }
-
-        public string ReturnNodes()
-        {
-            if(FwdNode != null)
-            {
-
-            }
-        }
+        //public void ReturnNodes(int ind, ref string index, ref string fileName, ref string fileExt, ref string dateAcc)
+        //{
+        //        index = Index;
+        //        fileName = FileName;
+        //        fileExt = FileExtention;
+        //        dateAcc = DateAccessed;          
+        //}
     }
 }

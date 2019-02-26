@@ -9,23 +9,35 @@ namespace HW4_Archibald
 {
     class Program
     {
+        IMedia<M> m = new {
+            Audio A = new Audio();
+            Video V = new Video();
+            Image I = new Image();
+        }
         static void Main(string[] args)
         {
-            int Selection;
+            Program pr = new Program();
+            bool exit = false;
+            int selection;
             string Input;
             string[] SearchDir;
-            WriteLine(" Enter an option: \n 1. Scan for Videos. \n 2. Scan for Audio. \n 3. Scan for Images \n 4. Scan for All. " +
-                "\n 5. Exit.");
-            Input = ReadLine();
-            int.TryParse(Input, out Selection);
-            
+            while (exit == false)
+            {
+                WriteLine(" Enter an option: \n 1. Scan for Videos. \n 2. Scan for Audio. \n 3. Scan for Images \n 4. Scan for All. " +
+                    "\n 5. Access Video Library. \n 6. Access Audio Library. \n 7. Access image library. \n 8. Exit.");
+                Input = ReadLine();
+                int.TryParse(Input, out selection);
+                exit = pr.SearchSelect(selection);
+            }
         }
 
-        void SearchSelec(int Select)
+        bool SearchSelect(int Select)
         {
+            bool exitVal = false;
             switch (Select)
             {
                 case 1:
+
                     break;
                 case 2:
                     break;
@@ -35,10 +47,18 @@ namespace HW4_Archibald
                     break;
                 case 5:
                     break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    exitVal = true;
+                    break;
                 default:
                     WriteLine("Don't be a fool follow the rules.");
                     break;
             }
+            return exitVal;
         }
 
     }
