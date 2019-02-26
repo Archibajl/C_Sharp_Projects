@@ -64,7 +64,7 @@ namespace HW4_Archibald
                     for (int i = 0; i < retstr.Length; i++)
                     {
                         Index[i] = i;
-                        da.Insert(Index[i], FileName[i]);
+                        da.FileName.Insert(Index[i], FileName[i]);
                         da.FileExtention.Insert(Index[i], FileExtention[i]);
                         da.DateAccessed.Insert(Index[i], DateLastAccessed[i]);
                         da.FileDirectory.Insert(Index[i], retstr[i]);
