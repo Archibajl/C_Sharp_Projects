@@ -14,15 +14,14 @@ namespace InitialSet_IntroAsmnt1
             bool exit = false;
             while (exit == false) {
                 int KeyInput = 0;
-                Program Prog;
-                WriteLine("Enter a umber between 1 and 5.");
-
+                
+                WriteLine("Enter a umber between 1 and 5.");                
                 InLine = ReadLine();
-                Transfer = Prog.TestVal(InLine);
+                Transfer = TestVal( InLine);
                 KeyInput = Convert.ToInt32(Transfer);
                 
-                OutLine = Prog.Output(KeyInput, exit);
-                WriteLine(Prog.Output(KeyInput, exit));
+                OutLine = Output(KeyInput, exit);
+                WriteLine(Output(KeyInput, exit));
             }
         }
         string Output(int KeyIn, bool Exit)
