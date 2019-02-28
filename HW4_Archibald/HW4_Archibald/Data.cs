@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 
 namespace HW4_Archibald
 {
-    public class Data<T> 
+    class Data<T> : IEnumerable<T>
     {
+        Data<T> dList = new Data<T>();
         //Data<int> FwdNode = null;
         //Data<int> PrevNode = null;
         //ICollection<int> Index = new ICollection<int>();
@@ -21,6 +23,28 @@ namespace HW4_Archibald
         public string FileExtention { get; set; }
         public string DateAccessed { get; set; }
         
+        public IEnumerator<T> GetEnumerator()
+        {
+            foreach(T d in dList)
+            {
+                yield return d;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return dList.GetEnumerator();
+        }
+
+         void Delete(T data)
+        {
+            dList.Delete(data);
+        }
+
+        void Add(T data)
+        {
+            dList.Add(data);
+        }
     //    Data<T>(struct)
     //    {
     //        FwdNode = null;
