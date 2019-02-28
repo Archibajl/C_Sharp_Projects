@@ -10,9 +10,9 @@ namespace HW5_pt1_Archibald
     {
         public string SumPrimes()
         {
-            
+            //sums up all numbers between 2 and 20,000 and returns the summation of all prime numbers between them
             int primeSum = 0;
-            for(int i=0; i <2000000; i++)
+            for(int i=2; i <20000; i++)
             {
                 bool isPrime = true;
                 for (int c = 2; c<i; c++)
@@ -24,11 +24,11 @@ namespace HW5_pt1_Archibald
                 }
                 if(isPrime == true)
                 {
-                    primeSum += i;
-                    Console.WriteLine($"{i} is Prime.");
+                    primeSum += i;                    
                 }
             }
-            return Convert.ToString(primeSum);
+            string primesum = Convert.ToString(primeSum);
+            return primesum;
         }
     }
 }
