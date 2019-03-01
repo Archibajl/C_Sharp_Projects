@@ -81,5 +81,22 @@ namespace HW4_Archibald
             }
             return retStr;
         }
+        public string[] RetFileName(string[] location, ref string[] dateAccessed)
+        {
+            //string[] temp;
+            string[] fileName = new string[location.Length];
+            
+            for (int i = 0; i < location.Length; i++)
+            {
+
+                dateAccessed[i] = Convert.ToString(Directory.GetLastAccessTime(location[i]));
+
+                string[] temp ;
+                temp = location[i].Split('\\').ToArray<string>();
+                fileName[i] = temp[temp.Length - 1];
+
+            }
+            return fileName;
+        }
     }
 }

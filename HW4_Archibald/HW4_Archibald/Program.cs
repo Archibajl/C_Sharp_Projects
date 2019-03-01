@@ -11,7 +11,7 @@ using static System.Console;
 
 namespace HW4_Archibald
 {
-    class Program
+    class Program 
     {
         //Character1[] character1 =
         //{
@@ -29,7 +29,7 @@ namespace HW4_Archibald
             bool exit = false;
             int selection;
             string Input;
-            string[] SearchDir;
+            //string[] SearchDir;
             while (exit == false)
             {
                 WriteLine(" Enter an option: \n 1. Scan for Videos. \n 2. Scan for Audio. \n 3. Scan for Images \n 4. Scan for All. " +

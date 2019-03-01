@@ -8,13 +8,12 @@ namespace HW4_Archibald
 {
     public interface IMedia<M>
     {        
-        int[] Index { set; get; }
-        string[] FileName { set; get; }
-        string[] FileExtention { set; get; }
-        string[] DateLastAccessed { set; get; }
+        //int[] Index { set; get; }
+        //string[] FileName { set; get; }
+        //string[] FileExtention { set; get; }
+        //string[] DateLastAccessed { set; get; }
         void Search(string directory);
         void PrintValues();
-        void RetFileType(string[] location);
-        void RetFileExtention(string[] location);
+        void Remove(int Index);
         }
 }
