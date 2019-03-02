@@ -10,61 +10,55 @@ namespace HW4_Archibald
     class Video : Search, IMedia<Video>
     {
         Data<Video> dv = new Data<Video>();
-              
-        string[] fileName, fileExtention, dateLastAccessed;
-        int[] index ;
-
+            
         int Length;
-        //public int[] Index { set { index = value; } get { return index; } }
-        //public string[] FileName { set { fileName = value; } get { return fileName; } }
-        //public string[] FileExtention { set { fileExtention = value; } get { return fileExtention; } }
-        //public string[] DateLastAccessed { set { dateLastAccessed = value; } get { return dateLastAccessed; } }
+       
 
         public void Search(string directory)
         {
             string[] fileTypes = { ".avi", ".mp4" };
 
-            dv.Search(directory, fileTypes);
-            //string[] retstr;
+            dv.Search(directory, fileTypes);            
+        }
 
-            //for (int b = 0; b < fileTypes.Length; b++)
-            //{
-            //    string[] temp;
-            //    int tempLen = 0;
-            //    retstr = ReturnFilePath(directory, fileTypes[b]);
-            //    temp = retstr;
-            //    if (retstr != null)
-            //    {
-            //        tempLen = retstr.Length;
-            //        Array.Resize<string>(ref retstr, retstr.Length + temp.Length);
+        public void LibraryMenu()
+        {
+            int selection1;
+            int selection2 = 0;
+            PrintValues();
+            Console.WriteLine(" 1. Sort by name. \n 2. Sort by extention. \n 3. Sort by date last accessed. \n 4. Touch/ update date accessed of file. \n" +
+                    "5. Remove file.");
+            string input = Console.ReadLine();
+            int.TryParse(input, out selection1);
 
-            //        for (int c = 0; c < temp.Length; c++)
-            //        {
-            //            if (tempLen != 0)
-            //            {
-            //                retstr[c + tempLen] = temp[c];
-            //            }
-            //            else
-            //            {
-            //                retstr[c] = temp[c];
-            //            }
-            //        }
-
-            //        RetFileType(temp);
-            //        RetFileExtention(temp);
-
-                    //for (int i = 0; i < retstr.Length; i++)
-                    //{
-                    //    Index[i] = i;
-                    //    dv.FileName.Insert(Index[i], FileName[i]);
-                    //    dv.FileExtention.Insert(Index[i], FileExtention[i]);
-                    //    dv.DateAccessed.Insert(Index[i], DateLastAccessed[i]);
-                    //    dv.FileDirectory.Insert(Index[i], retstr[i]);
-                    //    dv = new Data<Video>();
-                    //    Length = i;
-                    //}
-                //}
-            //}
+            switch (selection1)
+            {
+                case 1:
+                    Console.WriteLine("Enter an index to update.");
+                    input = Console.ReadLine();
+                    int.TryParse(input, out selection2);
+                    dv.SortName();
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    Console.WriteLine("Enter an index to update the date accessed.");
+                    input = Console.ReadLine();
+                    int.TryParse(input, out selection2);
+                    dv.TouchIndex(selection2);
+                    break;
+                case 5: //Removes file
+                    Console.WriteLine("Enter an index to remove.");
+                    input = Console.ReadLine();
+                    int.TryParse(input, out selection2);
+                    dv.RemoveValue(selection2);
+                    break;
+                default:
+                    Console.WriteLine("Try again friend.");
+                    break;
+            }
         }
 
         public void Remove(int Index)
@@ -83,27 +77,6 @@ namespace HW4_Archibald
             }
         }
 
-        //public void RetFileType(string[] location)
-        //{
-        //    for (int i = 0; i < location.Length; i++)
-        //    {
-        //        dv.DateLastAccessed[i] = Convert.ToString(Directory.GetLastAccessTime(location[i]));
-
-        //        string[] temp;
-        //        temp = location[i].Split('/').ToArray<string>();
-        //        dv.FileName[i] = temp[temp.Length - 1];
-
-        //    }
-        //}
-
-        //public void RetFileExtention(string[] location)
-        //{
-        //    for (int i = 0; i < location.Length; i++)
-        //    {
-        //        string[] temp;
-        //        temp = location[i].Split('.').ToArray<string>();
-        //        dv.FileExtention[i] = temp[temp.Length - 1];
-        //    }
-        //}
+        
     }
 }

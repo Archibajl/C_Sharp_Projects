@@ -69,13 +69,13 @@ namespace HW4_Archibald
                     Img.Search(input);
                     break;
                 case 5:
-                    Vid.PrintValues();
+                    Vid.LibraryMenu();
                     break;
                 case 6:
-                    Aud.PrintValues();
+                    Aud.LibraryMenu();
                     break;
                 case 7:
-                    Img.PrintValues();
+                    Img.LibraryMenu();
                     break;
                 case 8:
                     exitVal = true;
@@ -86,6 +86,5 @@ namespace HW4_Archibald
             }
             return exitVal;
         }
-
     }
 }

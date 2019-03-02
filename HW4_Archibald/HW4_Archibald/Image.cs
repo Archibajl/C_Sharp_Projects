@@ -12,59 +12,55 @@ namespace HW4_Archibald
 
         Data<Image> di = new Data<Image>();
         
-        string[] fileName, fileExtention, dateLastAccessed;
-        int[] index;
-
+        
         public int Length;
-        //public int[] Index { set { index = value; } get { return index; } }
-        //public string[] FileName { set { fileName = value; } get { return fileName; } }
-        //public string[] FileExtention { set { fileExtention = value; } get { return fileExtention; } }
-        //public string[] DateLastAccessed { set { dateLastAccessed = value; } get { return dateLastAccessed; } }
+        
         public void Search(string directory)
         {
             string[] fileTypes = { ".jpg", ".png", ".gif" };
 
             di.Search(directory, fileTypes);
-            //string[] retstr = null;
+            
+        }
 
-            //for (int b = 0; b < fileTypes.Length; b++)
-            //{
-            //    string[] temp;
-            //    int tempLen = 0;
-            //    retstr = ReturnFilePath(directory, fileTypes[b]);
-            //    temp = retstr;
-            //    if (retstr != null)
-            //    {
-            //        tempLen = retstr.Length;
-            //        Array.Resize<string>(ref retstr, retstr.Length + temp.Length);
+        public void LibraryMenu()
+        {
+            int selection1;
+            int selection2 = 0;
+            PrintValues();
+            Console.WriteLine(" 1. Sort by name. \n 2. Sort by extention. \n 3. Sort by date last accessed. \n 4. Touch/ update date accessed of file. \n" +
+                    "5. Remove file.");
+            string input = Console.ReadLine();
+            int.TryParse(input, out selection1);
 
-            //        for (int c = 0; c < temp.Length; c++)
-            //        {
-            //            if (tempLen != 0)
-            //            {
-            //                retstr[c + tempLen] = temp[c];
-            //            }
-            //            else
-            //            {
-            //                retstr[c] = temp[c];
-            //            }
-            //        }
-
-            //        RetFileType(temp);
-            //        RetFileExtention(temp);
-
-                    //for (int i = 0; i < retstr.Length; i++)
-                    //{
-                    //    Index[i] = i;
-                    //    di.FileName.Insert(Index[i], FileName[i]);
-                    //    di.FileExtention.Insert(Index[i], FileExtention[i]);
-                    //    di.DateAccessed.Insert(Index[i], DateLastAccessed[i]);
-                    //    di.FileDirectory.Insert(Index[i], retstr[i]);
-                    //    di = new Data<Image>();
-                    //    Length = i;
-                    //}
-                //}
-            //}
+            switch (selection1)
+            {
+                case 1:
+                    Console.WriteLine("Enter an index to update.");
+                    input = Console.ReadLine();
+                    int.TryParse(input, out selection2);
+                    di.SortName();
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    Console.WriteLine("Enter an index to update the date accessed.");
+                    input = Console.ReadLine();
+                    int.TryParse(input, out selection2);
+                    di.TouchIndex(selection2);
+                    break;
+                case 5: //Removes file
+                    Console.WriteLine("Enter an index to remove.");
+                    input = Console.ReadLine();
+                    int.TryParse(input, out selection2);
+                    di.RemoveValue(selection2);
+                    break;
+                default:
+                    Console.WriteLine("Try again friend.");
+                    break;
+            }
         }
 
         public void Remove(int Index)
@@ -79,28 +75,8 @@ namespace HW4_Archibald
             for (int i = 0; i < Length; i++)
             {
                 Console.WriteLine($"{i}. File Name: {di.FileName[i]}\n File Extention {di.FileExtention[i]} \n Date Last accessed {di.DateLastAccessed[i]}");
-                //Console.WriteLine($" Index: {i} \n File name: {FileName} \n File Extention: {FileExtention}\n Date Last Accessed {DateLastAccessed}");
             }
         }
-        //public void RetFileType(string[] location)
-        //{
-        //    for (int i = 0; i < location.Length; i++)
-        //    {
-        //        di.DateLastAccessed[i] = Convert.ToString(Directory.GetLastAccessTime(location[i]));
-        //        string[] temp;
-        //        temp = location[i].Split('/').ToArray<string>();
-        //        di.FileName[i] = temp[temp.Length - 1];
-        //    }
-        //}
-
-        //public void RetFileExtention(string[] location)
-        //{
-        //    for (int i = 0; i < location.Length; i++)
-        //    {
-        //        string[] temp;
-        //        temp = location[i].Split('.').ToArray<string>();
-        //        di.FileExtention[i] = temp[temp.Length - 1];
-        //    }
-        //}
+        
     }
 }
