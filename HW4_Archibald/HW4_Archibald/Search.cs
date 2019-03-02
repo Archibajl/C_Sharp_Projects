@@ -59,7 +59,6 @@ namespace HW4_Archibald
             }
             catch (Exception e)
             {
-
             }
             return retStr;
         }
@@ -75,6 +74,7 @@ namespace HW4_Archibald
             {
                 if (tempStr[i] != "")
                 {
+                    Console.WriteLine($"File Found {tempStr[i]}");
                     retStr[retCounter] = tempStr[i];
                     retCounter += 1;
                 }
@@ -82,8 +82,7 @@ namespace HW4_Archibald
             return retStr;
         }
         public string[] RetFileName(string[] location, ref string[] dateAccessed)
-        {
-            //string[] temp;
+        {            
             string[] fileName = new string[location.Length];
             
             for (int i = 0; i < location.Length; i++)

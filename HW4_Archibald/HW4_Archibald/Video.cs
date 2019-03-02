@@ -16,6 +16,7 @@ namespace HW4_Archibald
 
         public void Search(string directory)
         {
+            // sorts by file types listed.
             string[] fileTypes = { ".avi", ".mp4" };
 
             dv.Search(directory, fileTypes);            
@@ -25,35 +26,44 @@ namespace HW4_Archibald
         {
             int selection1;
             int selection2 = 0;
+            string[] fileTypes = { ".avi", ".mp4" };
             PrintValues();
-            Console.WriteLine(" 1. Sort by name. \n 2. Sort by extention. \n 3. Sort by date last accessed. \n 4. Touch/ update date accessed of file. \n" +
+            Console.WriteLine("\n 1. Sort by name. \n 2. Sort by extention. \n 3. Sort by date last accessed. \n 4. Touch/ update date accessed of file. \n" +
                     "5. Remove file.");
             string input = Console.ReadLine();
             int.TryParse(input, out selection1);
-
+            //Selects the command and calls the appropriate functions.
             switch (selection1)
             {
-                case 1:
-                    Console.WriteLine("Enter an index to update.");
-                    input = Console.ReadLine();
-                    int.TryParse(input, out selection2);
+                case 1: //Sorts by name
+                    Console.WriteLine("Sorting by name.");
                     dv.SortName();
+                    PrintValues();
                     break;
-                case 2:
+                case 2:// sorts by extention
+                    Console.WriteLine("Sorting by extention.");
+                    dv.SortFType(fileTypes);
+                    PrintValues();
                     break;
-                case 3:
+                case 3: // sorts by date last accessed
+                    Console.WriteLine("Sorting by date last accessed.");
+                    dv.SortAccDate();
+                    PrintValues();
                     break;
                 case 4:
                     Console.WriteLine("Enter an index to update the date accessed.");
                     input = Console.ReadLine();
                     int.TryParse(input, out selection2);
                     dv.TouchIndex(selection2);
+                    PrintSingleValue(selection2);
                     break;
                 case 5: //Removes file
                     Console.WriteLine("Enter an index to remove.");
                     input = Console.ReadLine();
                     int.TryParse(input, out selection2);
                     dv.RemoveValue(selection2);
+                    Console.WriteLine("Index {0} removed", selection2);
+                    PrintValues();
                     break;
                 default:
                     Console.WriteLine("Try again friend.");
@@ -63,20 +73,27 @@ namespace HW4_Archibald
 
         public void Remove(int Index)
         {
+            //Removes selected index.
             dv.RemoveValue(Index);
         }
                     
         public void PrintValues()
         {
+            //Prints stored values
             Length = dv.FileName.Length;
 
             for (int i = 0; i < Length; i++)
             {
                 Console.WriteLine($"File Name: {dv.FileName[i]}\n File Extention {dv.FileExtention[i]} \n Date Last accessed {dv.DateLastAccessed[i]}");
-                //Console.WriteLine($" Index: {i} \n File name: {FileName} \n File Extention: {FileExtention}\n Date Last Accessed {DateLastAccessed}");
             }
         }
 
-        
+        public void PrintSingleValue(int index)
+        {
+            Console.WriteLine("Updated.");
+            Console.WriteLine($"{index}. File Name: {dv.FileName[index]}\n File Extention {da.FileExtention[index]} \n Date Last accessed {da.DateLastAccessed[index]}");
+        }
+
+
     }
 }

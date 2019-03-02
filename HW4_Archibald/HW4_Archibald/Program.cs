@@ -13,12 +13,7 @@ namespace HW4_Archibald
 {
     class Program 
     {
-        //Character1[] character1 =
-        //{
-        //    new Warrior(),
-        //    new Archer(),
-        //    new Mage()
-        //};
+        //initializing each media type.
         IMedia<Video> Vid = new Video();
         IMedia<Image> Img = new Image();
         IMedia<Audio> Aud = new Audio();
@@ -29,13 +24,14 @@ namespace HW4_Archibald
             bool exit = false;
             int selection;
             string Input;
-            //string[] SearchDir;
+            //Loops until selected to exit.
             while (exit == false)
             {
                 WriteLine(" Enter an option: \n 1. Scan for Videos. \n 2. Scan for Audio. \n 3. Scan for Images \n 4. Scan for All. " +
                     "\n 5. Access Video Library. \n 6. Access Audio Library. \n 7. Access image library. \n 8. Exit.");
                 Input = ReadLine();
                 int.TryParse(Input, out selection);
+                //Calls the menu.
                 exit = pr.SearchSelect(selection);
             }
         }
@@ -46,29 +42,29 @@ namespace HW4_Archibald
             bool exitVal = false;
             switch (Select)
             {
-                case 1:
+                case 1: //Searches for Video Files.
                     WriteLine("Enter the directory to search.");
                     input = @ReadLine();
                     Vid.Search(input);
                     break;
-                case 2:
+                case 2: //searches for audio files.
                     WriteLine("Enter the directory to search.");
                     input = @ReadLine();
                     Aud.Search(input);
                     break;
-                case 3:
+                case 3: // searches for images.
                     WriteLine("Enter the directory to search.");
                     input = @ReadLine();
                     Img.Search(input);
                     break;
-                case 4:
+                case 4: //Searches for all types of media.
                     WriteLine("Enter the directory to search.");
                     input = @ReadLine();
                     Vid.Search(input);
                     Aud.Search(input);
                     Img.Search(input);
                     break;
-                case 5:
+                case 5://Library menues for each media type.
                     Vid.LibraryMenu();
                     break;
                 case 6:
@@ -80,7 +76,7 @@ namespace HW4_Archibald
                 case 8:
                     exitVal = true;
                     break;
-                default:
+                default: //default inproper input.
                     WriteLine("Don't be a fool follow the rules.");
                     break;
             }
