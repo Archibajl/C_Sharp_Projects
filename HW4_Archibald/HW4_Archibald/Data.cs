@@ -83,7 +83,7 @@ namespace HW4_Archibald
             for (int i = 0; i < location.Length; i++)
             {
                 string[] temp;
-                fileDirectory[i + tempLen] = location[i];
+                FileDirectory[i + tempLen] = location[i];
                 temp = location[i].Split('.').ToArray<string>();
                 FileExtention[i + tempLen] = temp[temp.Length - 1];
             }

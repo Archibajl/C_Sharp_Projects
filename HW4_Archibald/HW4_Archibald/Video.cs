@@ -91,7 +91,7 @@ namespace HW4_Archibald
         public void PrintSingleValue(int index)
         {
             Console.WriteLine("Updated.");
-            Console.WriteLine($"{index}. File Name: {dv.FileName[index]}\n File Extention {da.FileExtention[index]} \n Date Last accessed {da.DateLastAccessed[index]}");
+            Console.WriteLine($"{index}. File Name: {dv.FileName[index]}\n File Extention {dv.FileExtention[index]} \n Date Last accessed {dv.DateLastAccessed[index]}");
         }
 
 
