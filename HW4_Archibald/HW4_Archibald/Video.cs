@@ -84,7 +84,7 @@ namespace HW4_Archibald
 
             for (int i = 0; i < Length; i++)
             {
-                Console.WriteLine($"{i} File Name: {dv.FileName[i]}\n File Extention {dv.FileExtention[i]} \n Date Last accessed {dv.DateLastAccessed[i]}");
+                Console.WriteLine($"{i}, File Name: {dv.FileName[i]}\n File Extention {dv.FileExtention[i]} \n Date Last accessed {dv.DateLastAccessed[i]}");
             }
         }
 
