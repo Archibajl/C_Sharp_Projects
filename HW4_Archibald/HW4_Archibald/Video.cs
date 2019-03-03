@@ -93,7 +93,5 @@ namespace HW4_Archibald
             Console.WriteLine("Updated.");
             Console.WriteLine($"{index}. File Name: {dv.FileName[index]}\n File Extention {dv.FileExtention[index]} \n Date Last accessed {dv.DateLastAccessed[index]}");
         }
-
-
     }
 }
