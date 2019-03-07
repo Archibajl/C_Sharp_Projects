@@ -68,8 +68,38 @@ namespace Hw5_Pt2_Archibald
             return result;
         }
 
-        
-        public List<FileInfo> GetAllPNG(string path)
+        //public static Dictionary<string, List<PhoneBookEntry>> QueryPhoneBookEntries()
+        //{
+        //    List<PhoneBookEntry> phoneBook = new List<PhoneBookEntry>()
+        //    {
+        //        new PhoneBookEntry("Sarah", "Jones", "1887 Flat Iron Court", "Colorado Springs", "CO", "80921", "(719) 354-1857"),
+        //        new PhoneBookEntry("Josh", "Jones", "1887 Flat Iron Court", "Colorado Springs", "CO", "80921", "(719) 354-1855"),
+        //        new PhoneBookEntry("Bryan", "Adams", "1665 Snowflake Lane", "Boston", "MA", "02101", "(617) 143-1566"),
+        //        new PhoneBookEntry("John", "Smith", "4745 Meadowland Blvd", "San Diego", "CA", "22434", "(619) 354-6543"),
+        //        new PhoneBookEntry("Josh", "Jackson", "1145 Piros Drive", "Orlando", "FL", "32789", "(407) 650-8333"),
+        //        new PhoneBookEntry("Hannah", "Maben", "1710 Main Street", "Boston", "MA", "02101", "(617) 765-1857"),
+        //        new PhoneBookEntry("Harrison", "James", "1010 Maple Lane", "Denver", "CO", "80014", "(720) 123-4567"),
+        //        new PhoneBookEntry("Xavier", "Carlyle", "1552 Washington Avenue", "San Diego", "CA", "22434", "(619) 987-5465"),
+        //        new PhoneBookEntry("Michael", "Jones", "6510 Cherry Creek Lane", "Springfield", "TX", "75853", "(361) 234-985"),
+        //        new PhoneBookEntry("Sarah", "Smith", "1223 Mirage Drive", "Springfield", "TX", "75853", "(361) 127-5643"),
+        //    };
+
+        //    Dictionary<string, List<PhoneBookEntry>> results = new Dictionary<string, List<PhoneBookEntry>>();
+
+        //    results = new Dictionary<string, PhoneBookEntry>(
+        //        from int entry in phoneBook
+        //        where phoneBook[entry].Name == "Josh Jackson"
+        //        where phoneBook[entry].LastName == "Jones"
+        //        where phoneBook[entry].City == "Colorado Springs"
+        //        where phoneBook[entry].PhoneNumber.Substring(0, 3) == "617"
+        //        select new { phoneBook[entry].FirstName, phoneBook[entry].LastName, phoneBook[entry].Address, phoneBook[entry].City, phoneBook[entry].State,
+        //        phoneBook[entry].ZipCode, phoneBook[entry].PhoneNumber}).ToList<PhoneBookEntry>();
+
+        //    //results = Output.ToList<PhoneBookEntry>();
+        //    return results;
+        //}
+
+            public List<FileInfo> GetAllPNG(string path)
         {
             try
             {
