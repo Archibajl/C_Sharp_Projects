@@ -87,19 +87,27 @@ namespace Hw5_Pt2_Archibald
         //    Dictionary<string, List<PhoneBookEntry>> results = new Dictionary<string, List<PhoneBookEntry>>();
 
         //    results = new Dictionary<string, PhoneBookEntry>(
-        //        from int entry in phoneBook
+        //        from entry in phoneBook
         //        where phoneBook[entry].Name == "Josh Jackson"
         //        where phoneBook[entry].LastName == "Jones"
         //        where phoneBook[entry].City == "Colorado Springs"
         //        where phoneBook[entry].PhoneNumber.Substring(0, 3) == "617"
-        //        select new { phoneBook[entry].FirstName, phoneBook[entry].LastName, phoneBook[entry].Address, phoneBook[entry].City, phoneBook[entry].State,
-        //        phoneBook[entry].ZipCode, phoneBook[entry].PhoneNumber}).ToList<PhoneBookEntry>();
+        //        select new
+        //        {
+        //            phoneBook[entry].FirstName,
+        //            phoneBook[entry].LastName,
+        //            phoneBook[entry].Address,
+        //            phoneBook[entry].City,
+        //            phoneBook[entry].State,
+        //            phoneBook[entry].ZipCode,
+        //            phoneBook[entry].PhoneNumber
+        //        }).ToList<PhoneBookEntry>();
 
         //    //results = Output.ToList<PhoneBookEntry>();
         //    return results;
         //}
 
-            public List<FileInfo> GetAllPNG(string path)
+        public List<FileInfo> GetAllPNG(string path)
         {
             try
             {

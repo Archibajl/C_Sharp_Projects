@@ -24,7 +24,7 @@ namespace Hw5_Pt2_Archibald
             foreach (string a in Sql.FindStringsInAThatArentInB()) {
                 Console.Write("{0}, ",a);
             }
-            foreach(System.IO.FileInfo file in Sql.GetAllPNG(@"D:\Pictures\lord kek\_b_ - YLYL last one just 404 - Random - 4chan_files"))
+            foreach(System.IO.FileInfo file in Sql.GetAllPNG(@"C:\Users\Ryan\Pictures\"))
             {
                 Console.WriteLine(file);
             }
