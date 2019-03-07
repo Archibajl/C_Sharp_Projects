@@ -11,7 +11,7 @@ namespace Hw5_Pt2_Archibald
     {
         //Returns students that have straight A's.
         public void GetStraightAStudents()
-        {
+        {            
             List<Student> students = new List<Student>()
             {
                 new Student(1, 87, 89, 91, 92),
@@ -29,6 +29,7 @@ namespace Hw5_Pt2_Archibald
             List<Student> a_students = new List<Student>();
 
             {
+                //finds all students who's grades are aboce 90 in each catigory.
                 var AStudents =
                 from student in students
                 where student.HistoryGrade >= 90
@@ -38,6 +39,7 @@ namespace Hw5_Pt2_Archibald
 
                 a_students.AddRange(AStudents);
 
+                //function to print all straight A students.
                 foreach (var astudent in a_students)
                 {
                     Console.WriteLine("Student ID" + astudent.StudentID + "Is an A student.");
@@ -48,86 +50,70 @@ namespace Hw5_Pt2_Archibald
 
 
         //Returns any string in a that isn't also in b.
-        public static List<string> FindStringsInAThatArentInB()
+        public List<string> FindStringsInAThatArentInB()
         {
             List<string> a = new List<string>() { "r", "y", "a", "n" };
             List<string> b = new List<string>() { "d", "a", "r", "r", "a", "s" };
             List<string> result = new List<string>();
 
-            result =
+            //Queries characters in list a that aren't equal to one in list b
+            var result1 =
             from wordA in a
-            let TruthVal = new
-            {
-                retval =
-                from wordB in b
-                where wordA != wordB
-                select true
-            }
-            where TruthVal(g => g == true)
+            where b.All(g => (wordA != g))
             select wordA;
+
+            //returns the strings in a list.
+            result = result1.ToList<string>();
 
             return result;
         }
 
-        /// <summary>
-        /// HW 3. Finds all jpgs in the given path
-        /// 
-        /// You will need to change your path in multiple locations to test this.
-        /// 1. In Main of this file.
-        /// 2. In GetAllPNG_Test in LINQProblems_Test_Cases.cs
-        /// 
-        /// PLEASE CHANGE BOTH BACK TO @"C:\Users\Ryan\Pictures\" WHEN YOU FINALIZE AND SUMBIT!!!!
-        /// </summary>
-        public static List<FileInfo> GetAllPNG(string path)
+        
+        public List<FileInfo> GetAllPNG(string path)
         {
-            /* Hints for this problem:
-             * new DirectoryInfo(path).EnumerateDirectories("*", SearchOption.AllDirectories);
-             * directory.EnumerateFiles("*.png")
-             * 
-             * However, the enumerated method above might throw exceptions on files that cannot be accessed.
-             * To solve this, just test on a path that you know is safe.
-             */
+            try
+            {
+                //outputs all files in the current filepath to a list
+                List<FileInfo> tempFiles = new DirectoryInfo(path).GetFiles("*", SearchOption.AllDirectories).OrderBy(t => t.Name).ToList<FileInfo>();
 
-            List<FileInfo> files = new List<FileInfo>();
-
-            // from DirectoryInfo directory in new DirectoryInfo(path).GetDirectories()
-            //    select new
-            //    {
-            //        files.AddRange(GetAllPNG(directory.FullName));
-
-            //}
-            //foreach (DirectoryInfo directory in new DirectoryInfo(path).GetDirectories())
-            //{
-            //    files.AddRange(GetAllPNG(directory.FullName));
-            //}
-
-            var NewFiles =
-            from DirectoryInfo file in new DirectoryInfo(path).GetDirectories()
-            where file.Extension == ".png"
-            select new {
-               select  files.Add(file.ToList)
-            };
-
-            //files.AddRange(NewFiles.ToList<FileInfo>());
-            return files;
-
+                //searches for files with a png extention.
+                var output =
+           from FileInfo file in tempFiles
+           where file.FullName.EndsWith("png")
+           select file;
+                //outpouts all files found into a list.
+                List<FileInfo> Files = output.ToList<FileInfo>();
+                return Files;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("File inaccessable");
+                return null;
+            }
+            
         }
+
         //Gets the fibonacci numbers for a list of integers.
-        public static List<int> GetFibonacciNumbers()
+        public List<int> GetFibonacciNumbers()
         {
             //Fills the list.
             List<int> Input = new List<int>();
-            for (int i = 1; i < 40; i += 5)
-                input.Add(i);
-            //outputvalue
+            Input.AddRange(Enumerable.Range(1, 46));
+            //Puts all fibinocci numbers from 1 to > 46 into a list.
+            int[] Fibonacci = { 1, 2, 3, 5, 8, 13, 21, 34, 55 };
+            
             List<int> results = new List<int>();
 
-            from number in Input
-            where (number == 1) || (number == 2)
-            select 
+            //Checks any number in th range 1-46 against all fibbonacci numbers.
+            var retVal =
+             from int number in Input
+             where Fibonacci.Any(a => a == number)
+             select number;
 
+            //Converts the found fibbanacci numbers into a list for output.
+            results = retVal.ToList<int>();
+
+            return results;
         }
-
-
     }
 }

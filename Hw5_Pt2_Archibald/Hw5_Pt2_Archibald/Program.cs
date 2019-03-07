@@ -10,16 +10,29 @@ namespace Hw5_Pt2_Archibald
     {        
         static void Main(string[] args)
         {
+            //Note i had to remove most of the static declerations in order to get them to print.
+
             Program p = new Program();
             SolutionsLinq Sql = new SolutionsLinq();
-            //SolutionsLinq GetA = new void SolutionsLinq.GetStraightAStudents();
             List<Student> stt = new List<Student>();
-
+                        
             Console.WriteLine($" Get all straight a students in a list.");
             Sql.GetStraightAStudents();
             Console.WriteLine($" The item which is most profitable: {DetermineWhichItemWasMostProfitable().ItemName}");
             Console.WriteLine($"The sum of all prime numbers between 2 and 1000 is {p.SumPrimes()}");
-
+            Console.WriteLine($"Finds strings in list a that aren't in list b");
+            foreach (string a in Sql.FindStringsInAThatArentInB()) {
+                Console.Write("{0}, ",a);
+            }
+            foreach(System.IO.FileInfo file in Sql.GetAllPNG(@"D:\Pictures\lord kek\_b_ - YLYL last one just 404 - Random - 4chan_files"))
+            {
+                Console.WriteLine(file);
+            }
+            Console.WriteLine("All fibonacci numbers between 1 and 46");
+            foreach (int c in Sql.GetFibonacciNumbers())
+            {
+                Console.Write("{0}, ", c);
+            }
 
             Console.ReadKey();
         }
