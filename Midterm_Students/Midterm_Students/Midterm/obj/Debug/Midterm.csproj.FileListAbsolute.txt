@@ -1,0 +1,14 @@
+D:\Repositories\CS 3020\Projects\Midterm\Midterm\bin\Debug\Midterm.exe.config
+D:\Repositories\CS 3020\Projects\Midterm\Midterm\bin\Debug\Midterm.exe
+D:\Repositories\CS 3020\Projects\Midterm\Midterm\bin\Debug\Midterm.pdb
+D:\Repositories\CS 3020\Projects\Midterm\Midterm\obj\Debug\Midterm.csprojAssemblyReference.cache
+D:\Repositories\CS 3020\Projects\Midterm\Midterm\obj\Debug\Midterm.csproj.CoreCompileInputs.cache
+D:\Repositories\CS 3020\Projects\Midterm\Midterm\obj\Debug\Midterm.exe
+D:\Repositories\CS 3020\Projects\Midterm\Midterm\obj\Debug\Midterm.pdb
+D:\Repositories\CS 3020\Projects\Midterm_Students\Midterm\bin\Debug\Midterm.exe.config
+D:\Repositories\CS 3020\Projects\Midterm_Students\Midterm\bin\Debug\Midterm.exe
+D:\Repositories\CS 3020\Projects\Midterm_Students\Midterm\bin\Debug\Midterm.pdb
+D:\Repositories\CS 3020\Projects\Midterm_Students\Midterm\obj\Debug\Midterm.csprojAssemblyReference.cache
+D:\Repositories\CS 3020\Projects\Midterm_Students\Midterm\obj\Debug\Midterm.csproj.CoreCompileInputs.cache
+D:\Repositories\CS 3020\Projects\Midterm_Students\Midterm\obj\Debug\Midterm.exe
+D:\Repositories\CS 3020\Projects\Midterm_Students\Midterm\obj\Debug\Midterm.pdb
