@@ -14,10 +14,10 @@ namespace HW2_Archibald
     class Game
     {
 
-        Character2[] character2 = {
-            new Warrior2(),
-            new Archer2(),
-            new Mage2()
+        Character1[] character2 = {
+            new Warrior(),
+            new Archer(),
+            new Mage()
             };
 
         Character1[] character1 =

@@ -20,7 +20,7 @@ namespace HW2_Archibald
         {
             return $"knock back the opponent 4 units, range = 3, deals 3 damage";
         }
-        override public string Special(Character2 target)
+        override public string Special(Character1 target)
         {
             string effect;
             if (((target.Position - Position) <= 3) || (Position - target.Position) <= 3)

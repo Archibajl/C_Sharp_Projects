@@ -20,7 +20,7 @@ namespace HW2_Archibald
 
         public abstract string GetSpecialDescription();
 
-        public string Attack(Character2 target)
+        public string Attack(Character1 target)
         {
             string retstr;
 
@@ -34,7 +34,7 @@ namespace HW2_Archibald
             return retstr;
         }
 
-        public abstract string Special(Character2 target);
+        public abstract string Special(Character1 target);
         
         public abstract int MoveSpeed { set; get; }
 

@@ -21,7 +21,7 @@ namespace HW2_Archibald
         {
             return $"leap up to 8 units to the spot in front of the opponent if possible, if opponent is greater than 5 units away deal 30 damage";
         }
-        override public string Special(Character2 target)
+        override public string Special(Character1 target)
         {
             string effect;
             if (((target.Position - Position) <= 8) || (Position - target.Position) <= 8)
