@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Midterm
 {
     class Program
-    {
+    {               
         static void Main(string[] args)
         {
             int menuSelection = 0;
@@ -22,7 +22,7 @@ namespace Midterm
 
                 menuSelection = int.Parse(Console.ReadLine());
 
-                List<VendingMachineOption>[,] exclusions = new List<VendingMachineOption>();
+                List<VendingMachineOption> exclusions = new List<VendingMachineOption>();
 
                 switch (menuSelection)
                 {
@@ -30,37 +30,26 @@ namespace Midterm
                         machine.PrintVendingMachine(new List<VendingMachineOption>());
                         break;
                     case 2:
-                        foreach(var o in machine)
-                        {
-                            if (o is Food || o is Drink)
-                            {
-                                if ((o as Food)?.CalorieCount > 100 || (o as Drink)?.CalorieCount > 100)
-                                {
-                                    exclusions.Add(o);
-                                }
-                            }
-                            else
-                            {
-                                exclusions.Add(o);
-                            }
-                        }
+                        exclusions =
+                        (
+                            from ex in machine
+                            where ((ex is Food) || (ex is Drink)) ? ((ex as Food)?.CalorieCount > 100 || (ex as Drink)?.CalorieCount > 100) : true
+                            select ex
+                        ).ToList();
+                        
                         machine.PrintVendingMachine(exclusions);
                         break;
                     case 3:
-                        foreach (var o in machine)
-                        {
-                            if (o is NonElectronic || o is Electronic)
-                            {
-                                if ((o as NonElectronic)?.AgeRequirement >= 7 || (o as Electronic)?.AgeRequirement >= 7)
-                                {
-                                    exclusions.Add(o);
-                                }
-                            }
-                            else
-                            {
-                                exclusions.Add(o);
-                            }
-                        }
+
+                        exclusions =
+                       (
+                           from ex in machine
+                           where ((ex is NonElectronic) || (ex is Electronic)) ? 
+                           ((ex as NonElectronic)?.AgeRequirement >= 7 || (ex as Electronic)?.AgeRequirement >= 7) : 
+                           true
+                           select ex
+                       ).ToList();
+                       
                         machine.PrintVendingMachine(exclusions);
                         break;
                     case 4:
