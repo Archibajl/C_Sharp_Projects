@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{05268AB9-3EC3-44D5-B099-7D657E673ED2}</ProjectGuid>
+    <ProjectGuid>{1BEFA386-1972-4212-848C-BE1F168424CC}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>MidTermProject_Archibald</RootNamespace>
-    <AssemblyName>MidTermProject_Archibald</AssemblyName>
+    <RootNamespace>Midterm</RootNamespace>
+    <AssemblyName>Midterm</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,8 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consumable.cs" />
+    <Compile Include="Drink.cs" />
+    <Compile Include="Electronic.cs" />
+    <Compile Include="Food.cs" />
+    <Compile Include="NonElectronic.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Toy.cs" />
+    <Compile Include="VendingMachine.cs" />
+    <Compile Include="VendingMachineOption.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
