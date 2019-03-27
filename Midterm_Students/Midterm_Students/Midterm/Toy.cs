@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Midterm
 {
-    class Toy : VendingMachineOption
+    abstract class Toy : VendingMachineOption
     {
         public int AgeRequirement { get;  set; }
 

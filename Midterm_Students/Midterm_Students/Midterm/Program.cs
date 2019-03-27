@@ -20,43 +20,47 @@ namespace Midterm
                 Console.WriteLine("3. List toy options for kids under 7.");
                 Console.WriteLine("4. Exit Program");
 
-                menuSelection = int.Parse(Console.ReadLine());
-
-                List<VendingMachineOption> exclusions = new List<VendingMachineOption>();
-
-                switch (menuSelection)
+                if (int.TryParse(Console.ReadLine(), out menuSelection))
                 {
-                    case 1:
-                        machine.PrintVendingMachine(new List<VendingMachineOption>());
-                        break;
-                    case 2:
-                        exclusions =
-                        (
-                            from ex in machine
-                            where ((ex is Food) || (ex is Drink)) ? ((ex as Food)?.CalorieCount > 100 || (ex as Drink)?.CalorieCount > 100) : true
-                            select ex
-                        ).ToList();
-                        
-                        machine.PrintVendingMachine(exclusions);
-                        break;
-                    case 3:
 
-                        exclusions =
-                       (
-                           from ex in machine
-                           where ((ex is NonElectronic) || (ex is Electronic)) ? 
-                           ((ex as NonElectronic)?.AgeRequirement >= 7 || (ex as Electronic)?.AgeRequirement >= 7) : 
-                           true
-                           select ex
-                       ).ToList();
-                       
-                        machine.PrintVendingMachine(exclusions);
-                        break;
-                    case 4:
-                        Console.WriteLine("Thankyou for using this program!");
-                        Console.ReadKey();
-                        break;
-                }
+                    List<VendingMachineOption> exclusions = new List<VendingMachineOption>();
+
+                    switch (menuSelection)
+                    {
+                        case 1:
+                            machine.PrintVendingMachine(new List<VendingMachineOption>());
+                            break;
+                        case 2:
+                            exclusions =
+                            (
+                                from ex in machine
+                                where ((ex is Food) || (ex is Drink)) ? ((ex as Food)?.CalorieCount > 100 || (ex as Drink)?.CalorieCount > 100) : true
+                                select ex
+                            ).ToList();
+
+                            machine.PrintVendingMachine(exclusions);
+                            break;
+                        case 3:
+
+                            exclusions =
+                           (
+                               from ex in machine
+                               where ((ex is NonElectronic) || (ex is Electronic)) ?
+                               ((ex as NonElectronic)?.AgeRequirement >= 7 || (ex as Electronic)?.AgeRequirement >= 7) :
+                               true
+                               select ex
+                           ).ToList();
+
+                            machine.PrintVendingMachine(exclusions);
+                            break;
+                        case 4:
+                            Console.WriteLine("Thankyou for using this program!");
+                            Console.ReadKey();
+                            break;
+                    }
+                }else {
+                    Console.WriteLine("You entered an incorrect value, try a correct one."); }                    
+                
             } while (menuSelection != 4);
         }
 

@@ -9,12 +9,13 @@ namespace Midterm
 {
     class VendingMachine : IEnumerable<VendingMachineOption>
     {
-        IEnumerable<VendingMachineOption>[,] options = new IEnumerable<VendingMachineOption>[5,4];
+        //Enumeration of Vending machine option
+        public VendingMachineOption[,] options = new VendingMachineOption[5,4];
 
         public VendingMachine()
         {
             
-                options[0, 0] = (new Food("Jalapeno Chips", 1.25f, 11, 280, 1, 5000, true));
+                options[0, 0] = ( new Food("Jalapeno Chips", 1.25f, 11, 280, 1, 5000, true));
                 options[0, 1] = ( new NonElectronic("Action Figure", 9.99f, 10, 6, true));
                 options[0, 2] = ( new Electronic("BlackJack", 12.99f, 15, 11, true, Genre.Puzzle));
                 options[0, 3] = ( new Drink("Gatorade", 1.99f, 8, 60, 16, false));
@@ -70,13 +71,15 @@ namespace Midterm
 
         public IEnumerator GetEnumerator()
         {
-            return options.GetEnumerator();
+            var Opt1 = options.Cast<IEnumerable>();
+            return Opt1.GetEnumerator();
         }
 
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return options.GetEnumerator();
+            var Opt2 = options.Cast<IEnumerable>();
+            return Opt2.GetEnumerator();
         }
 
         IEnumerator<VendingMachineOption> IEnumerable<VendingMachineOption>.GetEnumerator()
