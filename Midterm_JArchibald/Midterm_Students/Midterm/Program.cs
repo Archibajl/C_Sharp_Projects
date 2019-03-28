@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Midterm
 {
-    class Program
+    class Program 
     {               
         static void Main(string[] args)
         {
@@ -29,6 +29,7 @@ namespace Midterm
                 {
 
                     List<VendingMachineOption> exclusions = new List<VendingMachineOption>();
+                    
 
                     switch (menuSelection)
                     {
@@ -37,6 +38,7 @@ namespace Midterm
                             break;
                         case 2:
                             //returns every exclusion to a list of "exclusions", with the exception of food items under 100 calories
+                                                        
                             exclusions =
                             (
                                 from ex in machine
