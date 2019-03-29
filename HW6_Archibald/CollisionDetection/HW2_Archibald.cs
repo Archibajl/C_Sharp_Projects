@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace CollisionDetection
 {
-    static class Program
+    static class HW2_Archibald
     {
         /// <summary>
         /// The main entry point for the application.
