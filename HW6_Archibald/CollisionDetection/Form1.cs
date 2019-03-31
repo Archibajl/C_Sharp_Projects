@@ -102,29 +102,82 @@ namespace CollisionDetection
         /// </summary>
         public void CollisionDetectionParallel()
         {
-            //Reset the color of squares to black.
-            for (int i = 0; i < squares.Count; i++)
-                squares[i].Color = Color.Black;
+            //Set the number of squares to a variable.
+            //This is faster to pull from a function once and save it locally.
+            int sqNum = squares.Count;
 
-            Thread Detector = new Thread(() =>
+            //Threads the reset function, works faster for larger number of particles.
+            //Reset the color of squares to black.
+            Thread Reset = new Thread (() =>
             {
-                for (int j = 0; j < squares.Count; j++)
+                for (int i = 0; i < sqNum; i++)
+                    squares[i].Color = Color.Black;
+            });
+            //Starts the thread to reset the squares.
+            Reset.Start();
+            
+            //Sets 2 different threading algorithms at different number of particles on the screen.
+            if (sqNum > 1500)
+            {
+                //Threads the first loop, this makes it even faster, it lagged a little when i only threaded the itterations.
+                //This function tanks at about 20,000 squares and drops below 10 fps at about 30,000 squares
+                Thread Detector = new Thread(() =>
                 {
-                    if (squares[i] != squares[j] && squares[i].IsCollidingWith(squares[j]))
+                    //Threads each itteration of the loop, this was faster for particles over 2000, 2500 was closer but it starts to tank at 2000.
+                    for (int i = 0; i < sqNum; i++)
                     {
-                        squares[i].Color = Color.Red;
+                        //Sends each itteration to a thread, and queues them
+                        Task.Factory.StartNew(() => Collidoscope(i));                        
+                    }
+                });
+            }
+            else
+            {
+                //Threads each itteration of the duel loop if the number of boxes is below 2000.
+                //This was faster to put the loop inside of the thread as opposed to running my function.
+                Thread Detector = new Thread(() =>
+                {
+                    //This runs the orrigional algorithm.
+                    for (int i = 0; i < sqNum; i++)
+                    {
+                        if (sqNum > i)
+                        {
+                            for (int j = 0; j < sqNum; j++)
+                            {
+                                if (squares[i] != squares[j] && squares[i].IsCollidingWith(squares[j]))
+                                {
+                                    squares[i].Color = Color.Red;
+                                    squares[j].Color = Color.Red;
+                                }
+                            }
+                        }
+                    }
+                });
+                //Starts the thread to detect collisions.
+                Detector.Start();
+            }
+        }
+
+        //Function that makes it easier to thread the nested loop.
+        void Collidoscope(int intercept)
+        {
+            //Sets the count of squares to a local variable.
+            int sqNum = squares.Count;
+            //This makes sure that the limiting variable is not somehow passed beyond the variables required range.
+            //In previous versions sometimes the input variable was beyond the limiting range of the loop.
+            if (sqNum > intercept)
+            {
+                //Loops to the number of squares to test the number of collisions.
+                for (int j = 0; j < sqNum; j++)
+                {
+                    if (squares[intercept] != squares[j] && squares[intercept].IsCollidingWith(squares[j]))
+                    {
+                        squares[intercept].Color = Color.Red;
                         squares[j].Color = Color.Red;
                     }
                 }
-            });
-            for (int i = 0; i < squares.Count; i++)
-            {
-                Detector.Start();
             }
-
-            
         }
-
         /// <summary>
         /// Draws the squares on the screen
         /// </summary>
