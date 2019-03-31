@@ -1,4 +1,8 @@
-﻿using System;
+﻿//Justin Archibald
+//CSC 3020 C#
+//HW 6
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

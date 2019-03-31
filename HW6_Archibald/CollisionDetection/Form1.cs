@@ -1,4 +1,8 @@
-﻿using System;
+﻿//Justin Archibald
+//CSC 3020 C#
+//HW 6
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -117,7 +121,7 @@ namespace CollisionDetection
             Reset.Start();
             
             //Sets 2 different threading algorithms at different number of particles on the screen.
-            if (sqNum > 1500)
+            if (sqNum > 1200)
             {
                 //Threads the first loop, this makes it even faster, it lagged a little when i only threaded the itterations.
                 //This function tanks at about 20,000 squares and drops below 10 fps at about 30,000 squares
@@ -133,7 +137,7 @@ namespace CollisionDetection
             }
             else
             {
-                //Threads each itteration of the duel loop if the number of boxes is below 2000.
+                //Threads each itteration of the duel loop if the number of boxes is below 1200.
                 //This was faster to put the loop inside of the thread as opposed to running my function.
                 Thread Detector = new Thread(() =>
                 {
