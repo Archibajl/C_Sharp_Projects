@@ -108,30 +108,32 @@ namespace CollisionDetection
         {
             //Set the number of squares to a variable.
             //This is faster to pull from a function once and save it locally.
-            int sqNum = squares.Count;
+            int sqNumber = squares.Count;
 
             //Threads the reset function, works faster for larger number of particles.
             //Reset the color of squares to black.
-            Thread Reset = new Thread (() =>
+            Task.Factory.StartNew(() =>
             {
-                for (int i = 0; i < sqNum; i++)
+                for (int i = 0; i < sqNumber; i++)
                     squares[i].Color = Color.Black;
             });
             //Starts the thread to reset the squares.
-            Reset.Start();
-            
+
+
             //Sets 2 different threading algorithms at different number of particles on the screen.
-            if (sqNum > 1200)
+            if (sqNumber > 1200)
             {
                 //Threads the first loop, this makes it even faster, it lagged a little when i only threaded the itterations.
                 //This function tanks at about 20,000 squares and drops below 10 fps at about 30,000 squares
-                Thread Detector = new Thread(() =>
+                Task.Factory.StartNew(() =>
                 {
                     //Threads each itteration of the loop, this was faster for particles over 2000, 2500 was closer but it starts to tank at 2000.
-                    for (int i = 0; i < sqNum; i++)
+                    for (int i = 0; i < sqNumber; i++)
                     {
-                        //Sends each itteration to a thread, and queues them
-                        Task.Factory.StartNew(() => Collidoscope(i));                        
+                        sqNumber = squares.Count;
+                        //Sends each itteration to a thread, and queues them                        
+                        Collidoscope(i, sqNumber);
+
                     }
                 });
             }
@@ -142,11 +144,11 @@ namespace CollisionDetection
                 Thread Detector = new Thread(() =>
                 {
                     //This runs the orrigional algorithm.
-                    for (int i = 0; i < sqNum; i++)
+                    for (int i = 0; i < sqNumber; i++)
                     {
-                        if (sqNum > i)
+                        if (sqNumber > i)
                         {
-                            for (int j = 0; j < sqNum; j++)
+                            for (int j = 0; j < sqNumber; j++)
                             {
                                 if (squares[i] != squares[j] && squares[i].IsCollidingWith(squares[j]))
                                 {
@@ -163,10 +165,10 @@ namespace CollisionDetection
         }
 
         //Function that makes it easier to thread the nested loop.
-        void Collidoscope(int intercept)
+        void Collidoscope(int intercept, int sqNum)
         {
             //Sets the count of squares to a local variable.
-            int sqNum = squares.Count;
+            //int sqNum = squares.Count;
             //This makes sure that the limiting variable is not somehow passed beyond the variables required range.
             //In previous versions sometimes the input variable was beyond the limiting range of the loop.
             if (sqNum > intercept)
