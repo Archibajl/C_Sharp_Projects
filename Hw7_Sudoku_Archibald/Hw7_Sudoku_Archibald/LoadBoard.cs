@@ -118,7 +118,7 @@ namespace Hw7_Sudoku_Archibald
         public string GenerateBoard()
         {
 
-            return null;
+            return ".................................................................................";
         }
 
         //Returns a random number between values.
