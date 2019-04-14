@@ -12,6 +12,7 @@ namespace Hw7_Sudoku_Archibald
 {
     public partial class Sudoku : Form
     {
+        LoadBoard lb = new LoadBoard();
         List<char> Values = new List<char>();
         List<int> BoardNumbers = new List<int>();
         List<char> InputBoardValues = new List<char>();
@@ -26,7 +27,8 @@ namespace Hw7_Sudoku_Archibald
             //Initializes the default load option via a radio buttion.
             radbtn_LoadEng.Checked = true;
             //Loads the values for the text boxes
-            LoadTxtBoxes(inputBoxes);
+            string board = lb.LoadBoards();
+            FillBoxes(inputBoxes, board);
         }
                
         public void LoadTxtBoxes(List<TextBox> Boxes)
@@ -44,16 +46,21 @@ namespace Hw7_Sudoku_Archibald
             LoadBoard lb = new LoadBoard();
             //Loads Text boxes to a list.
             List<TextBox> inputBoxes = TxtBox();
+            string board;
 
+            //Selects whether to generate a random board or load a pre-built one.
             if (radbtn_LoadEng.Checked == true)
             {
-                
+                board = lb.LoadBoards();
+                ClearBoxes(inputBoxes);
+                FillBoxes(inputBoxes, board);
             }
             else
             {
                 if(radbtn_RandGen.Checked == true)
                 {
-
+                    ClearBoxes(inputBoxes);
+                    board = lb.GenerateBoard();
                 }
                 else
                 {
@@ -93,6 +100,33 @@ namespace Hw7_Sudoku_Archibald
                 textBox74, textBox75, textBox76, textBox77, textBox78, textBox79,textBox80, textBox81
             };
             return inputBoxes;
+        }
+
+        //Fills the required boxes with values
+        void FillBoxes(List<TextBox> Boxes, string inBoard)
+        {            
+            //Sets a character array to the input string
+            char[] inputNumber = inBoard.ToCharArray(); ;
+            //Loops and inputs each number in the string to a text box.
+            //This also locks the text boxes that have numbers as starting values.
+            for(int i = 0; i < 81; i++)
+            {
+                if (inputNumber[i] != '.')
+                {
+                    Boxes[i].Text = inputNumber[i].ToString();
+                    Boxes[i].Enabled = false;
+                }
+            }
+        }
+
+        //Resets and enables all text boxes.
+        void ClearBoxes(List<TextBox> Boxes)
+        {
+            for(int i = 0; i< Boxes.Count; i++)
+            {
+                Boxes[i].Text = null;
+                Boxes[i].Enabled = true;
+            }
         }
     }
 }
