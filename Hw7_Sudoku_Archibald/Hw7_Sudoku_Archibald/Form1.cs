@@ -128,5 +128,7 @@ namespace Hw7_Sudoku_Archibald
                 Boxes[i].Enabled = true;
             }
         }
+
+
     }
 }
