@@ -13,6 +13,7 @@ namespace Hw7_Sudoku_Archibald
     public partial class Sudoku : Form
     {
         LoadBoard lb = new LoadBoard();
+        BoardFin fn = new BoardFin();
         List<char> Values = new List<char>();
         List<int> BoardNumbers = new List<int>();
         List<char> InputBoardValues = new List<char>();
@@ -56,7 +57,7 @@ namespace Hw7_Sudoku_Archibald
                 FillBoxes(inputBoxes, board);
             }
             else
-            {
+            {   //Tests for randomly generated board selection.
                 if(radbtn_RandGen.Checked == true)
                 {
                     ClearBoxes(inputBoxes);
@@ -72,7 +73,30 @@ namespace Hw7_Sudoku_Archibald
 
         private void btn_Check_Click(object sender, EventArgs e)
         {
+            //Initializes text boxes to a list.
             List<TextBox> inputBoxes = TxtBox();
+            int[,] boardVal = new int[9,9];
+            bool testVal = true;
+            int boxNum = 0;
+
+            for(int i=0; i < 9; i++)
+            {
+                for(int j=0; j < 9; j++)
+                {
+                    if (!int.TryParse(inputBoxes[boxNum].Text.ToString(), out boardVal[i, j]))
+                    {
+                        testVal = false;
+                        inputBoxes[boxNum].BackColor = Color.Red;
+                    }
+                    boxNum++;
+                }
+            }
+            //If all values are numbers a function is called to check the boardfor correct values.
+            if(testVal = true)
+            {
+
+            }
+
         }
 
         private void btn_Solve_Click(object sender, EventArgs e)
