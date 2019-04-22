@@ -115,7 +115,7 @@ namespace Hw7_Sudoku_Archibald
             return pass;
         }
 
-        public int[,] TestAll(int[,] board)
+        public List<int> TestAll(int[,] board)
         {
             List<int> Return = new List<int>();            
             Return.AddRange(TestRows(board));
@@ -123,15 +123,15 @@ namespace Hw7_Sudoku_Archibald
             Return.AddRange(TestBoxes(board));
             int len = Return.Count() /2;
 
-            int[,] ret = new int[len, len];
-            for (int i = 0; i< len; i += 2)
-            {
-                for(int j = 0; j <2; j++)
-                {
-                    ret[i, j] = Return[i];
-                }                 
-            }
-            return ret;
+            //int[,] ret = new int[len, len];
+            //for (int i = 0; i< len; i += 2)
+            //{
+            //    for(int j = 0; j <2; j++)
+            //    {
+            //        ret[i, j] = Return[i];
+            //    }                 
+            //}
+            return Return;
         }
         //Checks rows for correct input.
         List<int> TestRows(int[,] val)

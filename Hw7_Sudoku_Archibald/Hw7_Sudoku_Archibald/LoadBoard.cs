@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Hw7_Sudoku_Archibald
 {
     class LoadBoard
     {
         BoardFin fn = new BoardFin();
+        int[,] board = new int[9, 9];
         //Loads boards and returns a randome board.
         public string LoadBoards()
         {                        
@@ -120,8 +122,9 @@ namespace Hw7_Sudoku_Archibald
         //Generates a new board.
         public string GenerateBoard()
         {
-            int[,] board = new int[9,9];
-           
+            
+            List<int> FailedVal = new List<int>();
+
             bool solved = false;
             while (solved == false)
             {
@@ -133,13 +136,17 @@ namespace Hw7_Sudoku_Archibald
                         for (int x = 0; x < 6000000; x++) { }
                     }
                 }
-                fn.TestAll()
-                solved = TestGeneration(ref board, 0, 0);
+                FailedVal = fn.TestAll(board);
+                solved = (FailedVal.Count() != 0) ? false : true;
+                if (solved == false)
+                {
+                    solved = TestGeneration( FailedVal, 2, FailedVal[0], FailedVal[1]); 
+                }
             }
             return board.ToString();
         }
 
-        bool TestGeneration(ref int[,] board, int col, int row)
+        bool TestGeneration( List<int> failed, int counter, int col, int row)
         {
             List<int> TestVals = new List<int>
                 {
@@ -151,41 +158,53 @@ namespace Hw7_Sudoku_Archibald
             //TestVals.Remove(board[row, col]);
 
             bool pass = false;
-
+             
+            
             while ((TestVals.Count != 0) && (pass == false))
             {
                 //while ((!TestVals.Contains(temp)) && (TestVals.Count != 0))
                 //{
                 //    board[col, row] = RandomNum(1, 10);
                 //    temp = board[col, row];
-                    
+
                 //}
 
                 //if (pass == false)
                 //{
-                    
-                //}
 
+                //}
+                if (counter < failed.Count())
+                {
+                    Task.Factory.StartNew(() =>
+                    {
+                        pass = TestGeneration( failed, counter + 2, failed[counter], failed[counter + 1]);
+                    });
+                }
                 TestVals.Remove(board[col, row]);
                 if (IsAcceptable(board, col, row) == true)
                 {
-                    if (((row + 1) != 9) || (col + 1 != 9))
-                    {
-                        if (row + 1 != 9)
-                        {
-                            pass = TestGeneration(ref board, col, row + 1);
-                        }
-                        else
-                        {
-                            if (col + 1 != 9)
-                            {
-                                pass = TestGeneration(ref board, col + 1, 0);
-                            }
-                        }
-                    }
-                    else
-                    { pass = true;       }
-                    //pass = true;
+                    //if (counter < failed.Count())
+                    //{
+                    //    pass = TestGeneration(ref board, failed, counter + 2, failed[counter], failed[counter + 1]);
+                    //if (((row + 1) != 9) || (col + 1 != 9))
+                    //{
+                    //    if (row + 1 != 9)
+                    //    {
+                    //        pass = TestGeneration(ref board, failed, col, row + 1);
+                    //    }
+                    //    else
+                    //    {
+                    //        if (col + 1 != 9)
+                    //        {
+                    //            pass = TestGeneration(ref board, failed, col + 1, 0);
+                    //        }
+                    //    }
+                    //}
+                    //else
+                    //{ pass = true; }
+                    pass = true;
+                    //}
+                    //else { pass = true; }
                 }
                 else
                 {
@@ -196,8 +215,8 @@ namespace Hw7_Sudoku_Archibald
 
                     }
                 }
-
             }
+        
             return pass;
         }
 
