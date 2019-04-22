@@ -16,7 +16,7 @@ namespace Hw7_Sudoku_Archibald
         BoardFin fn = new BoardFin();
         List<char> Values = new List<char>();
         List<int> BoardNumbers = new List<int>();
-        List<char> InputBoardValues = new List<char>();
+        List<char> FailedBoardValues = new List<char>();
 
         public Sudoku()
         {          
@@ -86,15 +86,25 @@ namespace Hw7_Sudoku_Archibald
                     if (!int.TryParse(inputBoxes[boxNum].Text.ToString(), out boardVal[i, j]))
                     {
                         testVal = false;
-                        inputBoxes[boxNum].BackColor = Color.Red;
+                        inputBoxes[boxNum].BackColor = Color.LightYellow;
                     }
                     boxNum++;
                 }
             }
             //If all values are numbers a function is called to check the boardfor correct values.
-            if(testVal = true)
+            if(testVal == true)
             {
+                bool Rows, Collumns, Boxes;
+                List<Task<bool>> TaskList = new List<Task<bool>>();
+                Rows =  TestRows(boardVal, inputBoxes);
+                Collumns = TestCollumns(boardVal, inputBoxes);
+                Boxes = TestBoxes(boardVal, inputBoxes);
 
+                if (Rows == false && Collumns == false && Boxes == false)
+                {
+
+                    GreenBoxes(inputBoxes);
+                }
             }
 
         }
@@ -138,7 +148,155 @@ namespace Hw7_Sudoku_Archibald
                 if (inputNumber[i] != '.')
                 {
                     Boxes[i].Text = inputNumber[i].ToString();
-                    Boxes[i].Enabled = false;
+                    //Boxes[i].Enabled = false;
+                }
+            }
+        }
+
+        //Checks rows for correct input.
+        bool TestRows(int[,] val, List<TextBox> Boxes)
+        {
+            bool failedVal = false;
+            for (int i = 0; i < 9; i++)
+            {
+                List<int> TestVals = new List<int>
+                {
+                    1,2,3,4,5,6,7,8,9
+                };
+
+                for (int j = 0; j < 9; j++)
+                {
+                    if (TestVals.Contains(val[i, j]))
+                    {
+                        TestVals.Remove(val[i, j]);
+                    }
+                    else
+                    {
+                        failedVal = true;
+                        RowLineOut((i * 9) + j, Boxes);
+                    }
+                }
+            }
+            return failedVal;
+        }
+
+        //Tests collumns for correct input.
+        bool TestCollumns(int[,] val, List<TextBox> Boxes)
+        {
+           bool failedVal = false;
+
+            for (int i = 0; i < 9; i++)
+            {
+                List<int> TestVals = new List<int>
+                {
+                    1,2,3,4,5,6,7,8,9
+                };
+
+                for (int j = 0; j < 9; j++)
+                {
+                    if (val[j, i] != 0)
+                    {
+                        if (TestVals.Contains(val[j, i]))
+                        {
+                            TestVals.Remove(val[j, i]);
+                        }
+                        else
+                        {
+                            failedVal = true;
+                            CollumnLineOut((j * 9) + i, Boxes);
+                        }
+                    }
+                }
+            }
+            return failedVal;
+        }
+
+        //Tests boxes for correct input.
+        bool TestBoxes(int[,] val, List<TextBox> inputBoxes)
+        {
+            bool failedVal = false;
+            for (int boxCol = 0; boxCol < 3; boxCol++)
+            {
+                for (int boxRow = 0; boxRow < 3; boxRow++)
+                {
+                    List<int> TestVals = new List<int>
+                {
+                    1,2,3,4,5,6,7,8,9
+                };
+                    for (int r = 0; r < 3; r++)
+                    {
+                        for (int c = 0; c < 3; c++)
+                        {
+                            if (val[(boxCol*3) + c, r + (boxRow*3)] != 0)
+                            {
+                                if (TestVals.Contains( val[(boxCol * 3) + c, r + (boxRow * 3)]))
+                                {
+                                    TestVals.Remove(val[(boxCol * 3) + c, r + (boxRow * 3)]);
+                                }
+                                else
+                                {
+                                    failedVal = true;
+                                    BoxLineOut((((boxCol*3) + c)) , ((boxRow*3) + r), inputBoxes);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return failedVal;
+        }
+
+        //Changes the color of the Collumn for failed values.
+        void CollumnLineOut(int locator, List<TextBox> inputBoxes)
+        {            
+            int startPoint;             
+            inputBoxes[locator].BackColor = Color.Red;
+            if ((locator) < 9 )
+            {
+                startPoint = locator;
+            }
+            else
+            {
+                startPoint = locator;
+                while((startPoint) >= 9 )
+                {
+                    startPoint -= 9;
+                }
+            }
+            for(int i = 0; i<9; i ++)
+            {
+                inputBoxes[startPoint + (i*9)].BackColor = Color.IndianRed ;
+            }
+        }
+
+        //Changes the color of the failed row.
+        void RowLineOut(int locator, List<TextBox> inputBoxes)
+        {
+            int startPoint = locator;
+            if (startPoint %9 != 0)
+            {
+                //Sets the box to the starting text box of the line.
+                while(startPoint %9 != 0)
+                {
+                    startPoint -= 1;
+                }
+            }
+            for(int i = 0; i<9; i++)
+            {
+                inputBoxes[startPoint + i].BackColor = Color.IndianRed;
+            }
+        }
+
+        //Changes the color of the sections of boxes that fail the check.
+        void BoxLineOut(int locatorA, int LocatorB, List<TextBox> inputBoxes)
+        {
+            //Setting the start point to the 1D array of text boxes
+            int startPoint = (((locatorA-locatorA%3)*9)+(LocatorB- LocatorB%3));
+            for (int r = startPoint; r <= 18+startPoint; r += 9)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    inputBoxes[ r + i].BackColor = Color.PaleVioletRed;
                 }
             }
         }
@@ -149,10 +307,17 @@ namespace Hw7_Sudoku_Archibald
             for(int i = 0; i< Boxes.Count; i++)
             {
                 Boxes[i].Text = null;
+                Boxes[i].BackColor = Color.White;
                 Boxes[i].Enabled = true;
             }
         }
-
-
+        void GreenBoxes(List<TextBox> Boxes)
+        {
+            for (int i = 0; i < Boxes.Count; i++)
+            {
+                Boxes[i].BackColor = Color.GreenYellow;
+                Boxes[i].Enabled = false;
+            }
+        }
     }
 }

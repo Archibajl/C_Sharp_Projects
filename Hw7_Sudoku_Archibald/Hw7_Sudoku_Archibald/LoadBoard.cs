@@ -8,6 +8,7 @@ namespace Hw7_Sudoku_Archibald
 {
     class LoadBoard
     {
+        BoardFin fn = new BoardFin();
         //Loads boards and returns a randome board.
         public string LoadBoards()
         {                        
@@ -119,8 +120,85 @@ namespace Hw7_Sudoku_Archibald
         //Generates a new board.
         public string GenerateBoard()
         {
+            int[,] board = new int[9,9];
+           
+            bool solved = false;
+            while (solved == false)
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    for (int j = 0; j < 9; j++)
+                    {
+                        board[i, j] = RandomNum(1, 10);
+                        for (int x = 0; x < 6000000; x++) { }
+                    }
+                }
+                fn.TestAll()
+                solved = TestGeneration(ref board, 0, 0);
+            }
+            return board.ToString();
+        }
 
-            return ".................................................................................";
+        bool TestGeneration(ref int[,] board, int col, int row)
+        {
+            List<int> TestVals = new List<int>
+                {
+                    1,2,3,4,5,6,7,8,9
+                };
+
+            board[col, row] = RandomNum(1, 10);
+            int temp = board[row, col];
+            //TestVals.Remove(board[row, col]);
+
+            bool pass = false;
+
+            while ((TestVals.Count != 0) && (pass == false))
+            {
+                //while ((!TestVals.Contains(temp)) && (TestVals.Count != 0))
+                //{
+                //    board[col, row] = RandomNum(1, 10);
+                //    temp = board[col, row];
+                    
+                //}
+
+                //if (pass == false)
+                //{
+                    
+                //}
+
+                TestVals.Remove(board[col, row]);
+                if (IsAcceptable(board, col, row) == true)
+                {
+                    if (((row + 1) != 9) || (col + 1 != 9))
+                    {
+                        if (row + 1 != 9)
+                        {
+                            pass = TestGeneration(ref board, col, row + 1);
+                        }
+                        else
+                        {
+                            if (col + 1 != 9)
+                            {
+                                pass = TestGeneration(ref board, col + 1, 0);
+                            }
+                        }
+                    }
+                    else
+                    { pass = true;       }
+                    //pass = true;
+                }
+                else
+                {
+                    while ((!TestVals.Contains(temp)) && (TestVals.Count != 0))
+                    {
+                        board[col, row] = RandomNum(1, 10);
+                        temp = board[col, row];
+
+                    }
+                }
+
+            }
+            return pass;
         }
 
         //Returns a random number between values.
@@ -130,5 +208,110 @@ namespace Hw7_Sudoku_Archibald
             return rand.Next(minval, maxval);
         }
 
+        bool IsAcceptable(int[,] board, int col, int row)
+        {
+            bool pass;
+            bool box = true;
+            //if ((col%3 == 2) && (row%3 == 2))
+            //{
+            //    box = TestBox(board, col, row);
+            //}
+            if ((TestRows(board, col, row) == true) && (TestCollumns(board, col, row) == true) && (TestBox(board, col, row) == true))
+            {
+                pass = true;                
+            }
+            else
+            {
+                pass = false;
+            }
+            return pass;
+        }
+
+        bool TestRows(int[,] board, int col, int row)
+        {
+            bool pass = true;
+            //for(int r = row; r< row+3; r++)
+            //{
+                List<int> TestValRow = new List<int>
+                {
+                    1,2,3,4,5,6,7,8,9
+                };
+
+                for (int r = 0; r <= row; r++)
+                {
+                if (board[col, r] != 0)
+                {
+                    if (TestValRow.Contains(board[col, r]))
+                    {
+                        TestValRow.Remove(board[col, r]);
+                    }
+                    else
+                    {
+                        pass = false;
+                        break;
+                    }
+                }
+            }
+            //}
+            return pass;
+        }
+        bool TestCollumns(int[,] board, int col, int row )
+        {
+            bool pass = true;
+            //for (int c = col; c < col+3; c++)
+            //{
+                List<int> TestValCol = new List<int>
+                {
+                    1,2,3,4,5,6,7,8,9
+                };
+
+                for (int c = 0; c <= col; c++)
+                {
+                if (board[c, row] != 0)
+                {
+                    if (TestValCol.Contains(board[c, row]))
+                    {
+                        TestValCol.Remove(board[c, row]);
+                    }
+                    else
+                    {
+                        pass = false;
+                        break;
+                    }
+                }
+                }
+            //}
+            return pass;
+        }
+        bool TestBox(int[,] board, int coll, int rows)
+        {
+            int row = rows - rows % 3;
+            int col = coll - coll % 3;
+            bool pass = true;
+            List<int> TestValBox = new List<int>
+                {
+                    1,2,3,4,5,6,7,8,9
+                };
+
+            for (int r = row; r <= rows ; r++)
+            {
+                for(int c = col; c <= coll  ; c++)
+                {
+                    if (board[c, r] != 0)
+                    {
+                        if (TestValBox.Contains(board[c, r]))
+                        {
+                            TestValBox.Remove(board[c, r]);
+                        }
+                        else
+                        {
+                            pass = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            return pass;
+        }
     }
 }
