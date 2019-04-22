@@ -11,6 +11,7 @@ namespace Hw7_Sudoku_Archibald
     {
         BoardFin fn = new BoardFin();
         int[,] board = new int[9, 9];
+        List<Task> Checks = new List<Task>();
         //Loads boards and returns a randome board.
         public string LoadBoards()
         {                        
@@ -175,11 +176,19 @@ namespace Hw7_Sudoku_Archibald
                 //}
                 if (counter < failed.Count())
                 {
+                    Checks.Add(
                     Task.Factory.StartNew(() =>
                     {
                         pass = TestGeneration( failed, counter + 2, failed[counter], failed[counter + 1]);
-                    });
+                    })
+                    );
+                    //if(Checks.Count() > 6)
+                    //{
+                    //   ;
+                    //}
+                    
                 }
+                
                 TestVals.Remove(board[col, row]);
                 if (IsAcceptable(board, col, row) == true)
                 {
