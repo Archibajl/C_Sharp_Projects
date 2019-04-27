@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Enigma_Machine
 {
-    class LtSeq : ISequence<T>
+    class LtSeq : ISequence<LtSeq>
     {
         List<int> Rotor1 = new List<int>()
         {

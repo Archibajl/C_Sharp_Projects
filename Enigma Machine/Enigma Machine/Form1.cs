@@ -37,12 +37,14 @@ namespace Enigma_Machine
         {
             string inVal = textBox1.Text;
             char[] numbers = inVal.ToCharArray();
-            int[] 
+            int[] numInput = Array.ConvertAll(numbers, int.Parse); ()//new int[numbers.Length];
 
-            for(int i = 0; i < numbers.Length; i++)
+            for (int i = 0; i < numbers.Length; i++)
             {
-
+                int.TryParse(numbers[i], out numInput[i]);   
             }
+
+            
         }
 
         private void chk_LtRotor1_CheckedChanged(object sender, EventArgs e)
