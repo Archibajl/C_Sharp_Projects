@@ -50,9 +50,7 @@ namespace Enigma_Machine
         {
             string inVal = textBox1.Text;
             //char[] numbers = inVal.ToCharArray();
-            char number = inVal.LastOrDefault();
-            //try
-            //{
+            char number = inVal.LastOrDefault();            
                 
             NumInput.Add(int.Parse(number.ToString()));
             //new int[numbers.Length];
@@ -81,19 +79,16 @@ namespace Enigma_Machine
                     IncrementRotors();
 
                     NumInput[j] = temp;
-                    outVal += Convert.ToString(NumInput[j]);
+                    //outVal += Convert.ToString(NumInput[j]);
             }
             else { int j = 0; }
             //}
 
-            textBox2.Text = outVal;//NumInput.ToString();
+            textBox2.Text = NumInput.ToString();//NumInput.ToString();
                 ///ResetRotors();
-            //}
-            //catch (Exception)
-            //{    }
+         
             }
-
-        
+                
 
         void IncrementRotors()
         {
