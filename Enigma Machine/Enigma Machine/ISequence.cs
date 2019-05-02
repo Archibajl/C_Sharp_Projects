@@ -8,9 +8,14 @@ namespace Enigma_Machine
 {
     interface ISequence<T>
     {
-        int ScrambleSequence(bool[] rotorSeq, int chngNum);
-               
-        void RotateRotors(int rotorNum, int numberOfRotations);
+        int RotationCounter
+        {   get; set; }
+
+        int ScrambleSequenceFwd(int rotorSeq, int chngNum);
+
+        int ScrambleSequenceRev(int rotorSeq, int chngNum);
+
+        void RotateRotors(int rotorNum, int numberOfRotations, bool initialisation);
                
     }
 }

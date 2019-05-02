@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Enigma_Machine
-{    
-    class LtSeq : ISequence<LtSeq>
+{
+    class MidSeq : ISequence<MidSeq>
     {
         private int rotCounter = 0;
 
@@ -30,14 +30,14 @@ namespace Enigma_Machine
             1,6,5,2,9,0,7,4,3,8
         };
 
-
+        //Counts the number of rotations the wheel makes.
         public int RotationCounter
         {
             get { return rotCounter; }
             set { rotCounter = value; }
         }
 
-        //
+        //Returns the values of the rotors at the input position.
         public int ScrambleSequenceFwd(int rotorNum, int chngNum)
         {
             int retVal = chngNum;
@@ -61,7 +61,7 @@ namespace Enigma_Machine
             return retVal;
         }
 
-        //Returns the values of the position of the called output of said rotor.
+        //Returns the positions of the rotors from the output.
         public int ScrambleSequenceRev(int rotorNum, int chngNum)
         {
             int retVal = chngNum;
@@ -85,6 +85,7 @@ namespace Enigma_Machine
             return retVal;
         }
 
+        //Returns the output of the input position.
         int RotorChng(List<int> Rotor, int shiftyVal)
         {
             int retVal;
@@ -92,13 +93,15 @@ namespace Enigma_Machine
             return retVal;
         }
 
+        //Returns the position of the output.
         int ReverseRotor(List<int> Rotor, int shiftyVal)
         {
             int retVal;
             retVal = Rotor.IndexOf(shiftyVal);
             return retVal;
         }
-         
+
+
         //Rotates the roters output by incrementing each element by 1
         public void RotateRotors(int rotorNum, int numberOfRotations, bool initiisatoin)
         {
@@ -151,7 +154,8 @@ namespace Enigma_Machine
                         Rotor[j]++;
                     }
                 }
-                //rotCounter++;
+                //Increments the number of rotations, to tell when the rotor makes a full rotation.
+                rotCounter++;
             }
         }
 
@@ -190,6 +194,5 @@ namespace Enigma_Machine
                     break;
             }
         }
-
     }
 }

@@ -40,18 +40,24 @@
             this.txt_StartPos1 = new System.Windows.Forms.TextBox();
             this.txt_StartPos2 = new System.Windows.Forms.TextBox();
             this.txt_StartPos3 = new System.Windows.Forms.TextBox();
-            this.chk_LtRotor1 = new System.Windows.Forms.CheckBox();
-            this.chk_LtRotor2 = new System.Windows.Forms.CheckBox();
-            this.chk_LtRotor3 = new System.Windows.Forms.CheckBox();
-            this.chk_LtRotor4 = new System.Windows.Forms.CheckBox();
-            this.chk_MidRotor1 = new System.Windows.Forms.CheckBox();
-            this.chk_MidRotor2 = new System.Windows.Forms.CheckBox();
-            this.chk_MidRotor3 = new System.Windows.Forms.CheckBox();
-            this.chk_MidRotor4 = new System.Windows.Forms.CheckBox();
-            this.chk_RtRotor1 = new System.Windows.Forms.CheckBox();
-            this.chk_RtRotor2 = new System.Windows.Forms.CheckBox();
-            this.chk_RtRotor3 = new System.Windows.Forms.CheckBox();
-            this.chk_RtRotor4 = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radbtn_Lt4 = new System.Windows.Forms.RadioButton();
+            this.radbtn_Lt2 = new System.Windows.Forms.RadioButton();
+            this.radbtn_Lt3 = new System.Windows.Forms.RadioButton();
+            this.radbtn_Lt1 = new System.Windows.Forms.RadioButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.radbtn_Mid4 = new System.Windows.Forms.RadioButton();
+            this.radbtn_Mid1 = new System.Windows.Forms.RadioButton();
+            this.radbtn_Mid3 = new System.Windows.Forms.RadioButton();
+            this.radbtn_Mid2 = new System.Windows.Forms.RadioButton();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.radbtn_Rt4 = new System.Windows.Forms.RadioButton();
+            this.radbtn_Rt1 = new System.Windows.Forms.RadioButton();
+            this.radbtn_Rt3 = new System.Windows.Forms.RadioButton();
+            this.radbtn_Rt2 = new System.Windows.Forms.RadioButton();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -136,164 +142,206 @@
             // txt_StartPos1
             // 
             this.txt_StartPos1.Location = new System.Drawing.Point(183, 97);
+            this.txt_StartPos1.MaxLength = 1;
             this.txt_StartPos1.Name = "txt_StartPos1";
             this.txt_StartPos1.Size = new System.Drawing.Size(104, 20);
             this.txt_StartPos1.TabIndex = 9;
             this.txt_StartPos1.Text = "0";
+            this.txt_StartPos1.TextChanged += new System.EventHandler(this.txt_StartPos1_TextChanged);
             // 
             // txt_StartPos2
             // 
             this.txt_StartPos2.Location = new System.Drawing.Point(183, 128);
+            this.txt_StartPos2.MaxLength = 1;
             this.txt_StartPos2.Name = "txt_StartPos2";
             this.txt_StartPos2.Size = new System.Drawing.Size(104, 20);
             this.txt_StartPos2.TabIndex = 10;
             this.txt_StartPos2.Text = "0";
+            this.txt_StartPos2.TextChanged += new System.EventHandler(this.txt_StartPos2_TextChanged);
             // 
             // txt_StartPos3
             // 
             this.txt_StartPos3.Location = new System.Drawing.Point(183, 156);
+            this.txt_StartPos3.MaxLength = 1;
             this.txt_StartPos3.Name = "txt_StartPos3";
             this.txt_StartPos3.Size = new System.Drawing.Size(104, 20);
             this.txt_StartPos3.TabIndex = 11;
             this.txt_StartPos3.Text = "0";
+            this.txt_StartPos3.TextChanged += new System.EventHandler(this.txt_StartPos3_TextChanged);
             // 
-            // chk_LtRotor1
+            // groupBox1
             // 
-            this.chk_LtRotor1.AutoSize = true;
-            this.chk_LtRotor1.Location = new System.Drawing.Point(81, 104);
-            this.chk_LtRotor1.Name = "chk_LtRotor1";
-            this.chk_LtRotor1.Size = new System.Drawing.Size(15, 14);
-            this.chk_LtRotor1.TabIndex = 12;
-            this.chk_LtRotor1.UseVisualStyleBackColor = true;
-            this.chk_LtRotor1.CheckedChanged += new System.EventHandler(this.chk_LtRotor1_CheckedChanged);
+            this.groupBox1.Controls.Add(this.radbtn_Lt4);
+            this.groupBox1.Controls.Add(this.radbtn_Lt2);
+            this.groupBox1.Controls.Add(this.radbtn_Lt3);
+            this.groupBox1.Controls.Add(this.radbtn_Lt1);
+            this.groupBox1.Location = new System.Drawing.Point(72, 97);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(105, 25);
+            this.groupBox1.TabIndex = 24;
+            this.groupBox1.TabStop = false;
             // 
-            // chk_LtRotor2
+            // radbtn_Lt4
             // 
-            this.chk_LtRotor2.AutoSize = true;
-            this.chk_LtRotor2.Location = new System.Drawing.Point(102, 104);
-            this.chk_LtRotor2.Name = "chk_LtRotor2";
-            this.chk_LtRotor2.Size = new System.Drawing.Size(15, 14);
-            this.chk_LtRotor2.TabIndex = 13;
-            this.chk_LtRotor2.UseVisualStyleBackColor = true;
-            this.chk_LtRotor2.CheckedChanged += new System.EventHandler(this.chk_LtRotor2_CheckedChanged);
+            this.radbtn_Lt4.AutoSize = true;
+            this.radbtn_Lt4.Location = new System.Drawing.Point(70, 7);
+            this.radbtn_Lt4.Name = "radbtn_Lt4";
+            this.radbtn_Lt4.Size = new System.Drawing.Size(14, 13);
+            this.radbtn_Lt4.TabIndex = 29;
+            this.radbtn_Lt4.TabStop = true;
+            this.radbtn_Lt4.UseVisualStyleBackColor = true;
+            this.radbtn_Lt4.CheckedChanged += new System.EventHandler(this.radbtn_Lt4_CheckedChanged);
             // 
-            // chk_LtRotor3
+            // radbtn_Lt2
             // 
-            this.chk_LtRotor3.AutoSize = true;
-            this.chk_LtRotor3.Location = new System.Drawing.Point(123, 104);
-            this.chk_LtRotor3.Name = "chk_LtRotor3";
-            this.chk_LtRotor3.Size = new System.Drawing.Size(15, 14);
-            this.chk_LtRotor3.TabIndex = 14;
-            this.chk_LtRotor3.UseVisualStyleBackColor = true;
-            this.chk_LtRotor3.CheckedChanged += new System.EventHandler(this.chk_LtRotor3_CheckedChanged);
+            this.radbtn_Lt2.AutoSize = true;
+            this.radbtn_Lt2.Location = new System.Drawing.Point(30, 7);
+            this.radbtn_Lt2.Name = "radbtn_Lt2";
+            this.radbtn_Lt2.Size = new System.Drawing.Size(14, 13);
+            this.radbtn_Lt2.TabIndex = 27;
+            this.radbtn_Lt2.TabStop = true;
+            this.radbtn_Lt2.UseVisualStyleBackColor = true;
+            this.radbtn_Lt2.CheckedChanged += new System.EventHandler(this.radbtn_Lt2_CheckedChanged);
             // 
-            // chk_LtRotor4
+            // radbtn_Lt3
             // 
-            this.chk_LtRotor4.AutoSize = true;
-            this.chk_LtRotor4.Location = new System.Drawing.Point(144, 104);
-            this.chk_LtRotor4.Name = "chk_LtRotor4";
-            this.chk_LtRotor4.Size = new System.Drawing.Size(15, 14);
-            this.chk_LtRotor4.TabIndex = 15;
-            this.chk_LtRotor4.UseVisualStyleBackColor = true;
-            this.chk_LtRotor4.CheckedChanged += new System.EventHandler(this.chk_LtRotor4_CheckedChanged);
+            this.radbtn_Lt3.AutoSize = true;
+            this.radbtn_Lt3.Location = new System.Drawing.Point(50, 7);
+            this.radbtn_Lt3.Name = "radbtn_Lt3";
+            this.radbtn_Lt3.Size = new System.Drawing.Size(14, 13);
+            this.radbtn_Lt3.TabIndex = 28;
+            this.radbtn_Lt3.TabStop = true;
+            this.radbtn_Lt3.UseVisualStyleBackColor = true;
+            this.radbtn_Lt3.CheckedChanged += new System.EventHandler(this.radbtn_Lt3_CheckedChanged);
             // 
-            // chk_MidRotor1
+            // radbtn_Lt1
             // 
-            this.chk_MidRotor1.AutoSize = true;
-            this.chk_MidRotor1.Location = new System.Drawing.Point(81, 130);
-            this.chk_MidRotor1.Name = "chk_MidRotor1";
-            this.chk_MidRotor1.Size = new System.Drawing.Size(15, 14);
-            this.chk_MidRotor1.TabIndex = 16;
-            this.chk_MidRotor1.UseVisualStyleBackColor = true;
-            this.chk_MidRotor1.CheckedChanged += new System.EventHandler(this.chk_MidRotor1_CheckedChanged);
+            this.radbtn_Lt1.AutoSize = true;
+            this.radbtn_Lt1.Location = new System.Drawing.Point(10, 7);
+            this.radbtn_Lt1.Name = "radbtn_Lt1";
+            this.radbtn_Lt1.Size = new System.Drawing.Size(14, 13);
+            this.radbtn_Lt1.TabIndex = 26;
+            this.radbtn_Lt1.UseVisualStyleBackColor = true;
+            this.radbtn_Lt1.CheckedChanged += new System.EventHandler(this.radbtn_Lt1_CheckedChanged);
             // 
-            // chk_MidRotor2
+            // groupBox2
             // 
-            this.chk_MidRotor2.AutoSize = true;
-            this.chk_MidRotor2.Location = new System.Drawing.Point(102, 131);
-            this.chk_MidRotor2.Name = "chk_MidRotor2";
-            this.chk_MidRotor2.Size = new System.Drawing.Size(15, 14);
-            this.chk_MidRotor2.TabIndex = 17;
-            this.chk_MidRotor2.UseVisualStyleBackColor = true;
-            this.chk_MidRotor2.CheckedChanged += new System.EventHandler(this.chk_MidRotor2_CheckedChanged);
+            this.groupBox2.Controls.Add(this.radbtn_Mid4);
+            this.groupBox2.Controls.Add(this.radbtn_Mid1);
+            this.groupBox2.Controls.Add(this.radbtn_Mid3);
+            this.groupBox2.Controls.Add(this.radbtn_Mid2);
+            this.groupBox2.Location = new System.Drawing.Point(73, 123);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(105, 25);
+            this.groupBox2.TabIndex = 25;
+            this.groupBox2.TabStop = false;
             // 
-            // chk_MidRotor3
+            // radbtn_Mid4
             // 
-            this.chk_MidRotor3.AutoSize = true;
-            this.chk_MidRotor3.Location = new System.Drawing.Point(123, 131);
-            this.chk_MidRotor3.Name = "chk_MidRotor3";
-            this.chk_MidRotor3.Size = new System.Drawing.Size(15, 14);
-            this.chk_MidRotor3.TabIndex = 18;
-            this.chk_MidRotor3.UseVisualStyleBackColor = true;
-            this.chk_MidRotor3.CheckedChanged += new System.EventHandler(this.chk_MidRotor3_CheckedChanged);
+            this.radbtn_Mid4.AutoSize = true;
+            this.radbtn_Mid4.Location = new System.Drawing.Point(69, 8);
+            this.radbtn_Mid4.Name = "radbtn_Mid4";
+            this.radbtn_Mid4.Size = new System.Drawing.Size(14, 13);
+            this.radbtn_Mid4.TabIndex = 30;
+            this.radbtn_Mid4.TabStop = true;
+            this.radbtn_Mid4.UseVisualStyleBackColor = true;
+            this.radbtn_Mid4.CheckedChanged += new System.EventHandler(this.radbtn_Mid4_CheckedChanged);
             // 
-            // chk_MidRotor4
+            // radbtn_Mid1
             // 
-            this.chk_MidRotor4.AutoSize = true;
-            this.chk_MidRotor4.Location = new System.Drawing.Point(144, 131);
-            this.chk_MidRotor4.Name = "chk_MidRotor4";
-            this.chk_MidRotor4.Size = new System.Drawing.Size(15, 14);
-            this.chk_MidRotor4.TabIndex = 19;
-            this.chk_MidRotor4.UseVisualStyleBackColor = true;
-            this.chk_MidRotor4.CheckedChanged += new System.EventHandler(this.chk_MidRotor4_CheckedChanged);
+            this.radbtn_Mid1.AutoSize = true;
+            this.radbtn_Mid1.Location = new System.Drawing.Point(9, 8);
+            this.radbtn_Mid1.Name = "radbtn_Mid1";
+            this.radbtn_Mid1.Size = new System.Drawing.Size(14, 13);
+            this.radbtn_Mid1.TabIndex = 27;
+            this.radbtn_Mid1.TabStop = true;
+            this.radbtn_Mid1.UseVisualStyleBackColor = true;
+            this.radbtn_Mid1.CheckedChanged += new System.EventHandler(this.radbtn_Mid1_CheckedChanged);
             // 
-            // chk_RtRotor1
+            // radbtn_Mid3
             // 
-            this.chk_RtRotor1.AutoSize = true;
-            this.chk_RtRotor1.Location = new System.Drawing.Point(81, 160);
-            this.chk_RtRotor1.Name = "chk_RtRotor1";
-            this.chk_RtRotor1.Size = new System.Drawing.Size(15, 14);
-            this.chk_RtRotor1.TabIndex = 20;
-            this.chk_RtRotor1.UseVisualStyleBackColor = true;
-            this.chk_RtRotor1.CheckedChanged += new System.EventHandler(this.chk_RtRotor1_CheckedChanged);
+            this.radbtn_Mid3.AutoSize = true;
+            this.radbtn_Mid3.Location = new System.Drawing.Point(49, 8);
+            this.radbtn_Mid3.Name = "radbtn_Mid3";
+            this.radbtn_Mid3.Size = new System.Drawing.Size(14, 13);
+            this.radbtn_Mid3.TabIndex = 29;
+            this.radbtn_Mid3.TabStop = true;
+            this.radbtn_Mid3.UseVisualStyleBackColor = true;
+            this.radbtn_Mid3.CheckedChanged += new System.EventHandler(this.radbtn_Mid3_CheckedChanged);
             // 
-            // chk_RtRotor2
+            // radbtn_Mid2
             // 
-            this.chk_RtRotor2.AutoSize = true;
-            this.chk_RtRotor2.Location = new System.Drawing.Point(102, 160);
-            this.chk_RtRotor2.Name = "chk_RtRotor2";
-            this.chk_RtRotor2.Size = new System.Drawing.Size(15, 14);
-            this.chk_RtRotor2.TabIndex = 21;
-            this.chk_RtRotor2.UseVisualStyleBackColor = true;
-            this.chk_RtRotor2.CheckedChanged += new System.EventHandler(this.chk_RtRotor2_CheckedChanged);
+            this.radbtn_Mid2.AutoSize = true;
+            this.radbtn_Mid2.Location = new System.Drawing.Point(29, 8);
+            this.radbtn_Mid2.Name = "radbtn_Mid2";
+            this.radbtn_Mid2.Size = new System.Drawing.Size(14, 13);
+            this.radbtn_Mid2.TabIndex = 28;
+            this.radbtn_Mid2.UseVisualStyleBackColor = true;
+            this.radbtn_Mid2.CheckedChanged += new System.EventHandler(this.radbtn_Mid2_CheckedChanged);
             // 
-            // chk_RtRotor3
+            // groupBox3
             // 
-            this.chk_RtRotor3.AutoSize = true;
-            this.chk_RtRotor3.Location = new System.Drawing.Point(123, 160);
-            this.chk_RtRotor3.Name = "chk_RtRotor3";
-            this.chk_RtRotor3.Size = new System.Drawing.Size(15, 14);
-            this.chk_RtRotor3.TabIndex = 22;
-            this.chk_RtRotor3.UseVisualStyleBackColor = true;
-            this.chk_RtRotor3.CheckedChanged += new System.EventHandler(this.chk_RtRotor3_CheckedChanged);
+            this.groupBox3.Controls.Add(this.radbtn_Rt4);
+            this.groupBox3.Controls.Add(this.radbtn_Rt1);
+            this.groupBox3.Controls.Add(this.radbtn_Rt3);
+            this.groupBox3.Controls.Add(this.radbtn_Rt2);
+            this.groupBox3.Location = new System.Drawing.Point(73, 154);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(105, 25);
+            this.groupBox3.TabIndex = 25;
+            this.groupBox3.TabStop = false;
             // 
-            // chk_RtRotor4
+            // radbtn_Rt4
             // 
-            this.chk_RtRotor4.AutoSize = true;
-            this.chk_RtRotor4.Location = new System.Drawing.Point(144, 160);
-            this.chk_RtRotor4.Name = "chk_RtRotor4";
-            this.chk_RtRotor4.Size = new System.Drawing.Size(15, 14);
-            this.chk_RtRotor4.TabIndex = 23;
-            this.chk_RtRotor4.UseVisualStyleBackColor = true;
-            this.chk_RtRotor4.CheckedChanged += new System.EventHandler(this.chk_RtRotor4_CheckedChanged);
+            this.radbtn_Rt4.AutoSize = true;
+            this.radbtn_Rt4.Location = new System.Drawing.Point(69, 6);
+            this.radbtn_Rt4.Name = "radbtn_Rt4";
+            this.radbtn_Rt4.Size = new System.Drawing.Size(14, 13);
+            this.radbtn_Rt4.TabIndex = 33;
+            this.radbtn_Rt4.TabStop = true;
+            this.radbtn_Rt4.UseVisualStyleBackColor = true;
+            this.radbtn_Rt4.CheckedChanged += new System.EventHandler(this.radbtn_Rt4_CheckedChanged);
+            // 
+            // radbtn_Rt1
+            // 
+            this.radbtn_Rt1.AutoSize = true;
+            this.radbtn_Rt1.Location = new System.Drawing.Point(9, 6);
+            this.radbtn_Rt1.Name = "radbtn_Rt1";
+            this.radbtn_Rt1.Size = new System.Drawing.Size(14, 13);
+            this.radbtn_Rt1.TabIndex = 30;
+            this.radbtn_Rt1.TabStop = true;
+            this.radbtn_Rt1.UseVisualStyleBackColor = true;
+            this.radbtn_Rt1.CheckedChanged += new System.EventHandler(this.radbtn_Rt1_CheckedChanged);
+            // 
+            // radbtn_Rt3
+            // 
+            this.radbtn_Rt3.AutoSize = true;
+            this.radbtn_Rt3.Location = new System.Drawing.Point(49, 6);
+            this.radbtn_Rt3.Name = "radbtn_Rt3";
+            this.radbtn_Rt3.Size = new System.Drawing.Size(14, 13);
+            this.radbtn_Rt3.TabIndex = 32;
+            this.radbtn_Rt3.UseVisualStyleBackColor = true;
+            this.radbtn_Rt3.CheckedChanged += new System.EventHandler(this.radbtn_Rt3_CheckedChanged);
+            // 
+            // radbtn_Rt2
+            // 
+            this.radbtn_Rt2.AutoSize = true;
+            this.radbtn_Rt2.Location = new System.Drawing.Point(29, 6);
+            this.radbtn_Rt2.Name = "radbtn_Rt2";
+            this.radbtn_Rt2.Size = new System.Drawing.Size(14, 13);
+            this.radbtn_Rt2.TabIndex = 31;
+            this.radbtn_Rt2.TabStop = true;
+            this.radbtn_Rt2.UseVisualStyleBackColor = true;
+            this.radbtn_Rt2.CheckedChanged += new System.EventHandler(this.radbtn_Rt2_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(347, 374);
-            this.Controls.Add(this.chk_RtRotor4);
-            this.Controls.Add(this.chk_RtRotor3);
-            this.Controls.Add(this.chk_RtRotor2);
-            this.Controls.Add(this.chk_RtRotor1);
-            this.Controls.Add(this.chk_MidRotor4);
-            this.Controls.Add(this.chk_MidRotor3);
-            this.Controls.Add(this.chk_MidRotor2);
-            this.Controls.Add(this.chk_MidRotor1);
-            this.Controls.Add(this.chk_LtRotor4);
-            this.Controls.Add(this.chk_LtRotor3);
-            this.Controls.Add(this.chk_LtRotor2);
-            this.Controls.Add(this.chk_LtRotor1);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txt_StartPos3);
             this.Controls.Add(this.txt_StartPos2);
             this.Controls.Add(this.txt_StartPos1);
@@ -308,6 +356,12 @@
             this.Controls.Add(this.textBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -327,18 +381,21 @@
         private System.Windows.Forms.TextBox txt_StartPos1;
         private System.Windows.Forms.TextBox txt_StartPos2;
         private System.Windows.Forms.TextBox txt_StartPos3;
-        private System.Windows.Forms.CheckBox chk_LtRotor1;
-        private System.Windows.Forms.CheckBox chk_LtRotor2;
-        private System.Windows.Forms.CheckBox chk_LtRotor3;
-        private System.Windows.Forms.CheckBox chk_LtRotor4;
-        private System.Windows.Forms.CheckBox chk_MidRotor1;
-        private System.Windows.Forms.CheckBox chk_MidRotor2;
-        private System.Windows.Forms.CheckBox chk_MidRotor3;
-        private System.Windows.Forms.CheckBox chk_MidRotor4;
-        private System.Windows.Forms.CheckBox chk_RtRotor1;
-        private System.Windows.Forms.CheckBox chk_RtRotor2;
-        private System.Windows.Forms.CheckBox chk_RtRotor3;
-        private System.Windows.Forms.CheckBox chk_RtRotor4;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radbtn_Lt4;
+        private System.Windows.Forms.RadioButton radbtn_Lt2;
+        private System.Windows.Forms.RadioButton radbtn_Lt3;
+        private System.Windows.Forms.RadioButton radbtn_Lt1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton radbtn_Mid4;
+        private System.Windows.Forms.RadioButton radbtn_Mid1;
+        private System.Windows.Forms.RadioButton radbtn_Mid3;
+        private System.Windows.Forms.RadioButton radbtn_Mid2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton radbtn_Rt4;
+        private System.Windows.Forms.RadioButton radbtn_Rt1;
+        private System.Windows.Forms.RadioButton radbtn_Rt3;
+        private System.Windows.Forms.RadioButton radbtn_Rt2;
     }
 }
 

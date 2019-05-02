@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Enigma_Machine
-{    
-    class LtSeq : ISequence<LtSeq>
+{
+    class RtSeq : ISequence<RtSeq>
     {
         private int rotCounter = 0;
 
@@ -37,7 +37,7 @@ namespace Enigma_Machine
             set { rotCounter = value; }
         }
 
-        //
+        //Returns the output from the position on the rotor.
         public int ScrambleSequenceFwd(int rotorNum, int chngNum)
         {
             int retVal = chngNum;
@@ -61,7 +61,7 @@ namespace Enigma_Machine
             return retVal;
         }
 
-        //Returns the values of the position of the called output of said rotor.
+        //Returns the position from the output of the rotor.
         public int ScrambleSequenceRev(int rotorNum, int chngNum)
         {
             int retVal = chngNum;
@@ -85,6 +85,7 @@ namespace Enigma_Machine
             return retVal;
         }
 
+        //Returns the output depending on the input position.
         int RotorChng(List<int> Rotor, int shiftyVal)
         {
             int retVal;
@@ -92,13 +93,15 @@ namespace Enigma_Machine
             return retVal;
         }
 
+        //Returns the reverse of the output.
         int ReverseRotor(List<int> Rotor, int shiftyVal)
         {
             int retVal;
             retVal = Rotor.IndexOf(shiftyVal);
             return retVal;
         }
-         
+
+
         //Rotates the roters output by incrementing each element by 1
         public void RotateRotors(int rotorNum, int numberOfRotations, bool initiisatoin)
         {
@@ -151,7 +154,8 @@ namespace Enigma_Machine
                         Rotor[j]++;
                     }
                 }
-                //rotCounter++;
+                //Increments the number of rotations, to tell when the rotor makes a full rotation.
+                rotCounter++;
             }
         }
 

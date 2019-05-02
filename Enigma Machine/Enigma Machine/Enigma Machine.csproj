@@ -54,8 +54,11 @@
     </Compile>
     <Compile Include="ISequence.cs" />
     <Compile Include="LtSeq.cs" />
+    <Compile Include="MidSeq.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reflector.cs" />
+    <Compile Include="RtSeq.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
