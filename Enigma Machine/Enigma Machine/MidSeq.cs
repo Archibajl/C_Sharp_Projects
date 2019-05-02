@@ -6,29 +6,29 @@ using System.Threading.Tasks;
 
 namespace Enigma_Machine
 {
-    class MidSeq : ISequence<MidSeq>
+    class MidSeq //: ISequence<MidSeq>
     {
         private int rotCounter = 0;
 
-        List<int> Rotor1 = new List<int>()
-        {
-            1,3,6,0,5,4,8,7,9,2
-        };
+        private List<int> Rotor1 = new List<int>();
+        //{
+        //    1,3,6,0,5,4,8,7,9,2
+        //};
 
-        List<int> Rotor2 = new List<int>()
-        {
-            0,3,5,2,6,9,1,4,8,7
-        };
+        private List<int> Rotor2 = new List<int>();
+        //{
+        //    0,3,5,2,6,9,1,4,8,7
+        //};
 
-        List<int> Rotor3 = new List<int>()
-        {
-            5,9,1,7,3,8,0,2,4,6
-        };
+        private List<int> Rotor3 = new List<int>();
+        //{
+        //    5,9,1,7,3,8,0,2,4,6
+        //};
 
-        List<int> Rotor4 = new List<int>()
-        {
-            1,6,5,2,9,0,7,4,3,8
-        };
+        private List<int> Rotor4 = new List<int>();
+        //{
+        //    1,6,5,2,9,0,7,4,3,8
+        //};
 
         //Counts the number of rotations the wheel makes.
         public int RotationCounter
@@ -88,59 +88,61 @@ namespace Enigma_Machine
         //Returns the output of the input position.
         int RotorChng(List<int> Rotor, int shiftyVal)
         {
-            int retVal;
-            retVal = Rotor[shiftyVal];
-            return retVal;
+            int retFwd;
+            retFwd = Rotor[shiftyVal];
+            return retFwd;
         }
 
-        //Returns the position of the output.
+        //Returns the reverse of the output.
         int ReverseRotor(List<int> Rotor, int shiftyVal)
         {
-            int retVal;
-            retVal = Rotor.IndexOf(shiftyVal);
-            return retVal;
+            int retRev = 0;
+            retRev = Rotor.IndexOf(shiftyVal);
+            return retRev;
+
         }
 
 
         //Rotates the roters output by incrementing each element by 1
-        public void RotateRotors(int rotorNum, int numberOfRotations, bool initiisatoin)
+        public void RotateRotors(int rotorNum, int numberOfRotations, bool initiisation)
         {
-            try
+            //try
+            //{
+            //Resets rotors to their initial value.
+            if (initiisation == true)
             {
-                //Resets rotors to their initial value.
-                if (initiisatoin == true)
+                ResetRotors(rotorNum, numberOfRotations);
+            }
+            //Ensures an adequate number of rotations.
+            if ((numberOfRotations <= 9) && (numberOfRotations > 0))
+            {
+                switch (rotorNum)
                 {
-                    ResetRotors(rotorNum, numberOfRotations);
-                }
-                //Ensures an adequate number of rotations.
-                if ((numberOfRotations <= 9) && (numberOfRotations >= 0))
-                {
-                    switch (rotorNum)
-                    {
-                        //Selects list to be incremented.
-                        case 1:
-                            Rotator(ref Rotor1, numberOfRotations);
-                            break;
-                        case 2:
-                            Rotator(ref Rotor2, numberOfRotations);
-                            break;
-                        case 3:
-                            Rotator(ref Rotor3, numberOfRotations);
-                            break;
-                        case 4:
-                            Rotator(ref Rotor4, numberOfRotations);
-                            break;
-                        default:
-                            break;
-                    }
+                    //Selects list to be incremented.
+                    case 1:
+                        Rotor1 = Rotator(Rotor1, numberOfRotations);
+                        break;
+                    case 2:
+                        Rotor2 = Rotator(Rotor2, numberOfRotations);
+                        break;
+                    case 3:
+                        Rotor3 = Rotator(Rotor3, numberOfRotations);
+                        break;
+                    case 4:
+                        Rotor4 = Rotator(Rotor4, numberOfRotations);
+                        break;
+                    default:
+                        break;
                 }
             }
-            catch (Exception) { }
+            //}
+            //catch (Exception) { }
         }
 
         //Increments each value of selected list.
-        void Rotator(ref List<int> Rotor, int numberOfRotations)
+        List<int> Rotator(List<int> Rot, int numberOfRotations)
         {
+            List<int> Rotor = Rot;
             for (int i = 0; i < numberOfRotations; i++)
             {
                 for (int j = 0; j < Rotor.Count; j++)
@@ -151,12 +153,13 @@ namespace Enigma_Machine
                     }
                     else
                     {
-                        Rotor[j]++;
+                        Rotor[j] = Rotor[j] + 1;
                     }
                 }
                 //Increments the number of rotations, to tell when the rotor makes a full rotation.
                 rotCounter++;
             }
+            return Rotor;
         }
 
         //Resets rotors to initial values.

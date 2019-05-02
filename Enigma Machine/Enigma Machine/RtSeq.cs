@@ -6,29 +6,29 @@ using System.Threading.Tasks;
 
 namespace Enigma_Machine
 {
-    class RtSeq : ISequence<RtSeq>
+    class RtSeq //: ISequence<RtSeq>
     {
         private int rotCounter = 0;
 
-        List<int> Rotor1 = new List<int>()
-        {
-            1,3,6,0,5,4,8,7,9,2
-        };
+        private List<int> Rotor1 = new List<int>();
+        //{
+        //    1,3,6,0,5,4,8,7,9,2
+        //};
 
-        List<int> Rotor2 = new List<int>()
-        {
-            0,3,5,2,6,9,1,4,8,7
-        };
+        private List<int> Rotor2 = new List<int>();
+        //{
+        //    0,3,5,2,6,9,1,4,8,7
+        //};
 
-        List<int> Rotor3 = new List<int>()
-        {
-            5,9,1,7,3,8,0,2,4,6
-        };
+        private List<int> Rotor3 = new List<int>();
+        //{
+        //    5,9,1,7,3,8,0,2,4,6
+        //};
 
-        List<int> Rotor4 = new List<int>()
-        {
-            1,6,5,2,9,0,7,4,3,8
-        };
+        private List<int> Rotor4 = new List<int>();
+        //{
+        //    1,6,5,2,9,0,7,4,3,8
+        //};
 
 
         public int RotationCounter
@@ -88,32 +88,32 @@ namespace Enigma_Machine
         //Returns the output depending on the input position.
         int RotorChng(List<int> Rotor, int shiftyVal)
         {
-            int retVal;
-            retVal = Rotor[shiftyVal];
-            return retVal;
+            int retFwd;
+            retFwd = Rotor[shiftyVal];
+            return retFwd;
         }
 
         //Returns the reverse of the output.
         int ReverseRotor(List<int> Rotor, int shiftyVal)
         {
-            int retVal;
-            retVal = Rotor.IndexOf(shiftyVal);
-            return retVal;
+            int retRev = 0;
+            retRev = Rotor.IndexOf(shiftyVal);
+            return retRev;
+
         }
 
 
         //Rotates the roters output by incrementing each element by 1
-        public void RotateRotors(int rotorNum, int numberOfRotations, bool initiisatoin)
+        public void RotateRotors(int rotorNum, int numberOfRotations, bool initiisation)
         {
-            try
-            {
+            
                 //Resets rotors to their initial value.
-                if (initiisatoin == true)
+                if (initiisation == true)
                 {
                     ResetRotors(rotorNum, numberOfRotations);
                 }
                 //Ensures an adequate number of rotations.
-                if ((numberOfRotations <= 9) && (numberOfRotations >= 0))
+                if ((numberOfRotations <= 9) && (numberOfRotations > 0))
                 {
                     switch (rotorNum)
                     {
@@ -134,13 +134,13 @@ namespace Enigma_Machine
                             break;
                     }
                 }
-            }
-            catch (Exception) { }
+            
         }
 
         //Increments each value of selected list.
         void Rotator(ref List<int> Rotor, int numberOfRotations)
         {
+            //List<int> Rotor = Rot;
             for (int i = 0; i < numberOfRotations; i++)
             {
                 for (int j = 0; j < Rotor.Count; j++)
@@ -151,12 +151,13 @@ namespace Enigma_Machine
                     }
                     else
                     {
-                        Rotor[j]++;
+                        Rotor[j] = Rotor[j] + 1;
                     }
                 }
                 //Increments the number of rotations, to tell when the rotor makes a full rotation.
                 rotCounter++;
             }
+            //return Rotor;
         }
 
         //Resets rotors to initial values.
@@ -167,9 +168,10 @@ namespace Enigma_Machine
                 //Selects rotor to be reset.
                 case 1:
                     Rotor1.Clear();
-                    Rotor1 = new List<int>{
-                                    1,3,6,0,5,4,8,7,9,2
-                                };
+                    Rotor1 = new List<int>()
+                    {
+                        1,3,6,0,5,4,8,7,9,2
+                    };
                     break;
                 case 2:
                     Rotor2.Clear();

@@ -12,26 +12,28 @@ namespace Enigma_Machine
 {
     public partial class Form1 : Form
     {
+        string outVal = null;
         int[] EaRotors = new int[3];
         int[] NumRotations = new int[3] { 0,0,0};
-        ISequence<LtSeq> lt = new LtSeq();
-        ISequence<MidSeq> mid = new MidSeq();
-        ISequence<RtSeq> rt = new RtSeq();
+        LtSeq lt = new LtSeq();
+        MidSeq mid = new MidSeq();
+        RtSeq rt = new RtSeq();
         Reflection rf = new Reflection();
+        List<int> NumInput = new List<int>();
 
-        List<int> LtPosition = new List<int>()
-        {
-            0,0,0,0
-        };
-        List<int> MidPosition = new List<int>()
-        {
-            0,0,0,0
-        };
-        List<int> RtPosition = new List<int>()
-        {
-            0,0,0,0
-        };
-        
+        //List<int> LtPosition = new List<int>()
+        //{
+        //    0,0,0,0
+        //};
+        //List<int> MidPosition = new List<int>()
+        //{
+        //    0,0,0,0
+        //};
+        //List<int> RtPosition = new List<int>()
+        //{
+        //    0,0,0,0
+        //};
+
 
         public Form1()
         {
@@ -47,21 +49,26 @@ namespace Enigma_Machine
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             string inVal = textBox1.Text;
-            string outVal = null;
-            char[] numbers = inVal.ToCharArray();
+            //char[] numbers = inVal.ToCharArray();
+            char number = inVal.LastOrDefault();
             //try
             //{
-                List<int> NumInput = new List<int>();
-                 //new int[numbers.Length];
-                for (int i = 0; i < numbers.Count(); i++)
-                {
-                   NumInput.Add( int.Parse(numbers[i].ToString()));
-                }
-                for(int j = 0; j < numbers.Count(); j++)
-                {
+                
+            NumInput.Add(int.Parse(number.ToString()));
+            //new int[numbers.Length];
+            //for (int i = 0; i < numbers.Count(); i++)
+            //{
+            //   NumInput.Add( int.Parse(numbers[i].ToString()));
+            //}
+            //for(int j = 0; j < numbers.Count(); j++)                
+            //{
+            if (NumInput.Count != 0)
+            {
+                int j = NumInput.Count - 1;           
+
                     int temp = NumInput[j];
                     //temp = lt.ScrambleSequenceFwd(EaRotors[0], NumInput[j]);
-                    temp = lt.ScrambleSequenceFwd(EaRotors[0], NumInput[j]);
+                    temp = lt.ScrambleSequenceFwd(EaRotors[0], temp);
                     temp = mid.ScrambleSequenceFwd(EaRotors[1], temp);
                     temp = rt.ScrambleSequenceFwd(EaRotors[2], temp);
 
@@ -75,36 +82,40 @@ namespace Enigma_Machine
 
                     NumInput[j] = temp;
                     outVal += Convert.ToString(NumInput[j]);
-                }
+            }
+            else { int j = 0; }
+            //}
 
-                textBox2.Text = outVal;//NumInput.ToString();
+            textBox2.Text = outVal;//NumInput.ToString();
                 ///ResetRotors();
             //}
             //catch (Exception)
             //{    }
             }
 
+        
+
         void IncrementRotors()
         {
             if(rt.RotationCounter < 10)
             {
-                rt.RotateRotors(EaRotors[0], 1, false);
+                rt.RotateRotors(EaRotors[2], 1, false);
             }
             else
             {
                 if(mid.RotationCounter < 10)
                 {
                     rt.RotationCounter = 0;
-                    rt.RotateRotors(EaRotors[0], 1, false);
+                    rt.RotateRotors(EaRotors[2], 1, false);
                     mid.RotateRotors(EaRotors[1], 1, false);                    
                 }
                 else
                 {
                     rt.RotationCounter = 0;
                     mid.RotationCounter = 0;
-                    rt.RotateRotors(EaRotors[0], 1, false);
+                    rt.RotateRotors(EaRotors[2], 1, false);
                     mid.RotateRotors(EaRotors[1], 1, false);
-                    lt.RotateRotors(EaRotors[2], 1, false);
+                    lt.RotateRotors(EaRotors[0], 1, false);
                 }
             }
         }
@@ -274,6 +285,14 @@ namespace Enigma_Machine
                 rt.RotateRotors(EaRotors[2], NumRotations[2], true);
             }
             else { MessageBox.Show("Entry must be numeric."); }
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            ResetRotors();
+            outVal = null;
+            textBox1.Text = "";
+            textBox2.Text = "";
         }
     }
 }
