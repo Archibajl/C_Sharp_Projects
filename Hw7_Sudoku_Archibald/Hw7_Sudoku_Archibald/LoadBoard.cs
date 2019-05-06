@@ -129,33 +129,34 @@ namespace Hw7_Sudoku_Archibald
             bool solved = false;
             while (solved == false)
             {
-                for (int i = 0; i < 9; i++)
-                {
-                    for (int j = 0; j < 9; j++)
-                    {
-                        board[i, j] = RandomNum(1, 10);
-                        for (int x = 0; x < 6000000; x++) { }
-                    }
-                }
-                FailedVal = fn.TestAll(board);
-                solved = (FailedVal.Count() != 0) ? false : true;
-                if (solved == false)
-                {
-                    solved = TestGeneration( FailedVal, 2, FailedVal[0], FailedVal[1]); 
-                }
+                //for (int i = 0; i < 9; i++)
+                //{
+                //    for (int j = 0; j < 9; j++)
+                //    {
+                //        board[i, j] = RandomNum(1, 10);
+                //        for (int x = 0; x < 6000000; x++) { }
+                //    }
+                //}
+                //FailedVal = fn.TestAll(board);
+                board[8, 8] = RandomNum(1, 9);
+                //solved = (FailedVal.Count() != 0) ? false : true;
+                //if (solved == false)
+                //{
+                    solved = TestGeneration( 0,0); 
+                //}
             }
             return board.ToString();
         }
 
-        bool TestGeneration( List<int> failed, int counter, int col, int row)
+        bool TestGeneration( int col, int row)
         {
             List<int> TestVals = new List<int>
                 {
                     1,2,3,4,5,6,7,8,9
                 };
 
-            board[col, row] = RandomNum(1, 10);
-            int temp = board[row, col];
+            // board[col, row] = RandomNum(1, 10);
+            int temp = board[col,row];
             //TestVals.Remove(board[row, col]);
 
             bool pass = false;
@@ -173,56 +174,85 @@ namespace Hw7_Sudoku_Archibald
                 //if (pass == false)
                 //{
 
+                //    //}
+                //    //if (counter < failed.Count())
+                //    //{
+                //    //Checks.Add(
+                //    //Task.Factory.StartNew(() =>
+                //    //{
+                //    //    pass = TestGeneration(failed, counter + 2, failed[counter], failed[counter + 1]);
+                //    //})
+                //    //);
+                //    if (((row + 1) != 9) || (col + 1 != 9))
+                //    {
+                //        if (row + 1 != 9)
+                //        {
+                //            //Task.Factory.StartNew(() =>
+                //            //{
+                //                pass = TestGeneration(col, row + 1);
+                //            //});
+                //        }
+                //        else
+                //        {
+                //            if (col + 1 != 9)
+                //            {
+                //                pass = TestGeneration(col + 1, 0);
+                //            }
+                //        }
+                //    }
+                //    //    //if(Checks.Count() > 6)
+                //    //    //{
+                //    //    //   ;
+                //    //    //}
+
                 //}
-                if (counter < failed.Count())
-                {
-                    Checks.Add(
-                    Task.Factory.StartNew(() =>
-                    {
-                        pass = TestGeneration( failed, counter + 2, failed[counter], failed[counter + 1]);
-                    })
-                    );
-                    //if(Checks.Count() > 6)
-                    //{
-                    //   ;
-                    //}
-                    
-                }
-                
-                TestVals.Remove(board[col, row]);
+
+                //TestVals.Remove(board[col, row]);
                 if (IsAcceptable(board, col, row) == true)
                 {
                     //if (counter < failed.Count())
                     //{
                     //    pass = TestGeneration(ref board, failed, counter + 2, failed[counter], failed[counter + 1]);
-                    //if (((row + 1) != 9) || (col + 1 != 9))
-                    //{
-                    //    if (row + 1 != 9)
-                    //    {
-                    //        pass = TestGeneration(ref board, failed, col, row + 1);
-                    //    }
-                    //    else
-                    //    {
-                    //        if (col + 1 != 9)
-                    //        {
-                    //            pass = TestGeneration(ref board, failed, col + 1, 0);
-                    //        }
-                    //    }
-                    //}
-                    //else
-                    //{ pass = true; }
-                    pass = true;
+                    if (((row + 1) != 9) || (col + 1 != 9))
+                    {
+                        if (row + 1 != 9)
+                        {
+                            pass = TestGeneration(col, row + 1);
+                        }
+                        else
+                        {
+                            if (col + 1 != 9)
+                            {
+                                pass = TestGeneration(col + 1, 0);
+                            }
+                        }
+                    }
+                    else
+                    { pass = true; }
+                    //pass = true;
                     //}
                     //else { pass = true; }
                 }
                 else
                 {
-                    while ((!TestVals.Contains(temp)) && (TestVals.Count != 0))
+                    for(int i = 1; i<=9; i++)
                     {
-                        board[col, row] = RandomNum(1, 10);
-                        temp = board[col, row];
-
+                        board[col, row] = i;
+                        if(IsAcceptable(board, col, row))
+                        {
+                            board[col, row] = i;
+                            break;
+                        }
                     }
+                    pass = false;
+                    //pass = false;
+                    //while ((!TestVals.Contains(temp)) && (TestVals.Count != 0))
+                    //{
+                    //    board[col, row] = RandomNum(1, 10);
+                    //    temp = board[col, row];
+
+                    //}
+                    //TestVals.Remove(board[col, row]);
                 }
             }
         
@@ -267,8 +297,8 @@ namespace Hw7_Sudoku_Archibald
 
                 for (int r = 0; r <= row; r++)
                 {
-                if (board[col, r] != 0)
-                {
+                //if (board[col, r] != 0)
+                //{
                     if (TestValRow.Contains(board[col, r]))
                     {
                         TestValRow.Remove(board[col, r]);
@@ -278,7 +308,7 @@ namespace Hw7_Sudoku_Archibald
                         pass = false;
                         break;
                     }
-                }
+                //}
             }
             //}
             return pass;
@@ -295,8 +325,8 @@ namespace Hw7_Sudoku_Archibald
 
                 for (int c = 0; c <= col; c++)
                 {
-                if (board[c, row] != 0)
-                {
+                //if (board[c, row] != 0)
+                //{
                     if (TestValCol.Contains(board[c, row]))
                     {
                         TestValCol.Remove(board[c, row]);
@@ -306,7 +336,7 @@ namespace Hw7_Sudoku_Archibald
                         pass = false;
                         break;
                     }
-                }
+                //}
                 }
             //}
             return pass;
@@ -325,8 +355,8 @@ namespace Hw7_Sudoku_Archibald
             {
                 for(int c = col; c <= coll  ; c++)
                 {
-                    if (board[c, r] != 0)
-                    {
+                    //if (board[c, r] != 0)
+                    //{
                         if (TestValBox.Contains(board[c, r]))
                         {
                             TestValBox.Remove(board[c, r]);
@@ -336,7 +366,7 @@ namespace Hw7_Sudoku_Archibald
                             pass = false;
                             break;
                         }
-                    }
+                    //}
                 }
             }
             return pass;
