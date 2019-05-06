@@ -16,15 +16,14 @@ namespace HW8_MultiplayerTicTacToe
     {
         CheckGame cg = new CheckGame();
         char[,] Board = new char[3,3];
-        char FinalVal;
-        //List<TcpClient> connections = new List<TcpClient>();
+        char FinalVal;        
         TcpClient Player;
 
         public Form1()
         {
             InitializeComponent();
             txt_IpConnection.Text = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString();
-            Listen();
+            //Listen();
         }    
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -176,7 +175,7 @@ namespace HW8_MultiplayerTicTacToe
             List<TextBox> Boxes = TextBoxes();
             for(int i = 0; i < Boxes.Count; i++)
             {
-                if (Boxes[i].Text == null)
+                if (Boxes[i].Text == "")
                     return false;
             }
 
@@ -255,7 +254,7 @@ namespace HW8_MultiplayerTicTacToe
                 listener.Stop();
                 return;
             }            
-            await Task.Factory.StartNew(() => ListenForPacket(Player));
+            //await Task.Factory.StartNew(() => ListenForPacket(Player));
         }
 
         private void ListenForPacket(TcpClient connection)
@@ -272,7 +271,7 @@ namespace HW8_MultiplayerTicTacToe
                     resul.Add(result);
                     for(int i = 0; i < resul.Count; i++)
                     {
-                        lbl_Connection.Text += resul[i];
+                        lbl_Connection.Text = result;
                     }
                     //int position1 = res[0];
                     //int position2 = res[1];
@@ -283,8 +282,8 @@ namespace HW8_MultiplayerTicTacToe
 
         private void SendMessage(TcpClient Connection, string Loc1, string Loc2, string Val)
         {
-            byte[] bytesToSend = Encoding.ASCII.GetBytes(Loc1 + Loc2 + Val);
-            Connection.GetStream().Write(bytesToSend, 0, bytesToSend.Length);
+            byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(Loc1 + Loc2 + Val);
+            Connection.GetStream().Write(bytesToSend, 0, bytesToSend.Count() - 1);
         }
 
         private void btn_ResetGame_Click(object sender, EventArgs e)
@@ -296,10 +295,11 @@ namespace HW8_MultiplayerTicTacToe
 
         private void btn_TestConnection_Click(object sender, EventArgs e)
         {
-            //Listen();
+            Listen();
             SendMessage(Player , DateTime.Now.ToString(), "", "");
-            if (Player != null)
+            if (Player != null) { 
             SendMessage(Player, "1", "1", "1");
+                 }
         }
     }
 }
