@@ -24,6 +24,7 @@ namespace HW8_MultiplayerTicTacToe
         {
             InitializeComponent();
             txt_IpConnection.Text = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString();
+            Listen();
         }    
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -34,7 +35,7 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     string val = Board[0,0].ToString();
                     SendMessage( Player ,"0", "0", val);
-                    Listen();
+                    //Listen();
                 }
             }
         }
@@ -47,7 +48,7 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     string val = Board[0,1].ToString();
                     SendMessage(Player, "0", "1", val);
-                    Listen();
+                    //Listen();
                 }
             }
         }
@@ -60,7 +61,7 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     string val = Board[0,2].ToString();
                     SendMessage(Player, "0", "2", val);
-                    Listen();
+                    //Listen();
                 }
             }
         }
@@ -73,7 +74,7 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     string val = Board[1,0].ToString();
                     SendMessage(Player, "1", "0", val);
-                    Listen();
+                    //Listen();
                 }
             }
         }
@@ -87,7 +88,7 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     string val = Board[1,1].ToString();
                     SendMessage(Player, "1", "1", val);
-                    Listen();
+                    //Listen();
                 }
             }
         }
@@ -101,7 +102,7 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     string val = Board[1,2].ToString();
                     SendMessage(Player, "1", "2", val);
-                    Listen();
+                    //Listen();
                 }
             }
         }
@@ -115,7 +116,7 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     string val = Board[2, 0].ToString();
                     SendMessage(Player, "2", "0", val);
-                    Listen();
+                    //Listen();
                 }
 
             }
@@ -130,7 +131,7 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     string val = Board[2,1].ToString();
                     SendMessage(Player, "2", "1", val);
-                    Listen();
+                    //Listen();
                 }
             }
         }
@@ -144,7 +145,7 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     string val = Board[2,2].ToString();
                     SendMessage(Player, "2", "2", val);
-                    Listen();
+                    //Listen();
                 }
             }            
         }
@@ -223,9 +224,10 @@ namespace HW8_MultiplayerTicTacToe
                 Boxes[i].Enabled = enable;
                 if(enable == true)
                 {
-                    Boxes[i].Text = "";
+                    Boxes[i].Text = "";                    
                 }
             }
+            Board = new char[3, 3];
         }
 
         List<TextBox> TextBoxes()
@@ -259,6 +261,7 @@ namespace HW8_MultiplayerTicTacToe
         private void ListenForPacket(TcpClient connection)
         {
             NetworkStream stream = connection.GetStream();
+            List<string> resul = new List<string>();
             while (true)
             {
                 byte[] bytesToRead = new byte[connection.ReceiveBufferSize];
@@ -266,8 +269,11 @@ namespace HW8_MultiplayerTicTacToe
                 string result = Encoding.ASCII.GetString(bytesToRead, 0, bytesRead);
                 if (result != "")
                 {
-                    lbl_Connection.Text += result;
-                    //char[] res = result.ToCharArray();
+                    resul.Add(result);
+                    for(int i = 0; i < resul.Count; i++)
+                    {
+                        lbl_Connection.Text += resul[i];
+                    }
                     //int position1 = res[0];
                     //int position2 = res[1];
                     //Board[position1, position2] = res[2];
@@ -289,9 +295,10 @@ namespace HW8_MultiplayerTicTacToe
         }
 
         private void btn_TestConnection_Click(object sender, EventArgs e)
-        {            
-            Listen();
-            if(Player != null)
+        {
+            //Listen();
+            SendMessage(Player , DateTime.Now.ToString(), "", "");
+            if (Player != null)
             SendMessage(Player, "1", "1", "1");
         }
     }
