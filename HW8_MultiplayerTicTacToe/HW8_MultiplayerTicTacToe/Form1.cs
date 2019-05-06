@@ -266,10 +266,11 @@ namespace HW8_MultiplayerTicTacToe
                 string result = Encoding.ASCII.GetString(bytesToRead, 0, bytesRead);
                 if (result != "")
                 {
-                    char[] res = result.ToCharArray();
-                    int position1 = res[0];
-                    int position2 = res[1];
-                    Board[position1, position2] = res[2];
+                    lbl_Connection.Text += result;
+                    //char[] res = result.ToCharArray();
+                    //int position1 = res[0];
+                    //int position2 = res[1];
+                    //Board[position1, position2] = res[2];
                 }
             }
         }
@@ -290,7 +291,8 @@ namespace HW8_MultiplayerTicTacToe
         private void btn_TestConnection_Click(object sender, EventArgs e)
         {            
             Listen();
-            //SendMessage(Player, "0", "0", "0");
+            if(Player != null)
+            SendMessage(Player, "1", "1", "1");
         }
     }
 }
