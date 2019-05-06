@@ -14,9 +14,9 @@ namespace Hw7_Sudoku_Archibald
     {
         LoadBoard lb = new LoadBoard();
         BoardFin fn = new BoardFin();
-        List<char> Values = new List<char>();
+        //List<char> Values = new List<char>();
         List<int> BoardNumbers = new List<int>();
-        List<char> FailedBoardValues = new List<char>();
+        //List<char> FailedBoardValues = new List<char>();
 
         public Sudoku()
         {          
@@ -55,6 +55,7 @@ namespace Hw7_Sudoku_Archibald
                 board = lb.LoadBoards();
                 ClearBoxes(inputBoxes);
                 FillBoxes(inputBoxes, board);
+                FillList(board);
             }
             else
             {   //Tests for randomly generated board selection.
@@ -62,6 +63,7 @@ namespace Hw7_Sudoku_Archibald
                 {
                     ClearBoxes(inputBoxes);
                     board = lb.GenerateBoard();
+                    FillBoxes(inputBoxes, board);
                 }
                 else
                 {
@@ -111,7 +113,20 @@ namespace Hw7_Sudoku_Archibald
 
         private void btn_Solve_Click(object sender, EventArgs e)
         {
+            int[,] board = new int[9,9];
+            string solBoard;
             List<TextBox> inputBoxes = TxtBox();
+            for(int i = 0; i<9; i++)
+            {
+                for (int j = 0; j <9; j++)
+                {
+                    board[i, j] = BoardNumbers[(i * 9) + j];
+                }
+            }
+            BoardNumbers.Clear();
+            solBoard = fn.Solver(board);
+            FillBoxes(inputBoxes, solBoard);
+            GreenBoxes(inputBoxes);
         }
 
         private void btn_Exit_Click(object sender, EventArgs e)
@@ -146,9 +161,34 @@ namespace Hw7_Sudoku_Archibald
             for(int i = 0; i < 81; i++)
             {
                 if (inputNumber[i] != '.')
-                {
+                {                    
                     Boxes[i].Text = inputNumber[i].ToString();
+
                     //Boxes[i].Enabled = false;
+                }
+                else
+                {
+                    BoardNumbers.Add(0);
+                }
+            }
+        }
+
+        void FillList( string inBoard)
+        {
+            //Sets a character array to the input string
+            char[] inputNumber = inBoard.ToCharArray(); ;
+            //Loops and inputs each number in the string to a text box.
+            //This also locks the text boxes that have numbers as starting values.
+            for (int i = 0; i < 81; i++)
+            {
+                if (inputNumber[i] != '.')
+                {
+                    string temp = Convert.ToString(inputNumber[i]);
+                    BoardNumbers.Add(int.Parse(temp));
+                }
+                else
+                {
+                    BoardNumbers.Add(0);
                 }
             }
         }
@@ -311,6 +351,7 @@ namespace Hw7_Sudoku_Archibald
                 Boxes[i].Enabled = true;
             }
         }
+        //Greens up all boxes on the board.
         void GreenBoxes(List<TextBox> Boxes)
         {
             for (int i = 0; i < Boxes.Count; i++)
