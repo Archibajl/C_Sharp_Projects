@@ -367,6 +367,9 @@ namespace HW8_MultiplayerTicTacToe
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
+            //Player. Dispose();
+            Task.Yield();
             Player.Close();
             Close();
         }
