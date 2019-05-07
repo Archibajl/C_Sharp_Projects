@@ -243,18 +243,30 @@ namespace HW8_MultiplayerTicTacToe
         {
             try
             {
-                Player = new TcpClient(Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString(), 5555);
+                Player = new TcpClient(txt_IpConnection.Text, 5555);
             }
             catch
-            {                
+            {
+                AddToMessageBox("No listener found, opening listener.");
                 TcpListener listener = new TcpListener(Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork), 5555);
                 listener.Start();
                 Player = await listener.AcceptTcpClientAsync();
                 await Task.Factory.StartNew(() => ListenForPacket(Player));
                 listener.Stop();
                 return;
-            }            
-            //await Task.Factory.StartNew(() => ListenForPacket(Player));
+            }
+            AddToMessageBox("Listener found, connection successful.");
+            await Task.Factory.StartNew(() => ListenForPacket(Player));
+        }
+
+        private void AddToMessageBox(string s)
+        {
+            //Must invoke as delegate due to cross thread work
+            this.Invoke(new MethodInvoker(delegate
+            {
+                txt_IpConnection.AppendText(s + "\n");
+                txt_IpConnection.ScrollToCaret();
+            }));
         }
 
         private void ListenForPacket(TcpClient connection)
