@@ -163,7 +163,7 @@ namespace HW8_MultiplayerTicTacToe
             SendMessage(Player, pos1.ToString(), pos2.ToString(), val);
             //Boxes.Any(x => x.TextChanged == false).Wait();
             //while (BreakVal == false) { }
-            //BreakVal = false;
+            //BreakVal = false;            
         }
 
         private bool Return(TextBox Box, int loc1, int loc2)
@@ -355,6 +355,7 @@ namespace HW8_MultiplayerTicTacToe
             }));
         }
 
+        //Continuously listens for 
         private void ListenForPacket(TcpClient connection)
         {
             NetworkStream stream = connection.GetStream();
@@ -366,11 +367,7 @@ namespace HW8_MultiplayerTicTacToe
                 string result = ASCIIEncoding.ASCII.GetString(bytesToRead, 0, bytesRead);
                 if (result != "")
                 {
-                    AddMessage(result);
-                    //for(int i = 0; i < resul.Count; i++)
-                    //{
-                    //    AddMessage(result);
-                    //}                    
+                    AddMessage(result);                                       
                 }
             }
         }
