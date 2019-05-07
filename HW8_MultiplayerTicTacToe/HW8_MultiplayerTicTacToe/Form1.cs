@@ -159,7 +159,8 @@ namespace HW8_MultiplayerTicTacToe
         void CommitVals( int pos1, int pos2)
         {
             string val = Board[pos1, pos2].ToString();
-            SendMessage(Player, pos1.ToString(), pos2.ToString());
+            SendMessage(Player, pos1.ToString(), "");
+            SendMessage(Player, pos2.ToString(), "");
             SendMessage(Player,val, "");
         }
 
@@ -353,7 +354,7 @@ namespace HW8_MultiplayerTicTacToe
                 string result = ASCIIEncoding.ASCII.GetString(bytesToRead, 0, bytesRead);
                 if (result != "")
                 {
-                    resul.Add(result);
+                    AddMessage(result);
                     //for(int i = 0; i < resul.Count; i++)
                     //{
                     //    AddMessage(result);
