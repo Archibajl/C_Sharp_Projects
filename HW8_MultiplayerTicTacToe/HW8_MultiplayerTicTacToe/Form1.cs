@@ -159,9 +159,9 @@ namespace HW8_MultiplayerTicTacToe
         void CommitVals( int pos1, int pos2)
         {
             string val = Board[pos1, pos2].ToString();
-            SendMessage(Player, pos1.ToString(), "");
-            SendMessage(Player, pos2.ToString(), "");
-            SendMessage(Player,val, "");
+            SendMessage(Player, pos1.ToString(), pos2.ToString(), val);
+            //SendMessage(Player, pos2.ToString(), "");
+            //SendMessage(Player,val, "");
         }
 
         private bool Return(TextBox Box, int loc1, int loc2)
@@ -298,7 +298,7 @@ namespace HW8_MultiplayerTicTacToe
                     List<TextBox> Box = TextBoxes();
                     label1.Text = "Tic Tac Toe";
                     GrayBoxes(Box, true);
-                    SendMessage(Player, "Reset", "");
+                    SendMessage(Player, "Reset", "", "");
                 }
                 else
                 {
@@ -370,9 +370,9 @@ namespace HW8_MultiplayerTicTacToe
             }
         }
 
-        private void SendMessage(TcpClient Connection, string Val1, string Val2)
+        private void SendMessage(TcpClient Connection, string loc1, string loc2, string Val)
         {
-            string sender = (Val1 + Val2);
+            string sender = (loc1 + loc2 + Val);
             byte[] bytesToSend = Encoding.ASCII.GetBytes(sender);
             Connection.GetStream().Write(bytesToSend, 0, bytesToSend.Count() );
         }
@@ -382,7 +382,7 @@ namespace HW8_MultiplayerTicTacToe
             List<TextBox> Box = TextBoxes();
             label1.Text = "Tic Tac Toe";
             GrayBoxes( Box, true);
-            SendMessage(Player, "Reset\n", "");
+            SendMessage(Player, "Reset\n", "", "");
         }
 
         private void btn_TestConnection_Click(object sender, EventArgs e)
@@ -390,7 +390,7 @@ namespace HW8_MultiplayerTicTacToe
             Listen();
             //SendMessage(Player , DateTime.Now.ToString(), "", "");
             if (Player != null) { 
-            SendMessage(Player, "Connection Success", ".");
+            SendMessage(Player, "Connection Success", ".", "");
                  }
         }
     }
