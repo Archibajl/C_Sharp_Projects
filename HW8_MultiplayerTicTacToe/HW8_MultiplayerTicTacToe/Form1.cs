@@ -303,23 +303,24 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     if (inVal.Length == 1)
                     {
-                        if(inVal== "1" || inVal == "2" ||inVal == "0")
+                        if (inVal == "1" || inVal == "2" || inVal == "0")
                         {
                             if (setVal == 0)
                             {
                                 LocalValue1 = int.Parse(inVal);
                                 setVal++;
                             }
-                            if(setVal == 1)
+                            if (setVal == 1)
                             {
                                 LocalValue2 = int.Parse(inVal);
                             }
+                        }
                         //string retVal = inVal;
                         //if (inVal == "1") { retVal = "X"; }
                         //if (inVal == "0") { retVal = "O"; }
                         if (inVal == "X" || inVal == "O")
                         {
-                            Board[LocalValue1, LocalValue2] = inVal;
+                            Board[LocalValue1, LocalValue2] = char.Parse(inVal);
                             Boxes[(LocalValue1 * 3) + LocalValue2].Text = inVal;
                             Boxes[(LocalValue1 * 3) + LocalValue2].Enabled = false;
                                 setVal = 0;
