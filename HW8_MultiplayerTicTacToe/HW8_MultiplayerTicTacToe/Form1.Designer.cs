@@ -42,6 +42,7 @@
             this.btn_ResetGame = new System.Windows.Forms.Button();
             this.btn_TestConnection = new System.Windows.Forms.Button();
             this.lbl_Connection = new System.Windows.Forms.Label();
+            this.btn_Exit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -181,11 +182,22 @@
             this.lbl_Connection.TabIndex = 13;
             this.lbl_Connection.Text = "Ip Adress to Connect to.\r\nDefaults to current IP";
             // 
+            // btn_Exit
+            // 
+            this.btn_Exit.Location = new System.Drawing.Point(206, 431);
+            this.btn_Exit.Name = "btn_Exit";
+            this.btn_Exit.Size = new System.Drawing.Size(75, 23);
+            this.btn_Exit.TabIndex = 14;
+            this.btn_Exit.Text = "Close Game";
+            this.btn_Exit.UseVisualStyleBackColor = true;
+            this.btn_Exit.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(330, 482);
+            this.Controls.Add(this.btn_Exit);
             this.Controls.Add(this.lbl_Connection);
             this.Controls.Add(this.btn_TestConnection);
             this.Controls.Add(this.btn_ResetGame);
@@ -223,6 +235,7 @@
         private System.Windows.Forms.Button btn_ResetGame;
         private System.Windows.Forms.Button btn_TestConnection;
         private System.Windows.Forms.Label lbl_Connection;
+        private System.Windows.Forms.Button btn_Exit;
     }
 }
 
