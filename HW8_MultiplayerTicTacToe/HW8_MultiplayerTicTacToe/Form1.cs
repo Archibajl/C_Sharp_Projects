@@ -298,10 +298,7 @@ namespace HW8_MultiplayerTicTacToe
                     for(int i = 0; i < resul.Count; i++)
                     {
                         AddMessage(result);
-                    }
-                    //int position1 = res[0];
-                    //int position2 = res[1];
-                    //Board[position1, position2] = res[2];
+                    }                    
                 }
             }
         }
@@ -324,7 +321,7 @@ namespace HW8_MultiplayerTicTacToe
             Listen();
             //SendMessage(Player , DateTime.Now.ToString(), "", "");
             if (Player != null) { 
-            SendMessage(Player, "1", "1", "1");
+            SendMessage(Player, "3", "3", "3");
                  }
         }
     }
