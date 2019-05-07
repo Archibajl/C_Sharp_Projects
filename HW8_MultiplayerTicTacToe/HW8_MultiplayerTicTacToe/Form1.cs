@@ -35,7 +35,8 @@ namespace HW8_MultiplayerTicTacToe
                 if (IsFin() == false)
                 {
                     string val = Board[0,0].ToString();
-                    SendMessage( Player ,"0", "0", val);
+                    SendMessage( Player ,"0", "0");
+                    SendMessage(Player, val, "");
                     //Listen();
                 }
             }
@@ -48,7 +49,8 @@ namespace HW8_MultiplayerTicTacToe
                 if (IsFin() == false)
                 {
                     string val = Board[0,1].ToString();
-                    SendMessage(Player, "0", "1", val);
+                    SendMessage(Player, "0", "1");
+                    SendMessage(Player, val, "");
                     //Listen();
                 }
             }
@@ -61,7 +63,8 @@ namespace HW8_MultiplayerTicTacToe
                 if (IsFin() == false)
                 {
                     string val = Board[0,2].ToString();
-                    SendMessage(Player, "0", "2", val);
+                    SendMessage(Player, "0", "2");
+                    SendMessage(Player, val, "");
                     //Listen();
                 }
             }
@@ -74,7 +77,8 @@ namespace HW8_MultiplayerTicTacToe
                 if (IsFin() == false)
                 {
                     string val = Board[1,0].ToString();
-                    SendMessage(Player, "1", "0", val);
+                    SendMessage(Player, "1", "0");
+                    SendMessage(Player, val, "");
                     //Listen();
                 }
             }
@@ -88,7 +92,8 @@ namespace HW8_MultiplayerTicTacToe
                 if (IsFin() == false)
                 {
                     string val = Board[1,1].ToString();
-                    SendMessage(Player, "1", "1", val);
+                    SendMessage(Player, "1", "1");
+                    SendMessage(Player, val, "");
                     //Listen();
                 }
             }
@@ -102,7 +107,8 @@ namespace HW8_MultiplayerTicTacToe
                 if (IsFin() == false)
                 {
                     string val = Board[1,2].ToString();
-                    SendMessage(Player, "1", "2", val);
+                    SendMessage(Player, "1", "2");
+                    SendMessage(Player, val, "");
                     //Listen();
                 }
             }
@@ -116,7 +122,8 @@ namespace HW8_MultiplayerTicTacToe
                 if (IsFin() == false)
                 {
                     string val = Board[2, 0].ToString();
-                    SendMessage(Player, "2", "0", val);
+                    SendMessage(Player, "2", "0");
+                    SendMessage(Player, val, "");
                     //Listen();
                 }
 
@@ -131,7 +138,8 @@ namespace HW8_MultiplayerTicTacToe
                 if (IsFin() == false)
                 {
                     string val = Board[2,1].ToString();
-                    SendMessage(Player, "2", "1", val);
+                    SendMessage(Player, "2", "1");
+                    SendMessage(Player, val, "");
                     //Listen();
                 }
             }
@@ -145,7 +153,8 @@ namespace HW8_MultiplayerTicTacToe
                 if (IsFin() == false)
                 {
                     string val = Board[2,2].ToString();
-                    SendMessage(Player, "2", "2", val);
+                    SendMessage(Player, "2", "2");
+                    SendMessage(Player, val, "");
                     //Listen();
                 }
             }            
@@ -305,10 +314,10 @@ namespace HW8_MultiplayerTicTacToe
             }
         }
 
-        private void SendMessage(TcpClient Connection, string Loc1, string Loc2, string Val)
+        private void SendMessage(TcpClient Connection, string Val1, string Val2)
         {
-            string sender = (Val + Loc1 + Loc2 );
-            byte[] bytesToSend = Encoding.ASCII.GetBytes(sender);
+            string sender = (Val1 + Val2);
+            byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(sender);
             Connection.GetStream().Write(bytesToSend, 0, bytesToSend.Count() - 1);
         }
 
@@ -324,7 +333,7 @@ namespace HW8_MultiplayerTicTacToe
             Listen();
             //SendMessage(Player , DateTime.Now.ToString(), "", "");
             if (Player != null) { 
-            SendMessage(Player, "Connection Success", "", ".");
+            SendMessage(Player, "Connection Success", ".");
                  }
         }
     }
