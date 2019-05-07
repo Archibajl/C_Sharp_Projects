@@ -290,7 +290,7 @@ namespace HW8_MultiplayerTicTacToe
             {
                 byte[] bytesToRead = new byte[connection.ReceiveBufferSize];
                 int bytesRead = stream.Read(bytesToRead, 0, connection.ReceiveBufferSize);
-                string result = Encoding.ASCII.GetString(bytesToRead, 0, bytesRead);
+                string result = ASCIIEncoding.ASCII.GetString(bytesToRead, 0, bytesRead);
                 if (result != "")
                 {
                     resul.Add(result);
@@ -304,7 +304,8 @@ namespace HW8_MultiplayerTicTacToe
 
         private void SendMessage(TcpClient Connection, string Loc1, string Loc2, string Val)
         {
-            byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(Loc1 + Loc2 + Val);
+            string sender = (Loc1 + Loc2 + Val);
+            byte[] bytesToSend = Encoding.ASCII.GetBytes(sender);
             Connection.GetStream().Write(bytesToSend, 0, bytesToSend.Count() - 1);
         }
 
