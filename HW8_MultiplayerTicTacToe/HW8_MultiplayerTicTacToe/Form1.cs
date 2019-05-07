@@ -19,6 +19,7 @@ namespace HW8_MultiplayerTicTacToe
         char FinalVal;
         int LocalValue1;
         int LocalValue2;
+        int setVal;
         TcpClient Player;
 
         public Form1()
@@ -159,7 +160,7 @@ namespace HW8_MultiplayerTicTacToe
         {
             string val = Board[pos1, pos2].ToString();
             SendMessage(Player, pos1.ToString(), pos2.ToString());
-            SendMessage(Player, BinXO(val), "");
+            SendMessage(Player,val, "");
         }
 
         private bool Return(TextBox Box, int loc1, int loc2)
@@ -302,24 +303,38 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     if (inVal.Length == 1)
                     {
-                        string retVal = inVal;
-                        if (inVal == "1") { retVal = "X"; }
-                        if (inVal == "0") { retVal = "O"; }
-
-                        Board[LocalValue1, LocalValue2] = char.Parse(retVal);
-                        Boxes[(LocalValue1 * 3) + LocalValue2].Text = retVal;
-                        Boxes[(LocalValue1 * 3) + LocalValue2].Enabled = false;
+                        if(inVal== "1" || inVal == "2" ||inVal == "0")
+                        {
+                            if (setVal == 0)
+                            {
+                                LocalValue1 = int.Parse(inVal);
+                                setVal++;
+                            }
+                            if(setVal == 1)
+                            {
+                                LocalValue2 = int.Parse(inVal);
+                            }
+                        //string retVal = inVal;
+                        //if (inVal == "1") { retVal = "X"; }
+                        //if (inVal == "0") { retVal = "O"; }
+                        if (inVal == "X" || inVal == "O")
+                        {
+                            Board[LocalValue1, LocalValue2] = inVal;
+                            Boxes[(LocalValue1 * 3) + LocalValue2].Text = inVal;
+                            Boxes[(LocalValue1 * 3) + LocalValue2].Enabled = false;
+                                setVal = 0;
+                        }
                         //Return(Boxes[(LocalValue1 * 3) + LocalValue2], LocalValue1, LocalValue2);
                     }
                     else
                     {
-                        if (inVal.Length == 2)
-                        {
-                            string[] values = inVal.Split('\0');
-                            //char[] values = inVal.ToCharArray();
-                            LocalValue1 = int.Parse(values[0]);
-                            LocalValue2 = int.Parse(values[1]);
-                        }
+                        //if (inVal.Length == 2)
+                        //{
+                        //    string[] values = inVal.Split('\0');
+                        //    //char[] values = inVal.ToCharArray();
+                        //    LocalValue1 = int.Parse(values[0]);
+                        //    LocalValue2 = int.Parse(values[1]);
+                        //}
                         lbl_Connection.Text = inVal;
                     }
                 }
@@ -338,18 +353,18 @@ namespace HW8_MultiplayerTicTacToe
                 if (result != "")
                 {
                     resul.Add(result);
-                    for(int i = 0; i < resul.Count; i++)
-                    {
-                        AddMessage(result);
-                    }                    
+                    //for(int i = 0; i < resul.Count; i++)
+                    //{
+                    //    AddMessage(result);
+                    //}                    
                 }
             }
         }
 
-        private void SendMessage(TcpClient Connection, string Val1, string Val2)
+        private void SendMessage(TcpClient Connection, string Val, string Val2)
         {
-            string sender = (Val1 + Val2);
-            byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(sender);
+            //string sender = (Val + Val2);
+            byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(Val);
             Connection.GetStream().Write(bytesToSend, 0, bytesToSend.Count() - 1);
         }
 
