@@ -16,7 +16,9 @@ namespace HW8_MultiplayerTicTacToe
     {
         CheckGame cg = new CheckGame();
         char[,] Board = new char[3,3];
-        char FinalVal;        
+        char FinalVal;
+        int LocalValue1;
+        int LocalValue2;
         TcpClient Player;
 
         public Form1()
@@ -264,19 +266,20 @@ namespace HW8_MultiplayerTicTacToe
             List<TextBox> Boxes = TextBoxes();
             this.Invoke(new MethodInvoker(delegate
             {
-                if (inVal.Length == 3)
+                if (inVal.Length == 1)
                 { 
-                    lbl_Connection.Text = (inVal);
-                                                 
-                    char[] values = inVal.ToCharArray();
-                    int Loc1 = int.Parse(values[0].ToString());
-                    int Loc2 = int.Parse(values[1].ToString());
-                    
-                    Boxes[(Loc1 * 3) + Loc2].Text = values[2].ToString();
-                    Return(Boxes[(Loc1 * 3) + Loc2], Loc1, Loc2);
+                    //lbl_Connection.Text = (inVal);
+                    //Boxes[(LocalValue1 * 3) + LocalValue2].Text = inVal ;
+                    Return(Boxes[(LocalValue1 * 3) + LocalValue2], LocalValue1, LocalValue2);
                 }
                 else
                 {
+                    if(inVal.Length == 2)
+                    {
+                        char[] values = inVal.ToCharArray();
+                        LocalValue1 = int.Parse(values[0].ToString());
+                        LocalValue2 = int.Parse(values[1].ToString());
+                    }
                     lbl_Connection.Text = inVal;
                 }
             }));
@@ -304,7 +307,7 @@ namespace HW8_MultiplayerTicTacToe
 
         private void SendMessage(TcpClient Connection, string Loc1, string Loc2, string Val)
         {
-            string sender = (Loc1 + Loc2 + Val);
+            string sender = (Val + Loc1 + Loc2 );
             byte[] bytesToSend = Encoding.ASCII.GetBytes(sender);
             Connection.GetStream().Write(bytesToSend, 0, bytesToSend.Count() - 1);
         }
