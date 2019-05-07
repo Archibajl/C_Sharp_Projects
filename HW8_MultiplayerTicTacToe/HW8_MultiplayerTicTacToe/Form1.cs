@@ -24,7 +24,7 @@ namespace HW8_MultiplayerTicTacToe
         {
             InitializeComponent();
             txt_IpConnection.Text = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString();
-            Listen();
+            //Listen();
         }    
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -296,8 +296,8 @@ namespace HW8_MultiplayerTicTacToe
 
         private void btn_TestConnection_Click(object sender, EventArgs e)
         {
-            //Listen();
-            SendMessage(Player , DateTime.Now.ToString(), "", "");
+            Listen();
+            //SendMessage(Player , DateTime.Now.ToString(), "", "");
             if (Player != null)
             SendMessage(Player, "1", "1", "1");
         }
