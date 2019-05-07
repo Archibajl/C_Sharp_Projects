@@ -308,7 +308,7 @@ namespace HW8_MultiplayerTicTacToe
         private void btn_TestConnection_Click(object sender, EventArgs e)
         {
             Listen();
-            SendMessage(Player , DateTime.Now.ToString(), "", "");
+            //SendMessage(Player , DateTime.Now.ToString(), "", "");
             if (Player != null) { 
             SendMessage(Player, "1", "1", "1");
                  }
