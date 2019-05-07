@@ -291,23 +291,36 @@ namespace HW8_MultiplayerTicTacToe
             List<TextBox> Boxes = TextBoxes();
             this.Invoke(new MethodInvoker(delegate
             {
-                if (inVal.Length == 1)
+                if (inVal == "Reset")
                 {
-                    string retVal = inVal;
-                    if(inVal == "1") { retVal = "X"; }
-                    if(inVal == "0") { retVal = "O"; }
-                    Boxes[(LocalValue1 * 3) + LocalValue2].Text = retVal;
-                    Return(Boxes[(LocalValue1 * 3) + LocalValue2], LocalValue1, LocalValue2);
+                    List<TextBox> Box = TextBoxes();
+                    label1.Text = "Tic Tac Toe";
+                    GrayBoxes(Box, true);
+                    SendMessage(Player, "Reset", "");
                 }
                 else
                 {
-                    if(inVal.Length == 2)
+                    if (inVal.Length == 1)
                     {
-                        char[] values = inVal.ToCharArray();
-                        LocalValue1 = int.Parse(values[0].ToString());
-                        LocalValue2 = int.Parse(values[1].ToString());
+                        string retVal = inVal;
+                        if (inVal == "1") { retVal = "X"; }
+                        if (inVal == "0") { retVal = "O"; }
+
+                        Board[LocalValue1, LocalValue2] = char.Parse(retVal);
+                        Boxes[(LocalValue1 * 3) + LocalValue2].Text = retVal;
+                        Boxes[(LocalValue1 * 3) + LocalValue2].Enabled = false;
+                        //Return(Boxes[(LocalValue1 * 3) + LocalValue2], LocalValue1, LocalValue2);
                     }
-                    lbl_Connection.Text = inVal;
+                    else
+                    {
+                        if (inVal.Length == 2)
+                        {
+                            char[] values = inVal.ToCharArray();
+                            LocalValue1 = int.Parse(values[0].ToString());
+                            LocalValue2 = int.Parse(values[1].ToString());
+                        }
+                        lbl_Connection.Text = inVal;
+                    }
                 }
             }));
         }
@@ -344,6 +357,7 @@ namespace HW8_MultiplayerTicTacToe
             List<TextBox> Box = TextBoxes();
             label1.Text = "Tic Tac Toe";
             GrayBoxes( Box, true);
+            SendMessage(Player, "Reset", "");
         }
 
         private void btn_TestConnection_Click(object sender, EventArgs e)
