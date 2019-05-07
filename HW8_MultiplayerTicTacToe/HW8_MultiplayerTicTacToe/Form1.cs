@@ -16,8 +16,7 @@ namespace HW8_MultiplayerTicTacToe
     {
         CheckGame cg = new CheckGame();
         char[,] Board = new char[3,3];
-        char FinalVal;
-        //List<TcpClient> connections = new List<TcpClient>();
+        char FinalVal;        
         TcpClient Player;
 
         public Form1()
@@ -176,7 +175,7 @@ namespace HW8_MultiplayerTicTacToe
             List<TextBox> Boxes = TextBoxes();
             for(int i = 0; i < Boxes.Count; i++)
             {
-                if (Boxes[i].Text == null)
+                if (Boxes[i].Text == "")
                     return false;
             }
 
@@ -244,18 +243,30 @@ namespace HW8_MultiplayerTicTacToe
         {
             try
             {
-                Player = new TcpClient(Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString(), 5555);
+                Player = new TcpClient(txt_IpConnection.Text, 5555);
             }
             catch
-            {                
+            {
+                AddToMessageBox("No listener found, opening listener.");
                 TcpListener listener = new TcpListener(Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork), 5555);
                 listener.Start();
                 Player = await listener.AcceptTcpClientAsync();
                 await Task.Factory.StartNew(() => ListenForPacket(Player));
                 listener.Stop();
                 return;
-            }            
+            }
+            AddToMessageBox("Listener found, connection successful.");
             await Task.Factory.StartNew(() => ListenForPacket(Player));
+        }
+
+        private void AddToMessageBox(string s)
+        {
+            //Must invoke as delegate due to cross thread work
+            this.Invoke(new MethodInvoker(delegate
+            {
+                txt_IpConnection.AppendText(s + "\n");
+                txt_IpConnection.ScrollToCaret();
+            }));
         }
 
         private void ListenForPacket(TcpClient connection)
@@ -272,7 +283,7 @@ namespace HW8_MultiplayerTicTacToe
                     resul.Add(result);
                     for(int i = 0; i < resul.Count; i++)
                     {
-                        lbl_Connection.Text += resul[i];
+                        lbl_Connection.Text = result;
                     }
                     //int position1 = res[0];
                     //int position2 = res[1];
@@ -283,8 +294,8 @@ namespace HW8_MultiplayerTicTacToe
 
         private void SendMessage(TcpClient Connection, string Loc1, string Loc2, string Val)
         {
-            byte[] bytesToSend = Encoding.ASCII.GetBytes(Loc1 + Loc2 + Val);
-            Connection.GetStream().Write(bytesToSend, 0, bytesToSend.Length);
+            byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(Loc1 + Loc2 + Val);
+            Connection.GetStream().Write(bytesToSend, 0, bytesToSend.Count() - 1);
         }
 
         private void btn_ResetGame_Click(object sender, EventArgs e)
@@ -297,9 +308,10 @@ namespace HW8_MultiplayerTicTacToe
         private void btn_TestConnection_Click(object sender, EventArgs e)
         {
             Listen();
-            //SendMessage(Player , DateTime.Now.ToString(), "", "");
-            if (Player != null)
+            SendMessage(Player , DateTime.Now.ToString(), "", "");
+            if (Player != null) { 
             SendMessage(Player, "1", "1", "1");
+                 }
         }
     }
 }
