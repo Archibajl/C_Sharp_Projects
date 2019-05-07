@@ -30,11 +30,11 @@ namespace HW8_MultiplayerTicTacToe
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (Return(textBox1, 0, 0))
+            if (Board[0, 0] == '\0')
             {
-                if (IsFin() == false)
+                if (Return(textBox1, 0, 0))
                 {
-                    if (Board[0, 0] == '\0')
+                    if (IsFin() == false)
                     {
                         CommitVals(0, 0);
                     }
@@ -43,40 +43,41 @@ namespace HW8_MultiplayerTicTacToe
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
-        {            
-            if (Return(textBox2, 0, 1))
+        {
+            if (Board[0, 1] == '\0')
             {
-                if (IsFin() == false)
+                if (Return(textBox2, 0, 1))
                 {
-                    if (Board[0,1] == '\0')
+                    if (IsFin() == false)
                     {
-                        CommitVals(0, 2);
+                        CommitVals(0, 1);
                     }
                 }
             }
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
-        {           
-            if (Return(textBox3, 0, 2))
+        {
+            if (Board[0, 2] == '\0')
             {
-                if (IsFin() == false)
+                if (Return(textBox3, 0, 2))
                 {
-                    if (Board[0, 2] == '\0')
+                    if (IsFin() == false)
                     {
                         CommitVals(0, 2);
                     }
                 }
             }
         }
+        
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            if (Return(textBox4, 1, 0))
+            if (Board[1, 0] == '\0')
             {
-                if (IsFin() == false)
+                if (Return(textBox4, 1, 0))
                 {
-                    if (Board[1, 0] == '\0')
+                    if (IsFin() == false)
                     {
                         CommitVals(1, 0);
                     }
@@ -86,12 +87,11 @@ namespace HW8_MultiplayerTicTacToe
 
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
-            bool goodVal = Return(textBox5, 1, 1);
-            if (goodVal == true)
+            if (Board[1, 1] == '\0')
             {
-                if (IsFin() == false)
+                if (Return(textBox5, 1, 1))
                 {
-                    if (Board[1, 1] == '\0')
+                    if (IsFin() == false)
                     {
                         CommitVals(1, 1);
                     }
@@ -101,12 +101,11 @@ namespace HW8_MultiplayerTicTacToe
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
-            bool goodVal = Return(textBox6, 1, 2);
-            if (goodVal == true)
+            if (Board[1, 2] == '\0')
             {
-                if (IsFin() == false)
+                if (Return(textBox6, 1, 2))
                 {
-                    if (Board[1, 2] == '\0')
+                    if (IsFin() == false)
                     {
                         CommitVals(1, 2);
                     }
@@ -116,48 +115,44 @@ namespace HW8_MultiplayerTicTacToe
 
         private void textBox7_TextChanged(object sender, EventArgs e)
         {
-            bool goodVal = Return(textBox7, 2, 0);
-            if (goodVal == true)
+            if (Board[2, 0] == '\0')
             {
-                if (IsFin() == false)
+                if (Return(textBox7, 2, 0))
                 {
-                    if (Board[2, 0] == '\0')
+                    if (IsFin() == false)
                     {
                         CommitVals(2, 0);
                     }
                 }
-
             }
         }
 
         private void textBox8_TextChanged(object sender, EventArgs e)
         {
-            bool goodVal = Return(textBox8, 2, 1);
-            if (goodVal == true)
+            if (Board[2, 1] == '\0')
+            {
+            if (Return(textBox8, 2, 1))
             {
                 if (IsFin() == false)
                 {
-                    if (Board[2, 1] == '\0')
-                    {
-                        CommitVals(2, 1);
-                    }
+                    CommitVals(2, 1);
                 }
             }
+        }
         }
 
         private void textBox9_TextChanged(object sender, EventArgs e)
         {
-            bool goodVal = Return(textBox9, 2, 2);
-            if (goodVal == true)
-            {
-                if (IsFin() == false)
+            if (Board[2, 2] == '\0')
+            {                
+                if (Return(textBox9, 2, 2))
                 {
-                    if (Board[2, 2] == '\0')
+                    if (IsFin() == false)
                     {
                         CommitVals(2, 2);
                     }
                 }
-            }            
+            }
         }
 
         void CommitVals( int pos1, int pos2)
