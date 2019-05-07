@@ -271,8 +271,7 @@ namespace HW8_MultiplayerTicTacToe
                     char[] values = inVal.ToCharArray();
                     int Loc1 = int.Parse(values[0].ToString());
                     int Loc2 = int.Parse(values[1].ToString());
-                    //xoValue = values[2].ToUpper 
-                    //Board[Loc1, Loc2] = values[2];
+                    
                     Boxes[(Loc1 * 3) + Loc2].Text = values[2].ToString();
                     Return(Boxes[(Loc1 * 3) + Loc2], Loc1, Loc2);
                 }
