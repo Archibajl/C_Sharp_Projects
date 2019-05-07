@@ -247,7 +247,7 @@ namespace HW8_MultiplayerTicTacToe
             }
             catch
             {
-                AddToMessageBox("No listener found, opening listener.");
+                AddMessage("No listener found, opening listener.");
                 TcpListener listener = new TcpListener(Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork), 5555);
                 listener.Start();
                 Player = await listener.AcceptTcpClientAsync();
@@ -255,17 +255,31 @@ namespace HW8_MultiplayerTicTacToe
                 listener.Stop();
                 return;
             }
-            AddToMessageBox("Listener found, connection successful.");
+            AddMessage("Listener found, connection successful.");
             await Task.Factory.StartNew(() => ListenForPacket(Player));
         }
 
-        private void AddToMessageBox(string s)
+        private void AddMessage(string inVal)
         {
-            //Must invoke as delegate due to cross thread work
+            List<TextBox> Boxes = TextBoxes();
             this.Invoke(new MethodInvoker(delegate
             {
-                txt_IpConnection.AppendText(s + "\n");
-                txt_IpConnection.ScrollToCaret();
+                if (inVal.Length <= 3)
+                { 
+                    lbl_Connection.Text = (inVal);
+                                                 
+                    char[] values = inVal.ToCharArray();
+                    int Loc1 = int.Parse(values[0].ToString());
+                    int Loc2 = int.Parse(values[1].ToString());
+                    //xoValue = values[2].ToUpper 
+                    //Board[Loc1, Loc2] = values[2];
+                    Boxes[(Loc1 * 3) + Loc2].Text = values[2].ToString();
+                    Return(Boxes[(Loc1 * 3) + Loc2], Loc1, Loc2);
+                }
+                else
+                {
+                    lbl_Connection.Text = inVal;
+                }
             }));
         }
 
@@ -283,7 +297,7 @@ namespace HW8_MultiplayerTicTacToe
                     resul.Add(result);
                     for(int i = 0; i < resul.Count; i++)
                     {
-                        lbl_Connection.Text = result;
+                        AddMessage(result);
                     }
                     //int position1 = res[0];
                     //int position2 = res[1];
