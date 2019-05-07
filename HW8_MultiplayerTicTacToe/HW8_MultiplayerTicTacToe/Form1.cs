@@ -18,8 +18,7 @@ namespace HW8_MultiplayerTicTacToe
         char[,] Board = new char[3,3];
         char FinalVal;
         int LocalValue1;
-        int LocalValue2;
-        bool BreakVal = false;
+        int LocalValue2;        
         TcpClient Player;
 
         public Form1()
@@ -31,12 +30,16 @@ namespace HW8_MultiplayerTicTacToe
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            //Checks if the array has been filled already.
             if (Board[0, 0] == '\0')
             {
+                //Returns the proper value to the board and text box.
                 if (Return(textBox1, 0, 0))
                 {
+                    //Checks if the game is finished.
                     if (IsFin() == false)
                     {
+                        //Commits the changes to the board.
                         CommitVals(0, 0);
                     }
                 }
@@ -69,8 +72,7 @@ namespace HW8_MultiplayerTicTacToe
                     }
                 }
             }
-        }
-        
+        }        
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
@@ -156,6 +158,7 @@ namespace HW8_MultiplayerTicTacToe
             }
         }
 
+        //Commits the changes to each text box.
         void CommitVals( int pos1, int pos2)
         {
             List<TextBox> Boxes = TextBoxes();
@@ -166,6 +169,7 @@ namespace HW8_MultiplayerTicTacToe
             //BreakVal = false;            
         }
 
+        //Saves the value from the text box to the board character variables and changes them to correct values.
         private bool Return(TextBox Box, int loc1, int loc2)
         {
             string input = Box.Text;
@@ -187,6 +191,7 @@ namespace HW8_MultiplayerTicTacToe
             
         }
 
+        //Returns if the boards values are all filled.
         bool IsFull()
         {
             List<TextBox> Boxes = TextBoxes();
@@ -199,6 +204,7 @@ namespace HW8_MultiplayerTicTacToe
             return true;
         }
 
+        //returns if the board is full or game values are a winning value.
         bool IsFin()
         {
             List<TextBox> Box = TextBoxes();
@@ -233,6 +239,7 @@ namespace HW8_MultiplayerTicTacToe
             }
         }
 
+        //Grays out text boxes or resets the board.
         void GrayBoxes(List<TextBox> Boxes, bool enable)
         {
             for (int i = 0; i< Boxes.Count; i++)
@@ -248,6 +255,7 @@ namespace HW8_MultiplayerTicTacToe
             Board = new char[3, 3];
         }
 
+        //Returns a list of the boards text boxes
         List<TextBox> TextBoxes()
         {
             List<TextBox> retBoxes = new List<TextBox>
@@ -257,21 +265,8 @@ namespace HW8_MultiplayerTicTacToe
 
             return retBoxes;
         }
-
-        string BinXO(string chngVal)
-        {
-            if(chngVal == "X")
-            {
-                return "1";
-            }
-            if(chngVal == "O")
-            {
-                return "0";
-            }
-
-            return null;
-        }
-
+        
+        //Listens for other players and or starts the connection.
         async void Listen()
         {
             try
@@ -292,6 +287,7 @@ namespace HW8_MultiplayerTicTacToe
             await Task.Factory.StartNew(() => ListenForPacket(Player));
         }
 
+        //Returns the returned value from the listener.
         private void AddMessage(string inVal)
         {
             List<TextBox> Boxes = TextBoxes();
@@ -299,63 +295,34 @@ namespace HW8_MultiplayerTicTacToe
             {
                 if (inVal == "Reset")
                 {
+                    //Resets the board.
                     List<TextBox> Box = TextBoxes();
                     label1.Text = "Tic Tac Toe";
-                    GrayBoxes(Box, true);
-                    //SendMessage(Player, "Reset", "", "");                    
+                    GrayBoxes(Box, true);                   
                 }
                 else
                 {
                     if (inVal.Length == 3)
                     {
-                        //if (inVal == "1" || inVal == "2" || inVal == "0")
-                        //{
-                        //    if (setVal == 0)
-                        //    {
-                        //        LocalValue1 = int.Parse(inVal);
-                        //        setVal++;
-                        //    }
-                        //    if (setVal == 1)
-                        //    {
-                        //        LocalValue2 = int.Parse(inVal);
-                        //    }
-                        //}
-                        ////string retVal = inVal;
-                        ////if (inVal == "1") { retVal = "X"; }
-                        ////if (inVal == "0") { retVal = "O"; }
-                        //if (inVal == "X" || inVal == "O")
-                        //{
-                        //    Board[LocalValue1, LocalValue2] = char.Parse(inVal);
-                        //    Boxes[(LocalValue1 * 3) + LocalValue2].Text = inVal;
-                        //    Boxes[(LocalValue1 * 3) + LocalValue2].Enabled = false;
-                        //        setVal = 0;
-                        //}                        
+                        //Breaks up and places the values in the board and text box.
                         //string[] values = inVal.Split('\0');
                         char[] values = inVal.ToCharArray();
                         LocalValue1 = int.Parse(values[0].ToString());
                         LocalValue2 = int.Parse(values[1].ToString());
                         Board[LocalValue1, LocalValue2] = values[2];
                         Boxes[(LocalValue1 * 3) + LocalValue2].Enabled = false;
-                        Boxes[(LocalValue1 * 3) + LocalValue2].Text = values[2].ToString();
-                        //Return(Boxes[(LocalValue1 * 3) + LocalValue2], LocalValue1, LocalValue2);
+                        Boxes[(LocalValue1 * 3) + LocalValue2].Text = values[2].ToString();                        
                     }
                     else
                     {
-                        //if (inVal.Length == 2)
-                        //{
-                        //    string[] values = inVal.Split('\0');
-                        //    //char[] values = inVal.ToCharArray();
-                        //    LocalValue1 = int.Parse(values[0]);
-                        //    LocalValue2 = int.Parse(values[1]);
-                        //}
+                       //Changes the lables output depending in the input.
                         lbl_Connection.Text = inVal;
                     }
-                }
-                //BreakVal = true;
+                }                
             }));
         }
 
-        //Continuously listens for 
+        //Continuously listens for a return value.
         private void ListenForPacket(TcpClient connection)
         {
             NetworkStream stream = connection.GetStream();
@@ -372,6 +339,7 @@ namespace HW8_MultiplayerTicTacToe
             }
         }
 
+        //Sends a value for the game.
         private void SendMessage(TcpClient Connection, string loc1, string loc2, string Val)
         {
             string sender = (loc1 + loc2 + Val);
@@ -379,6 +347,7 @@ namespace HW8_MultiplayerTicTacToe
             Connection.GetStream().Write(bytesToSend, 0, bytesToSend.Count() );
         }
 
+        //Resets the game and sends a value to reset the other end.
         private void btn_ResetGame_Click(object sender, EventArgs e)
         {
             List<TextBox> Box = TextBoxes();
@@ -387,10 +356,10 @@ namespace HW8_MultiplayerTicTacToe
             SendMessage(Player, "Reset", "", "");
         }
 
+        //Tests the connection for players.
         private void btn_TestConnection_Click(object sender, EventArgs e)
         {
-            Listen();
-            //SendMessage(Player , DateTime.Now.ToString(), "", "");
+            Listen();            
             if (Player != null) { 
             SendMessage(Player, "Connection Success", ".", "");
                  }
