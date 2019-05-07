@@ -34,10 +34,10 @@ namespace HW8_MultiplayerTicTacToe
             {
                 if (IsFin() == false)
                 {
-                    string val = Board[0,0].ToString();
-                    SendMessage( Player ,"0", "0");
-                    SendMessage(Player, BinXO(val), "");
-                    //Listen();
+                    if (Board[0, 0] == '\0')
+                    {
+                        CommitVals(0, 0);
+                    }
                 }
             }
         }
@@ -48,10 +48,10 @@ namespace HW8_MultiplayerTicTacToe
             {
                 if (IsFin() == false)
                 {
-                    string val = Board[0,1].ToString();
-                    SendMessage(Player, "0", "1");
-                    SendMessage(Player, BinXO(val), "");
-                    //Listen();
+                    if (Board[0,1] == '\0')
+                    {
+                        CommitVals(0, 2);
+                    }
                 }
             }
         }
@@ -62,10 +62,10 @@ namespace HW8_MultiplayerTicTacToe
             {
                 if (IsFin() == false)
                 {
-                    string val = Board[0,2].ToString();
-                    SendMessage(Player, "0", "2");
-                    SendMessage(Player, BinXO(val), "");
-                    //Listen();
+                    if (Board[0, 2] == '\0')
+                    {
+                        CommitVals(0, 2);
+                    }
                 }
             }
         }
@@ -76,10 +76,10 @@ namespace HW8_MultiplayerTicTacToe
             {
                 if (IsFin() == false)
                 {
-                    string val = Board[1,0].ToString();
-                    SendMessage(Player, "1", "0");
-                    SendMessage(Player, BinXO(val), "");
-                    //Listen();
+                    if (Board[1, 0] == '\0')
+                    {
+                        CommitVals(1, 0);
+                    }
                 }
             }
         }
@@ -91,10 +91,10 @@ namespace HW8_MultiplayerTicTacToe
             {
                 if (IsFin() == false)
                 {
-                    string val = Board[1,1].ToString();
-                    SendMessage(Player, "1", "1");
-                    SendMessage(Player, BinXO(val), "");
-                    //Listen();
+                    if (Board[1, 1] == '\0')
+                    {
+                        CommitVals(1, 1);
+                    }
                 }
             }
         }
@@ -106,10 +106,10 @@ namespace HW8_MultiplayerTicTacToe
             {
                 if (IsFin() == false)
                 {
-                    string val = Board[1,2].ToString();
-                    SendMessage(Player, "1", "2");
-                    SendMessage(Player, BinXO(val), "");
-                    //Listen();
+                    if (Board[1, 2] == '\0')
+                    {
+                        CommitVals(1, 2);
+                    }
                 }
             }
         }
@@ -121,10 +121,10 @@ namespace HW8_MultiplayerTicTacToe
             {
                 if (IsFin() == false)
                 {
-                    string val = Board[2, 0].ToString();
-                    SendMessage(Player, "2", "0");
-                    SendMessage(Player, BinXO(val), "");
-                    //Listen();
+                    if (Board[2, 0] == '\0')
+                    {
+                        CommitVals(2, 0);
+                    }
                 }
 
             }
@@ -137,10 +137,10 @@ namespace HW8_MultiplayerTicTacToe
             {
                 if (IsFin() == false)
                 {
-                    string val = Board[2,1].ToString();
-                    SendMessage(Player, "2", "1");
-                    SendMessage(Player, BinXO(val), "");
-                    //Listen();
+                    if (Board[2, 1] == '\0')
+                    {
+                        CommitVals(2, 1);
+                    }
                 }
             }
         }
@@ -152,12 +152,19 @@ namespace HW8_MultiplayerTicTacToe
             {
                 if (IsFin() == false)
                 {
-                    string val = Board[2,2].ToString();
-                    SendMessage(Player, "2", "2");
-                    SendMessage(Player, BinXO(val), "");
-                    //Listen();
+                    if (Board[2, 2] == '\0')
+                    {
+                        CommitVals(2, 2);
+                    }
                 }
             }            
+        }
+
+        void CommitVals( int pos1, int pos2)
+        {
+            string val = Board[pos1, pos2].ToString();
+            SendMessage(Player, pos1.ToString(), pos2.ToString());
+            SendMessage(Player, BinXO(val), "");
         }
 
         private bool Return(TextBox Box, int loc1, int loc2)
@@ -294,7 +301,7 @@ namespace HW8_MultiplayerTicTacToe
                     string retVal = inVal;
                     if(inVal == "1") { retVal = "X"; }
                     if(inVal == "0") { retVal = "O"; }
-                    Boxes[(LocalValue1 * 3) + LocalValue2].Text = retVal.ToUpper();
+                    Boxes[(LocalValue1 * 3) + LocalValue2].Text = retVal;
                     Return(Boxes[(LocalValue1 * 3) + LocalValue2], LocalValue1, LocalValue2);
                 }
                 else
