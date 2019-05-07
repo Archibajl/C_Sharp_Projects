@@ -19,7 +19,7 @@ namespace HW8_MultiplayerTicTacToe
         char FinalVal;
         int LocalValue1;
         int LocalValue2;
-        int setVal;
+        bool BreakVal = false;
         TcpClient Player;
 
         public Form1()
@@ -158,10 +158,12 @@ namespace HW8_MultiplayerTicTacToe
 
         void CommitVals( int pos1, int pos2)
         {
+            List<TextBox> Boxes = TextBoxes();
             string val = Board[pos1, pos2].ToString();
             SendMessage(Player, pos1.ToString(), pos2.ToString(), val);
-            //SendMessage(Player, pos2.ToString(), "");
-            //SendMessage(Player,val, "");
+            //Boxes.Any(x => x.TextChanged == false).Wait();
+            //while (BreakVal == false) { }
+            //BreakVal = false;
         }
 
         private bool Return(TextBox Box, int loc1, int loc2)
@@ -241,6 +243,8 @@ namespace HW8_MultiplayerTicTacToe
                     Boxes[i].Text = "";                    
                 }
             }
+
+            if(enable == true)
             Board = new char[3, 3];
         }
 
@@ -298,7 +302,7 @@ namespace HW8_MultiplayerTicTacToe
                     List<TextBox> Box = TextBoxes();
                     label1.Text = "Tic Tac Toe";
                     GrayBoxes(Box, true);
-                    SendMessage(Player, "Reset", "", "");
+                    //SendMessage(Player, "Reset", "", "");                    
                 }
                 else
                 {
@@ -347,6 +351,7 @@ namespace HW8_MultiplayerTicTacToe
                         lbl_Connection.Text = inVal;
                     }
                 }
+                //BreakVal = true;
             }));
         }
 
@@ -382,7 +387,7 @@ namespace HW8_MultiplayerTicTacToe
             List<TextBox> Box = TextBoxes();
             label1.Text = "Tic Tac Toe";
             GrayBoxes( Box, true);
-            SendMessage(Player, "Reset\n", "", "");
+            SendMessage(Player, "Reset", "", "");
         }
 
         private void btn_TestConnection_Click(object sender, EventArgs e)
