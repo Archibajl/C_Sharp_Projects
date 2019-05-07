@@ -324,7 +324,7 @@ namespace HW8_MultiplayerTicTacToe
             Listen();
             //SendMessage(Player , DateTime.Now.ToString(), "", "");
             if (Player != null) { 
-            SendMessage(Player, "1", "1", "1");
+            SendMessage(Player, "Connection successful", "", ".");
                  }
         }
     }
