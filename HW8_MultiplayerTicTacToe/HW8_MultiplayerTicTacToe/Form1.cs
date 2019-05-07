@@ -302,30 +302,37 @@ namespace HW8_MultiplayerTicTacToe
                 }
                 else
                 {
-                    if (inVal.Length == 1)
+                    if (inVal.Length == 3)
                     {
-                        if (inVal == "1" || inVal == "2" || inVal == "0")
-                        {
-                            if (setVal == 0)
-                            {
-                                LocalValue1 = int.Parse(inVal);
-                                setVal++;
-                            }
-                            if (setVal == 1)
-                            {
-                                LocalValue2 = int.Parse(inVal);
-                            }
-                        }
-                        //string retVal = inVal;
-                        //if (inVal == "1") { retVal = "X"; }
-                        //if (inVal == "0") { retVal = "O"; }
-                        if (inVal == "X" || inVal == "O")
-                        {
-                            Board[LocalValue1, LocalValue2] = char.Parse(inVal);
-                            Boxes[(LocalValue1 * 3) + LocalValue2].Text = inVal;
-                            Boxes[(LocalValue1 * 3) + LocalValue2].Enabled = false;
-                                setVal = 0;
-                        }
+                        //if (inVal == "1" || inVal == "2" || inVal == "0")
+                        //{
+                        //    if (setVal == 0)
+                        //    {
+                        //        LocalValue1 = int.Parse(inVal);
+                        //        setVal++;
+                        //    }
+                        //    if (setVal == 1)
+                        //    {
+                        //        LocalValue2 = int.Parse(inVal);
+                        //    }
+                        //}
+                        ////string retVal = inVal;
+                        ////if (inVal == "1") { retVal = "X"; }
+                        ////if (inVal == "0") { retVal = "O"; }
+                        //if (inVal == "X" || inVal == "O")
+                        //{
+                        //    Board[LocalValue1, LocalValue2] = char.Parse(inVal);
+                        //    Boxes[(LocalValue1 * 3) + LocalValue2].Text = inVal;
+                        //    Boxes[(LocalValue1 * 3) + LocalValue2].Enabled = false;
+                        //        setVal = 0;
+                        //}                        
+                        //string[] values = inVal.Split('\0');
+                        char[] values = inVal.ToCharArray();
+                        LocalValue1 = int.Parse(values[0].ToString());
+                        LocalValue2 = int.Parse(values[1].ToString());
+                        Board[LocalValue1, LocalValue2] = values[2];
+                        Boxes[(LocalValue1 * 3) + LocalValue2].Enabled = false;
+                        Boxes[(LocalValue1 * 3) + LocalValue2].Text = values[2].ToString();
                         //Return(Boxes[(LocalValue1 * 3) + LocalValue2], LocalValue1, LocalValue2);
                     }
                     else
@@ -363,11 +370,11 @@ namespace HW8_MultiplayerTicTacToe
             }
         }
 
-        private void SendMessage(TcpClient Connection, string Val, string Val2)
+        private void SendMessage(TcpClient Connection, string Val1, string Val2)
         {
-            //string sender = (Val + Val2);
-            byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(Val);
-            Connection.GetStream().Write(bytesToSend, 0, bytesToSend.Count() - 1);
+            string sender = (Val1 + Val2);
+            byte[] bytesToSend = Encoding.ASCII.GetBytes(sender);
+            Connection.GetStream().Write(bytesToSend, 0, bytesToSend.Count() );
         }
 
         private void btn_ResetGame_Click(object sender, EventArgs e)
@@ -375,7 +382,7 @@ namespace HW8_MultiplayerTicTacToe
             List<TextBox> Box = TextBoxes();
             label1.Text = "Tic Tac Toe";
             GrayBoxes( Box, true);
-            SendMessage(Player, "Reset", "");
+            SendMessage(Player, "Reset\n", "");
         }
 
         private void btn_TestConnection_Click(object sender, EventArgs e)
