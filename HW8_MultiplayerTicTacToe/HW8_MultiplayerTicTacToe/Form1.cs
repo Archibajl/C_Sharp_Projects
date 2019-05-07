@@ -315,9 +315,10 @@ namespace HW8_MultiplayerTicTacToe
                     {
                         if (inVal.Length == 2)
                         {
-                            char[] values = inVal.ToCharArray();
-                            LocalValue1 = int.Parse(values[0].ToString());
-                            LocalValue2 = int.Parse(values[1].ToString());
+                            string[] values = inVal.Split('\0');
+                            //char[] values = inVal.ToCharArray();
+                            LocalValue1 = int.Parse(values[0]);
+                            LocalValue2 = int.Parse(values[1]);
                         }
                         lbl_Connection.Text = inVal;
                     }
