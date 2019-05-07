@@ -36,7 +36,7 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     string val = Board[0,0].ToString();
                     SendMessage( Player ,"0", "0");
-                    SendMessage(Player, val, "");
+                    SendMessage(Player, BinXO(val), "");
                     //Listen();
                 }
             }
@@ -50,7 +50,7 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     string val = Board[0,1].ToString();
                     SendMessage(Player, "0", "1");
-                    SendMessage(Player, val, "");
+                    SendMessage(Player, BinXO(val), "");
                     //Listen();
                 }
             }
@@ -64,7 +64,7 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     string val = Board[0,2].ToString();
                     SendMessage(Player, "0", "2");
-                    SendMessage(Player, val, "");
+                    SendMessage(Player, BinXO(val), "");
                     //Listen();
                 }
             }
@@ -78,7 +78,7 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     string val = Board[1,0].ToString();
                     SendMessage(Player, "1", "0");
-                    SendMessage(Player, val, "");
+                    SendMessage(Player, BinXO(val), "");
                     //Listen();
                 }
             }
@@ -93,7 +93,7 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     string val = Board[1,1].ToString();
                     SendMessage(Player, "1", "1");
-                    SendMessage(Player, val, "");
+                    SendMessage(Player, BinXO(val), "");
                     //Listen();
                 }
             }
@@ -108,7 +108,7 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     string val = Board[1,2].ToString();
                     SendMessage(Player, "1", "2");
-                    SendMessage(Player, val, "");
+                    SendMessage(Player, BinXO(val), "");
                     //Listen();
                 }
             }
@@ -123,7 +123,7 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     string val = Board[2, 0].ToString();
                     SendMessage(Player, "2", "0");
-                    SendMessage(Player, val, "");
+                    SendMessage(Player, BinXO(val), "");
                     //Listen();
                 }
 
@@ -139,7 +139,7 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     string val = Board[2,1].ToString();
                     SendMessage(Player, "2", "1");
-                    SendMessage(Player, val, "");
+                    SendMessage(Player, BinXO(val), "");
                     //Listen();
                 }
             }
@@ -154,7 +154,7 @@ namespace HW8_MultiplayerTicTacToe
                 {
                     string val = Board[2,2].ToString();
                     SendMessage(Player, "2", "2");
-                    SendMessage(Player, val, "");
+                    SendMessage(Player, BinXO(val), "");
                     //Listen();
                 }
             }            
@@ -250,6 +250,20 @@ namespace HW8_MultiplayerTicTacToe
             return retBoxes;
         }
 
+        string BinXO(string chngVal)
+        {
+            if(chngVal == "X")
+            {
+                return "1";
+            }
+            if(chngVal == "O")
+            {
+                return "0";
+            }
+
+            return null;
+        }
+
         async void Listen()
         {
             try
@@ -276,9 +290,11 @@ namespace HW8_MultiplayerTicTacToe
             this.Invoke(new MethodInvoker(delegate
             {
                 if (inVal.Length == 1)
-                { 
-                    //lbl_Connection.Text = (inVal);
-                    //Boxes[(LocalValue1 * 3) + LocalValue2].Text = inVal ;
+                {
+                    string retVal = inVal;
+                    if(inVal == "1") { retVal = "X"; }
+                    if(inVal == "0") { retVal = "O"; }
+                    Boxes[(LocalValue1 * 3) + LocalValue2].Text = retVal.ToUpper();
                     Return(Boxes[(LocalValue1 * 3) + LocalValue2], LocalValue1, LocalValue2);
                 }
                 else
