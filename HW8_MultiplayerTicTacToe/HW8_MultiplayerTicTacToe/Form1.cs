@@ -264,7 +264,7 @@ namespace HW8_MultiplayerTicTacToe
             List<TextBox> Boxes = TextBoxes();
             this.Invoke(new MethodInvoker(delegate
             {
-                if (inVal.Length <= 3)
+                if (inVal.Length == 3)
                 { 
                     lbl_Connection.Text = (inVal);
                                                  
@@ -321,7 +321,7 @@ namespace HW8_MultiplayerTicTacToe
             Listen();
             //SendMessage(Player , DateTime.Now.ToString(), "", "");
             if (Player != null) { 
-            SendMessage(Player, "3", "3", "3");
+            SendMessage(Player, "Connection Success", "", ".");
                  }
         }
     }
