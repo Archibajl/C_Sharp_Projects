@@ -11,8 +11,7 @@ using System.Windows.Forms;
 namespace Enigma_Machine
 {
     public partial class Form1 : Form
-    {
-        string outVal = null;
+    {        
         int[] EaRotors = new int[3];
         int[] NumRotations = new int[3] { 0,0,0};
         LtSeq lt = new LtSeq();
@@ -20,20 +19,6 @@ namespace Enigma_Machine
         RtSeq rt = new RtSeq();
         Reflection rf = new Reflection();
         List<int> NumInput = new List<int>();
-
-        //List<int> LtPosition = new List<int>()
-        //{
-        //    0,0,0,0
-        //};
-        //List<int> MidPosition = new List<int>()
-        //{
-        //    0,0,0,0
-        //};
-        //List<int> RtPosition = new List<int>()
-        //{
-        //    0,0,0,0
-        //};
-
 
         public Form1()
         {
@@ -49,23 +34,18 @@ namespace Enigma_Machine
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             string inVal = textBox1.Text;
-            //char[] numbers = inVal.ToCharArray();
-            char number = inVal.LastOrDefault();            
-                
-            NumInput.Add(int.Parse(number.ToString()));
-            //new int[numbers.Length];
-            //for (int i = 0; i < numbers.Count(); i++)
-            //{
-            //   NumInput.Add( int.Parse(numbers[i].ToString()));
-            //}
-            //for(int j = 0; j < numbers.Count(); j++)                
-            //{
-            if (NumInput.Count != 0)
+            List<char> Input =inVal.ToList();
+            char number = inVal.LastOrDefault();
+            if (Input.Count() > NumInput.Count())
             {
-                int j = NumInput.Count - 1;           
+                NumInput.Add(int.Parse(number.ToString()));
+                
+                if (NumInput.Count != 0)
+                {
+                    int j = NumInput.Count - 1;
 
                     int temp = NumInput[j];
-                    //temp = lt.ScrambleSequenceFwd(EaRotors[0], NumInput[j]);
+                    //Runs the number generator forward and then in reverse to return the correct result.
                     temp = lt.ScrambleSequenceFwd(EaRotors[0], temp);
                     temp = mid.ScrambleSequenceFwd(EaRotors[1], temp);
                     temp = rt.ScrambleSequenceFwd(EaRotors[2], temp);
@@ -75,21 +55,53 @@ namespace Enigma_Machine
                     temp = rt.ScrambleSequenceRev(EaRotors[2], temp);
                     temp = mid.ScrambleSequenceRev(EaRotors[1], temp);
                     temp = lt.ScrambleSequenceRev(EaRotors[0], temp);
-
+                    //Increments the position of the rotors.
                     IncrementRotors();
-
-                    NumInput[j] = temp;
-                    //outVal += Convert.ToString(NumInput[j]);
+                    //Returns the encoded value to the end of the list.
+                    NumInput[j] = temp;                    
+                }
+                else { int j = 0; }
+                //}
             }
-            else { int j = 0; }
-            //}
-
-            textBox2.Text = NumInput.ToString();//NumInput.ToString();
-                ///ResetRotors();
-         
+            else
+            {
+                int difference = NumInput.Count() - Input.Count();
+                for(int i = 0; i < difference; i++)
+                {
+                    DecrementRotors();
+                    NumInput.RemoveAt(NumInput.Count - 1);
+                }
             }
+            textBox2.Text = string.Join("", NumInput);
+        }
                 
+        //Decrements the rotors 
+        void DecrementRotors()
+        {
+            if (rt.RotationCounter > 0)
+            {
+                rt.DecrementRotors(EaRotors[2], 1, false);
+            }
+            else
+            {
+                if (mid.RotationCounter > 0)
+                {
+                    rt.RotationCounter = 9;
+                    rt.DecrementRotors(EaRotors[2], 1, false);
+                    mid.DecrementRotors(EaRotors[1], 1, false);
+                }
+                else
+                {
+                    rt.RotationCounter = 9;
+                    mid.RotationCounter = 9;
+                    rt.DecrementRotors(EaRotors[2], 1, false);
+                    mid.DecrementRotors(EaRotors[1], 1, false);
+                    lt.DecrementRotors(EaRotors[0], 1, false);
+                }
+            }
+        }
 
+        //Increments each sections rotors.
         void IncrementRotors()
         {
             if(rt.RotationCounter < 10)
@@ -115,35 +127,15 @@ namespace Enigma_Machine
             }
         }
 
+        //Resets the rotors to their initial input values.
         void ResetRotors()
         {
             lt.RotateRotors(EaRotors[0], NumRotations[0], true);
             mid.RotateRotors(EaRotors[1], NumRotations[1], true);
             rt.RotateRotors(EaRotors[2], NumRotations[2], true);
         }
-
-        //bool[,] CheckBoxes()
-        //{
-        //    bool[,] ChkBoxRotors = new bool[3, 4];
-
-        //    RadioButton[,] Boxes = new RadioButton[,]
-        //    {
-        //        { radbtn_Lt1, radbtn_Lt2, radbtn_Lt3, radbtn_Lt4},
-        //        { radbtn_Mid1, radbtn_Mid2, radbtn_Mid3, radbtn_Mid4},
-        //        { radbtn_Rt1, radbtn_Rt2, radbtn_Rt3, radbtn_Rt4}
-        //    };
-
-        //    for(int i = 0; i <3; i++)
-        //    {
-        //        for(int j = 0; j<4; j++)
-        //        {
-        //            ChkBoxRotors[i, j] = Boxes[i, j].Checked;
-        //        }
-        //    }
-
-        //    return ChkBoxRotors;
-        //}
-
+        
+        //Changes the saved values and number of rotations in each position.
         private void radbtn_Lt1_CheckedChanged(object sender, EventArgs e)
         {
             if (radbtn_Lt1.Checked)
@@ -252,6 +244,7 @@ namespace Enigma_Machine
             }
         }
 
+        //Changes the number of starting rotations and resets the rotor
         private void txt_StartPos1_TextChanged(object sender, EventArgs e)
         {            
                 string rotate = txt_StartPos1.Text;
@@ -282,10 +275,10 @@ namespace Enigma_Machine
             else { MessageBox.Show("Entry must be numeric."); }
         }
 
+        //Resets the text box and incrementations upon leaving.
         private void textBox1_Leave(object sender, EventArgs e)
         {
-            ResetRotors();
-            outVal = null;
+            ResetRotors();            
             textBox1.Text = "";
             textBox2.Text = "";
         }

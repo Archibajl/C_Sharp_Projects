@@ -9,26 +9,10 @@ namespace Enigma_Machine
     class RtSeq //: ISequence<RtSeq>
     {
         private int rotCounter = 0;
-
         private List<int> Rotor1 = new List<int>();
-        //{
-        //    1,3,6,0,5,4,8,7,9,2
-        //};
-
         private List<int> Rotor2 = new List<int>();
-        //{
-        //    0,3,5,2,6,9,1,4,8,7
-        //};
-
         private List<int> Rotor3 = new List<int>();
-        //{
-        //    5,9,1,7,3,8,0,2,4,6
-        //};
-
         private List<int> Rotor4 = new List<int>();
-        //{
-        //    1,6,5,2,9,0,7,4,3,8
-        //};
 
 
         public int RotationCounter
@@ -197,5 +181,48 @@ namespace Enigma_Machine
             }
         }
 
+        public void DecrementRotors(int rotorNum, int numberOfRotations, bool initiisation)
+        {
+
+            //Ensures an adequate number of rotations.
+            switch (rotorNum)
+            {
+                //Selects list to be incremented.
+                case 1:
+                    DecRotor(ref Rotor1, numberOfRotations);
+                    break;
+                case 2:
+                    DecRotor(ref Rotor2, numberOfRotations);
+                    break;
+                case 3:
+                    DecRotor(ref Rotor3, numberOfRotations);
+                    break;
+                case 4:
+                    DecRotor(ref Rotor4, numberOfRotations);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void DecRotor(ref List<int> Rotor, int numberOfRotations)
+        {
+            for (int i = 0; i < numberOfRotations; i++)
+            {
+                for (int j = 0; j < Rotor.Count(); j++)
+                {
+                    if (Rotor[j] == 0)
+                    {
+                        Rotor[j] = 9;
+                    }
+                    else
+                    {
+                        Rotor[j]--;
+                    }
+                }
+                //Increments the number of rotations, to tell when the rotor makes a full rotation.
+                rotCounter--;
+            }
+        }
     }
 }

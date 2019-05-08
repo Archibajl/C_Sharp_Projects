@@ -52,7 +52,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ISequence.cs" />
     <Compile Include="LtSeq.cs" />
     <Compile Include="MidSeq.cs" />
     <Compile Include="Program.cs" />
