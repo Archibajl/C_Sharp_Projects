@@ -1,4 +1,8 @@
-﻿using System;
+﻿//Justin Archibald
+//CSC 3020
+//Enigma machine Extera Credit.
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
