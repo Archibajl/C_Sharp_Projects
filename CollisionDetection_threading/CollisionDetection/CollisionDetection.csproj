@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EC3A29F6-4150-451B-AA3E-B8EC9F38A892}</ProjectGuid>
+    <ProjectGuid>{CD318169-301C-4676-AB12-8EFD0EEAF6CD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Enigma_Machine</RootNamespace>
-    <AssemblyName>Enigma Machine</AssemblyName>
+    <RootNamespace>CollisionDetection</RootNamespace>
+    <AssemblyName>CollisionDetection</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -53,14 +53,10 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="IMomento.cs" />
-    <Compile Include="LetterMap.cs" />
-    <Compile Include="ReelFunctionality.cs" />
-    <Compile Include="ReelOriginator.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="HW2_Archibald.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reflector.cs" />
-    <Compile Include="ReelSequence.cs" />
+    <Compile Include="Square.cs" />
+    <Compile Include="Vector2.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -74,9 +70,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="..\.editorconfig">
-      <Link>.editorconfig</Link>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
