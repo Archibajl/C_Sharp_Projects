@@ -11,74 +11,53 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Enigma_Machine
 {
     public partial class Form1 : Form
     {        
-        private int[] EaRotors = new int[3];
         private int[] NumRotations = new int[4] { 0,0,0,0};
         private ReelSequence Reel = new ReelSequence();
         private LetterMap characterMap = new LetterMap();
-        private Reflection reflector = new Reflection();
-        private List<int> numInput = new List<int>();
-        private List<char> charOutput = new List<char>();
+        private int characterCounter;
+        private string outputText = "";
+
 
         public Form1()
         {
             InitializeComponent();
-            EaRotors[0] = 1;
-            EaRotors[1] = 2;
-            EaRotors[2] = 3;
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        //event methods
+        private void txt_Input_TextChanged(object sender, EventArgs e)
         {
-            string inVal = textBox1.Text;
-            List<char> Input =inVal.ToList();
-            char text = System.Char.ToLower(inVal.LastOrDefault());
-            if (Input.Count() > numInput.Count())
+            
+            string inVal = txt_Input.Text.ToLower();
+            int stringLength = inVal.Length;
+            
+            if((stringLength-characterCounter) == 1)
             {
-                numInput.Add(characterMap.mapToNumber(text));
-                if (numInput.Count != 0)
-                {
-                    int j = numInput.Count - 1;
-
-                    int temp = numInput[j];
-                    //Runs the number generator forward and then in reverse to return the correct result.
-                    numInput[j] = Reel.ScrambleSequenceFwd(temp);
-
-                    //Returns the encoded value to the end of the list.
-                    charOutput.Add(characterMap.mapToChar(numInput[j]));
-                }
+                outputText += encodeOne(inVal[stringLength-1]);
+                characterCounter = inVal.Count();
             }
-            else if(Input.Count() < numInput.Count())
+            else if (stringLength > characterCounter+1)
             {
-                int difference = numInput.Count() - Input.Count();
+                characterCounter = inVal.Count();
+                outputText = encodeMany(inVal);
+            }
+            else if(stringLength < characterCounter)
+            {
+                int difference = stringLength - characterCounter;
                 for(int i = 0; i < difference; i++)
                 {
                     Reel.DecrementRotors();
-                    numInput.RemoveAt(numInput.Count - 1);
                 }
+                characterCounter = stringLength;
             }
-            textBox2.Text = String.Concat(charOutput).ToUpper();
+            txt_output.Text = outputText;
         }
-
-        //Resets the rotors to their initial input values.
-        private void ResetRotors()
-        {
-            Reel = new ReelSequence();
-        }
-        
        
-        //Resets the text box and incrementations upon leaving.
-        private void textBox1_Leave(object sender, EventArgs e)
-        {
-            ResetRotors();            
-            textBox1.Text = "";
-            textBox2.Text = "";
-        }
-
         //Changes the number of starting rotations and resets the rotor
         private void txt_Reel1_TextChanged(object sender, EventArgs e)
         {
@@ -113,13 +92,50 @@ namespace Enigma_Machine
             else { MessageBox.Show("Entry must be numeric."); }
         }
 
-
         private void btn_setReels_Click(object sender, EventArgs e)
         {
             for(int i=0; i<NumRotations.Length; i++)
             {
                 Reel.IncrementRotors(i, NumRotations[i]);
             }
+        }
+
+        //Resets the text box and incrementations upon leaving.
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Reel = new ReelSequence();
+            outputText = "";
+        }
+
+
+        //Support Methods
+        //encode/translate text
+        private String encodeMany(string text)
+        {
+            List<char> Input = text.ToList();
+            //Stack<char> chars = new Stack<char>();
+            string charOutput = "";
+
+            if (Input.Count != 0)
+            {
+                foreach (char c in Input)
+                {
+                    int transformNumber = characterMap.mapToNumber(System.Char.ToLower(c));
+                    transformNumber = Reel.ScrambleSequenceFwd(transformNumber);
+                    charOutput += characterMap.mapToChar(transformNumber);
+                }
+            }
+
+            return charOutput.ToUpper();
+        }
+
+        private String encodeOne(char text)
+        {
+            int transformNumber = characterMap.mapToNumber(System.Char.ToLower(text));
+            transformNumber = Reel.ScrambleSequenceFwd(transformNumber);
+            string charOutput = characterMap.mapToChar(transformNumber);
+
+            return charOutput.ToUpper();
         }
     }
 }

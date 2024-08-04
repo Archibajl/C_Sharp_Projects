@@ -29,7 +29,7 @@ namespace Enigma_Machine
             {
                 int outputNumber = reel[3][reel[2][reel[1][reel[0][inputNumber]]]];
                 outputNumber = reflector.Reflect(outputNumber);
-                outputNumber = reel[0][reel[1][reel[2][reel[3][inputNumber]]]];
+                outputNumber = reel[0][reel[1][reel[2][reel[3][outputNumber]]]];
                 return outputNumber;
             }
 
@@ -72,19 +72,19 @@ namespace Enigma_Machine
                 {
                     List<int> rotor = reel[reelNumber];
                     rotorSize = rotor.Count - 1;
-                    for (int j = 0; j < rotorSize; j++)
+                    for (int j = 0; j <= rotorSize; j++)
                     {
                         try
                         {
-                            if (j == (rotorSize - 1))
+                            if (j == 0)
                             {
-                                rotor.Insert(j, (int)rotor[0]);
-                                rotor.Insert(j, IncrementEndPoint((int)rotor[j]));
-                            }
-                            else
+                                int temp = rotor[j];
+                                rotor[j] = IncrementEndPoint((int)rotor[rotorSize]);
+                                rotor[rotorSize] = IncrementEndPoint(temp);
+                        }
+                            else if(j < rotorSize)
                             {
-                                rotor.Insert(j, (int)rotor[j + 1]);
-                                rotor.Insert(j, IncrementEndPoint((int)rotor[j]));
+                                rotor[j] = IncrementEndPoint((int)rotor[j + 1]);
                             }
                         }
                         catch (ArgumentOutOfRangeException e)

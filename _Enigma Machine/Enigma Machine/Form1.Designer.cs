@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txt_Input = new System.Windows.Forms.TextBox();
+            this.txt_output = new System.Windows.Forms.TextBox();
             this.Input = new System.Windows.Forms.Label();
             this.Output = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,28 +40,29 @@
             this.txt_Reel3 = new System.Windows.Forms.TextBox();
             this.txt_Reel2 = new System.Windows.Forms.TextBox();
             this.btn_setReels = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txt_Input
             // 
-            this.textBox1.Location = new System.Drawing.Point(97, 25);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(359, 142);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
+            this.txt_Input.Location = new System.Drawing.Point(97, 25);
+            this.txt_Input.Margin = new System.Windows.Forms.Padding(4);
+            this.txt_Input.Multiline = true;
+            this.txt_Input.Name = "txt_Input";
+            this.txt_Input.Size = new System.Drawing.Size(359, 142);
+            this.txt_Input.TabIndex = 0;
+            this.txt_Input.TextChanged += new System.EventHandler(this.txt_Input_TextChanged);
+            this.txt_Input.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
-            // textBox2
+            // txt_output
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(97, 339);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(359, 280);
-            this.textBox2.TabIndex = 1;
+            this.txt_output.Enabled = false;
+            this.txt_output.Location = new System.Drawing.Point(97, 339);
+            this.txt_output.Margin = new System.Windows.Forms.Padding(4);
+            this.txt_output.Multiline = true;
+            this.txt_output.Name = "txt_output";
+            this.txt_output.Size = new System.Drawing.Size(359, 211);
+            this.txt_output.TabIndex = 1;
             // 
             // Input
             // 
@@ -168,12 +169,23 @@
             this.btn_setReels.UseVisualStyleBackColor = true;
             this.btn_setReels.Click += new System.EventHandler(this.btn_setReels_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(338, 583);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(97, 31);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "Clear";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HotTrack;
             this.ClientSize = new System.Drawing.Size(504, 647);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_setReels);
             this.Controls.Add(this.txt_Reel2);
             this.Controls.Add(this.txt_Reel3);
@@ -184,8 +196,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Output);
             this.Controls.Add(this.Input);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txt_output);
+            this.Controls.Add(this.txt_Input);
             this.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
@@ -197,8 +209,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txt_Input;
+        private System.Windows.Forms.TextBox txt_output;
         private System.Windows.Forms.Label Input;
         private System.Windows.Forms.Label Output;
         private System.Windows.Forms.Label label1;
@@ -209,6 +221,7 @@
         private System.Windows.Forms.TextBox txt_Reel3;
         private System.Windows.Forms.TextBox txt_Reel2;
         private System.Windows.Forms.Button btn_setReels;
+        private System.Windows.Forms.Button button1;
     }
 }
 

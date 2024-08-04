@@ -70,64 +70,64 @@ namespace Enigma_Machine
             }
         }
 
-        public char mapToChar(int map)
+        public string mapToChar(int map)
         {
             switch (map)
             {
                 case 10: 
-                    return 'a';
+                    return "a";
                 case 11:
-                    return 'b';
+                    return "b";
                 case 12:
-                    return 'c';
+                    return "c";
                 case 13:
-                    return 'd';
+                    return "d";
                 case 14:
-                    return 'e';
+                    return "e";
                 case 15:
-                    return 'f';
+                    return "f";
                 case 16:
-                    return 'g';
+                    return "g";
                 case 17:
-                    return 'h';
+                    return "h";
                 case 18:
-                    return 'i';
+                    return "i";
                 case 19:
-                    return 'j';
+                    return "j";
                 case 20:
-                    return 'k';
+                    return "k";
                 case 21:
-                    return 'l';
+                    return "l";
                 case 22:
-                    return 'm';
+                    return "m";
                 case 23:
-                    return 'n';
+                    return "n";
                 case 24:
-                    return 'o';
+                    return "o";
                 case 25:
-                    return 'p';
+                    return "p";
                 case 26:
-                    return 'q';
+                    return "q";
                 case 27:
-                    return 'r';
+                    return "r";
                 case 28:
-                    return 's';
+                    return "s";
                 case 29:
-                    return 't';
+                    return "t";
                 case 30:
-                    return 'u';
+                    return "u";
                 case 31:
-                    return 'v';
+                    return "v";
                 case 32:
-                    return 'w';
+                    return "w";
                 case 33:
-                    return 'x';
+                    return "x";
                 case 34:
-                    return 'y';
+                    return "y";
                 case 35:
-                    return 'z';
+                    return "z";
                 default:
-                    return (char) map;
+                    return Convert.ToString(map);
             }
         }
     }

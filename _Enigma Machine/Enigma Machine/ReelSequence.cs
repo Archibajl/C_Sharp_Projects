@@ -37,12 +37,8 @@ namespace Enigma_Machine
         //Returns the output from the position on the rotor.
         public int ScrambleSequenceFwd(int inputNumber)
         {
-            int retVal = inputNumber;
-
             //Return current reel value
-            retVal = GetCurrentSequenceAndIncrement(inputNumber);
-
-            return retVal;
+            return GetCurrentSequenceAndIncrement(inputNumber);
         }
 
         //Returns the position from the output of the rotor.
