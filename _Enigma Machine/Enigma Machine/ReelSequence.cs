@@ -31,7 +31,7 @@ namespace Enigma_Machine
                 1,6,5,2,9,0,7,4,3,8,14,28,24,31,25,35,19,10,34,26,30,18,27,17,33,21,23,15,29,16,20,13,12,22,32,11
             });
 
-            setState();
+            //setState();
         }
 
         //Returns the output from the position on the rotor.

@@ -15,7 +15,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Enigma_Machine
 {
-    public partial class Form1 : Form
+    public partial class Enigma_frm : Form
     {        
         private int[] NumRotations = new int[4] { 0,0,0,0};
         private ReelSequence Reel = new ReelSequence();
@@ -24,7 +24,7 @@ namespace Enigma_Machine
         private string outputText = "";
 
 
-        public Form1()
+        public Enigma_frm()
         {
             InitializeComponent();
         }
@@ -48,10 +48,11 @@ namespace Enigma_Machine
             }
             else if(stringLength < characterCounter)
             {
-                int difference = stringLength - characterCounter;
+                int difference = characterCounter -stringLength;
                 for(int i = 0; i < difference; i++)
                 {
                     Reel.DecrementRotors();
+                    outputText = outputText.Substring(0, stringLength-i);
                 }
                 characterCounter = stringLength;
             }

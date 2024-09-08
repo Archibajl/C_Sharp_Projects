@@ -25,7 +25,7 @@ namespace Enigma_Machine
 
         public bool getState()
         {
-            if((state == null) || (state.Count >0))
+            if((state == null) || (state.Count < 0))
                     return false;
 
             reel = state.Pop();
